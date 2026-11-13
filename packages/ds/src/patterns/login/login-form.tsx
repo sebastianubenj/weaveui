@@ -22,7 +22,7 @@ export const LOGIN_COPY = {
   submitting: "Logging in…",
 } as const;
 
-export type LoginSubmitResult = "success" | "invalid-credentials" | "network";
+export type LoginSubmitResult = "success" | "invalid-credentials" | "network" | { type: "error"; message: string };
 
 export interface LoginValues {
   email: string;
@@ -140,7 +140,7 @@ export function LoginForm({
   );
   const [submitting, setSubmitting] = React.useState(appearance === "submitting");
   const [formError, setFormError] = React.useState<
-    "invalid-credentials" | "network" | undefined
+    "invalid-credentials" | "network" | { type: "error"; message: string } | undefined
   >(appearance === "invalid-credentials" ? "invalid-credentials" : undefined);
   const [errors, setErrors] = React.useState<FieldErrors>(() => {
     if (appearance === "invalid-email") {
@@ -223,7 +223,7 @@ export function LoginForm({
 
     try {
       const result = await onSubmit?.({ email, password, rememberMe });
-      if (result === "invalid-credentials" || result === "network") {
+      if (result === "invalid-credentials" || result === "network" || (result && typeof result === "object")) {
         setFormError(result);
       }
     } catch {
@@ -341,8 +341,8 @@ export function LoginForm({
                 >
                   {submitting ? LOGIN_COPY.submitting : LOGIN_COPY.submit}
                 </Button>
-                {formError === "network" ? (
-                  <FormAlert id={formAlertId}>{LOGIN_COPY.network}</FormAlert>
+                {formError && formError !== "invalid-credentials" ? (
+                  <FormAlert id={formAlertId}>{typeof formError === "object" ? formError.message : LOGIN_COPY.network}</FormAlert>
                 ) : null}
               </div>
               <p

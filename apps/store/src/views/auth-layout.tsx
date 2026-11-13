@@ -1,7 +1,8 @@
 import * as React from "react";
 
-import { cn } from "@weaveui/ds";
+import { cn, FormAlert } from "@weaveui/ds";
 import { Navigation } from "@/components/ui/navigation";
+import { useAuth } from "@/lib/auth-context";
 
 export interface AuthLayoutProps extends React.ComponentProps<"div"> {
   logoHref?: string;
@@ -15,6 +16,7 @@ export function AuthLayout({
   logoLabel = "Home",
   ...props
 }: AuthLayoutProps) {
+  const { error } = useAuth();
   return (
     <div
       className={cn(
@@ -29,7 +31,8 @@ export function AuthLayout({
           px-(--semantics-layout-mobile-grid-margin)
           md:px-(--primitives-spacing-8)`}
       >
-        <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) justify-center">
+        <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) flex-col items-center gap-(--primitives-spacing-4)">
+          {error ? <FormAlert className="max-w-(--primitives-max-width-max-w-md)">{error}</FormAlert> : null}
           {children}
         </div>
       </div>

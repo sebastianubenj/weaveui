@@ -40,7 +40,7 @@ export interface ResetPasswordValues {
   confirmPassword: string;
 }
 
-export type ResetPasswordSubmitResult = "success" | "network";
+export type ResetPasswordSubmitResult = "success" | "network" | { type: "error"; message: string };
 
 export type ResetPasswordAppearance =
   | "initial"
@@ -181,6 +181,13 @@ export function SetANewPasswordForm({
   });
 
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const focusPasswordAfterCheck = React.useRef(false);
+  React.useLayoutEffect(() => {
+    if (!submitting && focusPasswordAfterCheck.current) {
+      focusPasswordAfterCheck.current = false;
+      passwordRef.current?.focus();
+    }
+  });
   const confirmRef = React.useRef<HTMLInputElement>(null);
   const submitLock = React.useRef(false);
 
@@ -244,6 +251,7 @@ export function SetANewPasswordForm({
     }
 
     submitLock.current = true;
+    setSubmitting(true);
 
     if (checkCompromisedPassword) {
       try {
@@ -251,23 +259,25 @@ export function SetANewPasswordForm({
         setLeakedResult(result);
         if (result !== "clear") {
           submitLock.current = false;
-          passwordRef.current?.focus();
+          focusPasswordAfterCheck.current = true;
+          setSubmitting(false);
           return;
         }
       } catch {
         setLeakedResult("unavailable");
         submitLock.current = false;
-        passwordRef.current?.focus();
+        focusPasswordAfterCheck.current = true;
+        setSubmitting(false);
         return;
       }
     }
-
-    setSubmitting(true);
 
     try {
       const result = await onSubmit?.({ password, confirmPassword });
       if (result === "network") {
         setFormError(RESET_PASSWORD_COPY.network);
+      } else if (result && typeof result === "object") {
+        setFormError(result.message);
       }
     } catch {
       setFormError(RESET_PASSWORD_COPY.network);

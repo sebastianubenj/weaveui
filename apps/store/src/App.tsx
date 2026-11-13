@@ -7,10 +7,10 @@ import {
   requestPasswordReset,
   resendConfirmationEmail,
   signInAccount,
-  signOutAccount,
   updatePassword,
 } from "@/lib/auth";
 import { useAuth } from "@/lib/auth-context";
+import { checkCompromisedPassword } from "@/lib/password-security";
 import { ExpiredLink } from "@/views/expired-link/expired-link";
 import { ForgotPassword } from "@/views/forgot-password/forgot-password";
 import { Home } from "@/views/home/home";
@@ -77,6 +77,7 @@ function RegisterRoute() {
     <Register
       logoHref="/"
       loginHref="/login"
+      checkCompromisedPassword={checkCompromisedPassword}
       confirmationEmail={confirmationEmail}
       confirmationSubmitting={confirmationSubmitting}
       confirmationError={confirmationError}
@@ -126,16 +127,17 @@ function ForgotPasswordRoute() {
 
 function ResetPasswordRoute() {
   const navigate = useNavigate();
-  const { ready, loggedIn, linkError } = useAuth();
+  const { ready, loggedIn, linkError, error, logOut } = useAuth();
   const [completing, setCompleting] = useState(false);
 
   useEffect(() => {
     // Wait until the email-link exchange finishes. "Not logged in yet" is not
     // the same as an expired link while that exchange is still running.
-    if (!ready || linkError || completing) return;
+    if (!ready || linkError || error || completing) return;
     if (!loggedIn) navigate("/expired-link", { replace: true });
-  }, [ready, loggedIn, linkError, completing, navigate]);
+  }, [ready, loggedIn, linkError, error, completing, navigate]);
 
+  if (error && !loggedIn) return <LoginRoute />;
   if (!ready || linkError || (!loggedIn && !completing)) return null;
 
   return (
@@ -143,16 +145,44 @@ function ResetPasswordRoute() {
       logoHref="/"
       loginHref="/login"
       forgotPasswordHref="/forgot-password"
+      checkCompromisedPassword={checkCompromisedPassword}
       onSubmit={async ({ password }) => {
         const result = await updatePassword(password);
         if (result === "updated") {
           setCompleting(true);
+          await logOut();
           navigate("/password-updated", { replace: true });
-          void signOutAccount();
+          return;
+        }
+        if (result === "expired") {
+          navigate("/expired-link", { replace: true });
           return;
         }
         return result;
       }}
+    />
+  );
+}
+
+function PasswordUpdatedRoute() {
+  const { loggedIn, logOut } = useAuth();
+  const navigate = useNavigate();
+  const [submitting, setSubmitting] = useState(false);
+
+  return (
+    <PasswordUpdated
+      logoHref="/"
+      loginHref="/login"
+      description={loggedIn ? "Your password was updated. Log out to sign in with your new password." : undefined}
+      actionLabel={loggedIn ? (submitting ? "Logging out…" : "Log out") : undefined}
+      onAction={loggedIn ? async (event) => {
+        event.preventDefault();
+        if (submitting) return;
+        setSubmitting(true);
+        const result = await logOut();
+        setSubmitting(false);
+        if (result === "signed-out") navigate("/login", { replace: true });
+      } : undefined}
     />
   );
 }
@@ -169,7 +199,7 @@ export function App() {
         <Route path="/reset-password" element={<ResetPasswordRoute />} />
         <Route
           path="/password-updated"
-          element={<PasswordUpdated logoHref="/" loginHref="/login" />}
+          element={<PasswordUpdatedRoute />}
         />
         <Route
           path="/expired-link"

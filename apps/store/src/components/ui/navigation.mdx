@@ -137,9 +137,14 @@ Also supports native `<a>` attributes. `ref` is the anchor. Hidden below `md`.
 
 ### NavigationSection
 
+Desktop menu sections align with the start of the bar content, with a 48px token gap.
+
+`size="lg"` uses the 24px heading style. `size="sm"` uses the 12px heading style with a 15px line height and 4px padding. The section supplies the size to its links; a link may override it. Section headings keep their existing typography.
+
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `heading` | `string` | — | Section label. Omit on the first mobile section when it has no heading. |
+| `size` | `"lg" \| "sm"` | `"lg"` | Default size for links in this section. |
 | `children` | `React.ReactNode` | — | Usually `NavigationMenuLink` items. |
 | `className` | `string` | — | Classes on the section. |
 
@@ -149,6 +154,7 @@ Also supports native `<a>` attributes. `ref` is the anchor. Hidden below `md`.
 | --- | --- | --- | --- |
 | `href` | `string` | — | Destination. Always followed in the desktop panel. |
 | `submenu` | `React.ReactNode` | — | Below `md`, opens this content as the second mobile level instead of navigating. |
+| `size` | `"lg" \| "sm"` | Section size, otherwise `"lg"` | Override the section’s link size. |
 | `className` | `string` | — | Classes on the link. |
 
 Also supports native `<a>` attributes. `ref` is the anchor.

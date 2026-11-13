@@ -12,7 +12,7 @@ This file is the source of truth for architecture and agent behavior. Do not add
 - `README.md` is human onboarding: what the repo is, how to run it, and where files live. It must not restate these rules.
 - `.mdx` next to a component or foundation is Storybook usage (when to use it, canvases, accessibility notes). Add MDX when that family already has MDX. Do not add MDX for a pattern or view unless the story cannot carry the usage guidance.
 - `.stories.tsx` are the examples, controls, and `play` tests. Component API is the TypeScript props. An MDX API table explains usage; it is not a second contract.
-- Tokens: the Figma variables plugin writes `packages/ds/tokens/figma-variables.raw.json`. `packages/ds/scripts/normalize-figma-variables.js` rebuilds primitives and semantics in `packages/ds/tokens/tokens.json`, and the Dark mode of the Semantic Colors collection in `packages/ds/tokens/tokens.dark.json`. Font, typography, and effect stay in `tokens.json`. `packages/ds/build-tokens.js` writes generated CSS, which is an artifact.
+- Tokens: full Figma variable exports from the development plugin, or verified targeted updates read through Figma MCP, update `packages/ds/tokens/figma-variables.raw.json`. `packages/ds/scripts/normalize-figma-variables.js` rebuilds primitives and semantics in `packages/ds/tokens/tokens.json`, and the Dark mode of the Semantic Colors collection in `packages/ds/tokens/tokens.dark.json`. Font, typography, and effect stay in `tokens.json`. `packages/ds/build-tokens.js` writes generated CSS, which is an artifact.
 - Enforcement is `npm run check`, not another markdown file.
 
 ## 1. General Architecture
@@ -173,14 +173,15 @@ Do not manually edit:
 
 When token changes are required:
 
-1. For a Figma variable change, run the development plugin in `packages/ds/figma/export-variables/`, save the download as `packages/ds/tokens/figma-variables.raw.json`, then run `npm run tokens:normalize`. That rewrites primitives and semantics (both `Semantics` and `Semantic Colors`) and the dark file. Only `Semantic Colors` may have a Dark mode; every other collection has one mode. Font, typography, and effect stay as they are in `packages/ds/tokens/tokens.json` and are not rebuilt from Variables.
-2. For a change to those preserved styles, or to token-generation logic, edit that source directly.
-3. Run:
+1. For Figma variable changes, update `packages/ds/tokens/figma-variables.raw.json` from the Figma source. For a small, targeted change, Codex may read the exact variable definitions and metadata through Figma MCP, then merge only those entries into the existing raw export. Preserve unrelated entries and the export schema; do not infer or invent IDs, keys, collection/mode values, types, scopes, aliases, or other metadata. Use this route only when MCP exposes all fields needed by the raw schema. For broad changes, full collection updates, or incomplete MCP data, run the development plugin in `packages/ds/figma/export-variables/` and replace the raw export with its complete download.
+2. After a Figma variable update, run `npm run tokens:normalize`. This rewrites primitives and semantics (both `Semantics` and `Semantic Colors`) and the dark file. Only `Semantic Colors` may have a Dark mode; every other collection has one mode. Font, typography, and effect stay as they are in `packages/ds/tokens/tokens.json` and are not rebuilt from Variables. Skip normalization for changes that do not modify the Figma variable source.
+3. For a change to those preserved styles, or to token-generation logic, edit that source directly.
+4. Run:
 
 `npm run build:tokens`
 
-4. Verify the generated output.
-5. Verify that the generated CSS contains the expected tokens.
+5. Verify the raw source and normalized diff contain only the intended changes.
+6. Verify the generated output and confirm the generated CSS contains the expected tokens.
 
 The generated CSS is an artifact, not the source of truth.
 
@@ -188,7 +189,7 @@ The current token pipeline is:
 
 Figma local variables
 ↓
-`packages/ds/figma/export-variables/`
+Full export: `packages/ds/figma/export-variables/` | Targeted sync: verified Figma MCP definitions
 ↓
 `packages/ds/tokens/figma-variables.raw.json`
 ↓
@@ -704,7 +705,7 @@ Run the full `npm run check` when:
 
 If a check fails, fix the issue and rerun only the relevant check to verify the fix.
 
-When Figma variables changed, export them and run `npm run tokens:normalize` before `npm run build:tokens`. When token source or `packages/ds/build-tokens.js` changed, run `npm run build:tokens` first and confirm the generated CSS has no `[object Object]` values.
+When Figma variables change, sync them into the raw source using a full plugin export or a verified targeted Figma MCP update, then run `npm run tokens:normalize` before `npm run build:tokens`. When token source or `packages/ds/build-tokens.js` changes, run `npm run build:tokens` first and confirm the generated CSS has no `[object Object]` values.
 
 When UI changed, confirm the affected Storybook story. Testing rules are in section 23.
 

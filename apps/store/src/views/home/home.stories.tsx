@@ -2,10 +2,12 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 
 import { Home } from "./home";
+import { BAG_STORAGE_KEY } from "@/lib/bag";
 
 const meta = {
   title: "Views/Home",
   component: Home,
+  beforeEach: () => { localStorage.removeItem(BAG_STORAGE_KEY); },
   parameters: {
     layout: "fullscreen",
   },
@@ -75,5 +77,28 @@ export const Mobile: Story = {
     await waitFor(() =>
       expect(canvas.queryByRole("heading", { name: "Bag" })).toBeNull(),
     );
+  },
+};
+
+export const BrowseProduct: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.hover(canvas.getByRole("link", { name: "Products" }));
+    await userEvent.click(await body.findByRole("link", { name: "OP-XY" }));
+    await waitFor(() => expect(canvas.getByRole("article", { name: "OP-XY" })).toHaveFocus());
+    await expect(canvas.queryByRole("button", { name: "Products menu" })).toHaveAttribute("aria-expanded", "false");
+  },
+};
+
+export const BrowseProductMobile: Story = {
+  globals: { viewport: { value: "mobile2", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Menu" }));
+    await userEvent.click(await canvas.findByRole("link", { name: "Products" }));
+    await userEvent.click(await canvas.findByRole("link", { name: "OP-XY" }));
+    await waitFor(() => expect(canvas.getByRole("article", { name: "OP-XY" })).toHaveFocus());
+    await waitFor(() => expect(canvas.queryByRole("button", { name: "Close" })).not.toBeInTheDocument());
   },
 };

@@ -1,3 +1,5 @@
+import type * as React from "react";
+
 import { cn } from "#/lib/utils";
 import { buttonVariants } from "#/components/ui/button";
 import { PageHeader } from "#/components/ui/page-header";
@@ -15,6 +17,7 @@ export interface PasswordUpdatedProps {
   description?: string;
   actionHref?: string;
   actionLabel?: string;
+  onAction?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
 export function PasswordUpdated({
@@ -23,6 +26,7 @@ export function PasswordUpdated({
   description = PASSWORD_UPDATED_COPY.description,
   actionHref = "#",
   actionLabel = PASSWORD_UPDATED_COPY.login,
+  onAction,
 }: PasswordUpdatedProps) {
   return (
     <div
@@ -38,6 +42,7 @@ export function PasswordUpdated({
       <div className="flex w-full flex-col items-start gap-(--primitives-spacing-6)">
         <a
           href={actionHref}
+          onClick={onAction}
           className={cn(buttonVariants({ variant: "primary", size: "lg" }), "w-full")}
         >
           {actionLabel}

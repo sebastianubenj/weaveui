@@ -997,16 +997,16 @@ export const DesktopSearchWidth: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Search" }));
     await body.findByRole("searchbox", { name: "Search" });
 
-    // The field is as wide as the bar content, from the mark to the search button.
+    // The field is as wide as the bar content, from the mark to the bag button.
     const form = body.getByRole("search").getBoundingClientRect();
     const mark = canvas
       .getByRole("link", { name: "Home" })
       .getBoundingClientRect();
-    const trigger = canvas
-      .getByRole("button", { name: "Search" })
+    const bag = canvas
+      .getByRole("button", { name: "Bag" })
       .getBoundingClientRect();
     await expect(Math.abs(form.left - mark.left)).toBeLessThanOrEqual(1);
-    await expect(Math.abs(form.right - trigger.right)).toBeLessThanOrEqual(1);
+    await expect(Math.abs(form.right - bag.right)).toBeLessThanOrEqual(1);
   },
 };
 
@@ -1171,4 +1171,20 @@ export const EmptyMobile: Story = {
       canvas.queryByRole("button", { name: "Menu" }),
     ).not.toBeInTheDocument();
   },
+};
+
+export const SectionSizes: Story = {
+  args: requiredArgs,
+  render: () => (
+    <div className="flex flex-wrap items-start gap-(--primitives-spacing-12)">
+      <NavigationSection heading="Large links" size="lg">
+        <NavigationMenuLink href="#repairs" onClick={stopNavigation}>Repairs</NavigationMenuLink>
+        <NavigationMenuLink href="#maintenance" onClick={stopNavigation}>Maintenance</NavigationMenuLink>
+      </NavigationSection>
+      <NavigationSection heading="Small links" size="sm">
+        <NavigationMenuLink href="#collections" onClick={stopNavigation}>Collections</NavigationMenuLink>
+        <NavigationMenuLink href="#stories" onClick={stopNavigation}>Stories</NavigationMenuLink>
+      </NavigationSection>
+    </div>
+  ),
 };

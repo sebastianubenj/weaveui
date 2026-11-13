@@ -277,6 +277,8 @@
   --semantics-typography-heading-heading-sm-tracking-tight: -0.025em;
   --semantics-typography-heading-heading-xl-lh-tight: 1.25;
   --semantics-typography-heading-heading-xl-tracking-tight: -0.025em;
+  --semantics-typography-heading-heading-xxs-lh-tight: 1.25;
+  --semantics-typography-heading-heading-xxs-tracking-tight: -0.025em;
   --semantics-typography-label-label-lg-lh-snug: 1.375;
   --semantics-typography-label-label-lg-tracking-0-125: -0.0125em;
   --semantics-typography-label-label-md-lh-snug: 1.375;
@@ -335,6 +337,7 @@
   --semantics-typography-heading-heading-md-font-size: var(--primitives-typography-font-size-text-lg);
   --semantics-typography-heading-heading-sm-font-size: var(--primitives-typography-font-size-text-base);
   --semantics-typography-heading-heading-xl-font-size: var(--primitives-typography-font-size-text-2xl);
+  --semantics-typography-heading-heading-xxs-font-size: var(--primitives-typography-font-size-text-xs);
   --semantics-typography-label-font-weight: var(--primitives-typography-font-weight-medium);
   --semantics-typography-label-label-lg-font-size: var(--primitives-typography-font-size-text-base);
   --semantics-typography-label-label-md-font-size: var(--primitives-typography-font-size-text-sm);

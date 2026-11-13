@@ -1,106 +1,88 @@
-import * as React from "react";
-
+import { useEffect, useState } from "react";
+import { FormAlert } from "@weaveui/ds";
 import {
   Navigation,
   NavigationBagTrigger,
-  type NavigationBagItem,
   NavigationLink,
   NavigationMenuLink,
   NavigationSearchTrigger,
   NavigationSection,
 } from "@/components/ui/navigation";
 import { useAuth } from "@/lib/auth-context";
-import {
-  HomeProducts,
-  type HomeProduct,
-} from "@/patterns/home-products/home-products";
+import { addProductToBag, useBag } from "@/lib/bag";
+import { PRODUCTS } from "@/lib/catalog";
+import { HomeProducts } from "@/patterns/home-products/home-products";
 
-const links = [
-  "Products",
-  "Services",
-  "Discover",
-  "Support",
-  "About",
-] as const;
+interface ProductGroup { heading: string; productIds: string[] }
 
-type HomeLink = (typeof links)[number];
+const groups = {
+  synthesizers: { heading: "Synthesizers", productIds: ["op-1-field", "op-xy"] },
+  samplers: { heading: "Samplers", productIds: ["ep-40", "ko-ii-fx-mic"] },
+  recording: { heading: "Recording & mixing", productIds: ["tp-7", "cm-15", "tx-6"] },
+  accessories: { heading: "Accessories & audio", productIds: ["ep-2350", "ko-pedal", "life-is-fantastic"] },
+} satisfies Record<string, ProductGroup>;
 
-const panels: Record<HomeLink, { sections: number; links: number }> = {
-  Products: { sections: 3, links: 8 },
-  Services: { sections: 2, links: 4 },
-  Discover: { sections: 2, links: 6 },
-  Support: { sections: 1, links: 5 },
-  About: { sections: 1, links: 3 },
-};
+type HomeMenu = { label: string } & (
+  | { groups: ProductGroup[]; links?: never }
+  | { links: string[]; groups?: never }
+);
 
-function stopNavigation(event: React.MouseEvent<HTMLAnchorElement>) {
-  event.preventDefault();
-}
+const menus: HomeMenu[] = [
+  { label: "Products", groups: Object.values(groups) },
+  { label: "Services", links: ["Repairs", "Maintenance", "Customization"] },
+  { label: "Discover", links: ["Collections", "Collaborations", "Stories", "Artists"] },
+  { label: "Support", links: ["Help Center", "Orders & Shipping", "Product Resources"] },
+  { label: "About", links: ["Our Story", "Design Philosophy", "Careers", "Contact"] },
+];
 
-function MenuLinks({ count }: { count: number }) {
-  return Array.from({ length: count }, (_, index) => (
-    <NavigationMenuLink
-      key={index}
-      href={`#item-${index}`}
-      onClick={stopNavigation}
-    >
-      Navigation menu link
+function MenuContent({ menu, onSelect }: { menu: HomeMenu; onSelect: (id: string) => void }) {
+  const links = menu.links?.map((label) => (
+    <NavigationMenuLink key={label} href="#" onClick={(event) => event.preventDefault()}>
+      {label}
     </NavigationMenuLink>
   ));
-}
 
-function LinkPanel({ sections, links: linkCount }: { sections: number; links: number }) {
-  return Array.from({ length: sections }, (_, index) => (
-    <NavigationSection key={index} heading="Heading">
-      <MenuLinks count={linkCount} />
-    </NavigationSection>
-  ));
-}
-
-function HomeMenu() {
   return (
-    <NavigationSection>
-      {links.map((label) => (
-        <NavigationMenuLink
-          key={label}
-          href={`#${label.toLowerCase()}`}
-          onClick={stopNavigation}
-          submenu={<LinkPanel {...panels[label]} />}
-        >
-          {label}
-        </NavigationMenuLink>
-      ))}
-    </NavigationSection>
+    <>
+      <div className="contents md:hidden">
+        {menu.groups ? (
+          <ProductLinks groups={menu.groups} onSelect={onSelect} />
+        ) : (
+          <NavigationSection>{links}</NavigationSection>
+        )}
+      </div>
+      <div className="hidden md:contents">
+        {menu.groups ? (
+          <ProductLinks groups={menu.groups} onSelect={onSelect} />
+        ) : (
+          <NavigationSection heading={`Explore ${menu.label}`}>{links}</NavigationSection>
+        )}
+      </div>
+    </>
   );
 }
 
-function bagQuantity(count: number) {
-  return count > 1 ? `x${count}` : undefined;
-}
-
-function addProductToBag(
-  items: NavigationBagItem[],
-  product: HomeProduct,
-): NavigationBagItem[] {
-  const index = items.findIndex((item) => item.name === product.name);
-
-  if (index === -1) {
-    return [
-      ...items,
-      {
-        name: product.name,
-        src: product.src,
-        alt: product.alt,
-      },
-    ];
-  }
-
-  return items.map((item, itemIndex) => {
-    if (itemIndex !== index) return item;
-    const current = Number.parseInt(item.quantity?.replace(/^x/, "") ?? "1", 10);
-    const next = current + 1;
-    return { ...item, quantity: bagQuantity(next) };
-  });
+function ProductLinks({ groups: sections, onSelect }: { groups: ProductGroup[]; onSelect: (id: string) => void }) {
+  return sections.map((group) => (
+    <NavigationSection
+      key={group.heading}
+      heading={group.heading}
+      size={group.heading === groups.synthesizers.heading ? "lg" : "sm"}
+    >
+      {group.productIds.flatMap((id) => {
+        const product = PRODUCTS.find((candidate) => candidate.id === id);
+        return product ? [
+          <NavigationMenuLink key={id} href={`#product-${id}`} onClick={(event) => {
+            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+            event.preventDefault();
+            onSelect(id);
+          }}>
+            {product.name}
+          </NavigationMenuLink>,
+        ] : [];
+      })}
+    </NavigationSection>
+  ));
 }
 
 export interface HomeProps {
@@ -108,8 +90,24 @@ export interface HomeProps {
 }
 
 export function Home({ onReview }: HomeProps) {
-  const { loggedIn, logOut } = useAuth();
-  const [bagItems, setBagItems] = React.useState<NavigationBagItem[]>([]);
+  const { loggedIn, logOut, error } = useAuth();
+  const bagItems = useBag();
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState<string | null>(null);
+  const [destination, setDestination] = useState<{ id: string } | null>(null);
+
+  function selectProduct(id: string) {
+    setOpen(false);
+    setValue(null);
+    setDestination({ id });
+  }
+
+  useEffect(() => {
+    if (!destination) return;
+    const product = document.getElementById(`product-${destination.id}`);
+    product?.scrollIntoView({ block: "start" });
+    product?.focus({ preventScroll: true });
+  }, [destination]);
 
   return (
     <>
@@ -121,18 +119,30 @@ export function Home({ onReview }: HomeProps) {
         menuLabel="Menu"
         closeLabel="Close"
         backLabel="Back"
-        menu={<HomeMenu />}
+        open={open}
+        onOpenChange={setOpen}
+        value={value}
+        onValueChange={setValue}
+        menu={
+          <NavigationSection>
+            {menus.map((menu) => (
+              <NavigationMenuLink key={menu.label} href="#products"
+                submenu={<MenuContent menu={menu} onSelect={selectProduct} />}>
+                {menu.label}
+              </NavigationMenuLink>
+            ))}
+          </NavigationSection>
+        }
       >
-        {links.map((label) => (
+        {menus.map((menu) => (
           <NavigationLink
-            key={label}
-            value={label.toLowerCase()}
-            href={`#${label.toLowerCase()}`}
-            onClick={stopNavigation}
-            menu={<LinkPanel {...panels[label]} />}
-            menuLabel={`${label} menu`}
+            key={menu.label}
+            value={menu.label.toLowerCase()}
+            href="#products"
+            menu={<MenuContent menu={menu} onSelect={selectProduct} />}
+            menuLabel={`${menu.label} menu`}
           >
-            {label}
+            {menu.label}
           </NavigationLink>
         ))}
         <NavigationSearchTrigger />
@@ -147,11 +157,10 @@ export function Home({ onReview }: HomeProps) {
           onReview={onReview}
         />
       </Navigation>
-      <HomeProducts
-        onAction={(product) => {
-          setBagItems((items) => addProductToBag(items, product));
-        }}
-      />
+      <main>
+        {error ? <FormAlert className="px-(--semantics-layout-mobile-grid-margin) md:px-(--semantics-layout-desktop-grid-margin)">{error}</FormAlert> : null}
+        <HomeProducts onAction={addProductToBag} />
+      </main>
     </>
   );
 }

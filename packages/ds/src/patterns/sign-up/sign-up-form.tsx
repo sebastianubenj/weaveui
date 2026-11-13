@@ -44,7 +44,7 @@ export interface RegisterValues {
   confirmPassword: string;
 }
 
-export type RegisterSubmitResult = "success" | "network";
+export type RegisterSubmitResult = "success" | "network" | { type: "error"; message: string };
 
 export type RegisterAppearance =
   | "initial"
@@ -218,6 +218,13 @@ export function SignUpForm({
   const nameRef = React.useRef<HTMLInputElement>(null);
   const emailRef = React.useRef<HTMLInputElement>(null);
   const passwordRef = React.useRef<HTMLInputElement>(null);
+  const focusPasswordAfterCheck = React.useRef(false);
+  React.useLayoutEffect(() => {
+    if (!submitting && focusPasswordAfterCheck.current) {
+      focusPasswordAfterCheck.current = false;
+      passwordRef.current?.focus();
+    }
+  });
   const confirmRef = React.useRef<HTMLInputElement>(null);
   const submitLock = React.useRef(false);
 
@@ -312,6 +319,7 @@ export function SignUpForm({
     }
 
     submitLock.current = true;
+    setSubmitting(true);
 
     if (checkCompromisedPassword) {
       try {
@@ -319,23 +327,25 @@ export function SignUpForm({
         setLeakedResult(result);
         if (result !== "clear") {
           submitLock.current = false;
-          passwordRef.current?.focus();
+          focusPasswordAfterCheck.current = true;
+          setSubmitting(false);
           return;
         }
       } catch {
         setLeakedResult("unavailable");
         submitLock.current = false;
-        passwordRef.current?.focus();
+        focusPasswordAfterCheck.current = true;
+        setSubmitting(false);
         return;
       }
     }
-
-    setSubmitting(true);
 
     try {
       const result = await onSubmit?.({ name, email, password, confirmPassword });
       if (result === "network") {
         setFormError(REGISTER_COPY.network);
+      } else if (result && typeof result === "object") {
+        setFormError(result.message);
       }
     } catch {
       setFormError(REGISTER_COPY.network);
@@ -371,6 +381,7 @@ export function SignUpForm({
                 ref={nameRef}
                 type="text"
                 autoComplete="name"
+                disabled={submitting}
                 placeholder="Enter your full name"
                 value={name}
                 error={Boolean(errors.name)}
@@ -401,6 +412,7 @@ export function SignUpForm({
                 ref={emailRef}
                 type="email"
                 autoComplete="email"
+                disabled={submitting}
                 placeholder="Enter your email"
                 value={email}
                 error={Boolean(errors.email)}
@@ -453,6 +465,7 @@ export function SignUpForm({
                 ref={passwordRef}
                 type={passwordVisible ? "text" : "password"}
                 autoComplete="new-password"
+                disabled={submitting}
                 placeholder="Create a password"
                 value={password}
                 error={passwordInvalid}
@@ -481,6 +494,7 @@ export function SignUpForm({
                 ref={confirmRef}
                 type={confirmVisible ? "text" : "password"}
                 autoComplete="new-password"
+                disabled={submitting}
                 placeholder="Re-enter your password"
                 value={confirmPassword}
                 error={Boolean(errors.confirm)}

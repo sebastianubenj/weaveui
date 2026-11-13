@@ -19,6 +19,7 @@ function resolveDsHashAlias(): Plugin {
 
 export default defineConfig({
   plugins: [resolveDsHashAlias(), react(), tailwindcss()],
+  optimizeDeps: { include: ["react-router-dom"] },
   resolve: {
     alias: [
       { find: /^@\//, replacement: `${path.resolve(import.meta.dirname, "./src")}/` },
@@ -39,6 +40,14 @@ export default defineConfig({
   },
   test: {
     projects: [
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["src/lib/**/*.test.ts"],
+          environment: "node",
+        },
+      },
       {
         extends: true,
         plugins: [

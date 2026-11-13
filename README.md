@@ -23,6 +23,12 @@ npm run dev
 
 Store: [http://localhost:5173](http://localhost:5173)
 
+Copy `apps/store/.env.example` to `apps/store/.env` and set the Supabase project URL and public anon key to enable authentication. Configure the project's allowed email redirects for `/login` and `/reset-password` on your local and deployed origins. The forms require passwords of at least 15 characters; configure the backend password policy accordingly in [Supabase Auth](https://supabase.com/docs/guides/auth/password-security).
+
+Registration and password recovery check compromised passwords on submission using the [Pwned Passwords range API](https://haveibeenpwned.com/API/v3#PwnedPasswords). Only a five-character SHA-1 prefix is sent, with response padding; the password and full hash stay in the browser. An unavailable check blocks submission and allows retry. This client check complements the backend policy.
+
+The demo bag persists product IDs and quantities in this browser. Catalog search results, the cart page, and checkout are pending design. Storybook's authentication flows use a simulated Supabase client and password checker, so interaction tests do not create real accounts or call either service.
+
 ```bash
 npm run storybook:store
 ```
@@ -39,12 +45,14 @@ Accessibility: `@storybook/addon-a11y` fails `npm test` on CSF violations (`para
 
 ## Tokens
 
-Figma variables are exported with the development plugin in `packages/ds/figma/export-variables/`.
+For a small, targeted variable change, Codex can read the exact definitions from Figma MCP and merge only those entries into the existing raw export. This is only used when MCP provides all metadata required by the export schema; unrelated entries are preserved. For broad changes, full collection updates, or incomplete MCP data, use the development plugin for a complete export.
+
+Full exports use the development plugin in `packages/ds/figma/export-variables/`:
 
 1. In Figma: Plugins → Development → Import plugin from manifest… → `packages/ds/figma/export-variables/manifest.json`.
 2. Run **Export variables**. Save the download as `packages/ds/tokens/figma-variables.raw.json`.
-3. `npm run tokens:normalize` rewrites primitives and semantics in `packages/ds/tokens/tokens.json` and the Dark mode of Semantic Colors in `packages/ds/tokens/tokens.dark.json`. Font, typography, and effect styles in `tokens.json` stay as they are.
-4. `npm run build:tokens` writes `packages/ds/src/styles/generated/tokens.css` and `tokens.dark.css`.
+After either update path, run `npm run tokens:normalize` to rewrite primitives and semantics in `packages/ds/tokens/tokens.json` and the Dark mode of Semantic Colors in `packages/ds/tokens/tokens.dark.json`. Font, typography, and effect styles in `tokens.json` stay as they are.
+Then run `npm run build:tokens` to write `packages/ds/src/styles/generated/tokens.css` and `tokens.dark.css`.
 
 Dark mode is applied with `data-theme="dark"` on `<html>`. Storybook has a Theme switch in the toolbar.
 

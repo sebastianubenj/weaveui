@@ -34,16 +34,26 @@ const linkClassName = `inline-flex h-(--primitives-spacing-8) shrink-0 items-cen
   [@media(hover:hover)]:hover:[color:var(--semantics-colors-interaction-navigation-link-hover)]
   ${focusRing}`;
 
+export type NavigationSectionSize = "lg" | "sm";
+const NavigationSectionSizeContext = React.createContext<NavigationSectionSize>("lg");
+
 const menuLinkClassName = `flex w-full items-center justify-start no-underline
-  px-(--primitives-spacing-8) py-(--primitives-spacing-out-of-scale-1-5) md:px-(--primitives-spacing-2)
   font-sans [font-weight:var(--semantics-typography-heading-font-weight)]
-  text-(length:--semantics-typography-heading-heading-xl-font-size)
-  leading-(--semantics-typography-heading-heading-xl-lh-tight)
-  tracking-(--semantics-typography-heading-heading-xl-tracking-tight)
   whitespace-nowrap cursor-pointer
   [color:var(--semantics-colors-foreground-default)]
   [@media(hover:hover)]:hover:[color:var(--semantics-colors-interaction-navigation-link-hover)]
   ${focusRing}`;
+
+const menuLinkSizes: Record<NavigationSectionSize, string> = {
+  lg: `px-(--primitives-spacing-8) py-(--primitives-spacing-out-of-scale-1-5) md:px-(--primitives-spacing-1)
+    text-(length:--semantics-typography-heading-heading-xl-font-size)
+    leading-(--semantics-typography-heading-heading-xl-lh-tight)
+    tracking-(--semantics-typography-heading-heading-xl-tracking-tight)`,
+  sm: `p-(--primitives-spacing-1)
+    text-(length:--semantics-typography-heading-heading-xxs-font-size)
+    leading-(--semantics-typography-heading-heading-xxs-lh-tight)
+    tracking-(--semantics-typography-heading-heading-xxs-tracking-tight)`,
+};
 
 const iconButtonClassName = `box-border inline-flex shrink-0 items-center justify-center
   border-0 bg-transparent p-0 [color:inherit] cursor-pointer
@@ -635,14 +645,18 @@ export function NavigationLink({
       >
         <Icon name="chevron-down" size="var(--primitives-spacing-3)" />
       </NavigationMenu.Trigger>
-      <NavigationMenu.Content className={panelContentClassName}>
-        {menu}
+      <NavigationMenu.Content className={cn(panelContentClassName, "justify-start")}>
+        <div className="ml-[var(--navigation-content-offset,0px)] flex w-[min(100%,var(--navigation-sections-width,100%))] items-start gap-(--primitives-spacing-12)">
+          {menu}
+        </div>
       </NavigationMenu.Content>
     </NavigationMenu.Item>
   );
 }
 
 export interface NavigationMenuLinkProps extends React.ComponentProps<"a"> {
+  /** Overrides the containing section’s link size. */
+  size?: NavigationSectionSize;
   /**
    * Second-level content, usually `NavigationSection` elements. Below the `md` breakpoint the
    * link opens it in the mobile menu instead of navigating. In the desktop panel the link
@@ -652,6 +666,7 @@ export interface NavigationMenuLinkProps extends React.ComponentProps<"a"> {
 }
 
 export function NavigationMenuLink({
+  size,
   submenu,
   className,
   onClick,
@@ -659,12 +674,13 @@ export function NavigationMenuLink({
   ...props
 }: NavigationMenuLinkProps) {
   const level = React.useContext(MobileLevelContext);
+  const sectionSize = React.useContext(NavigationSectionSizeContext);
 
   return (
     <a
       data-slot="navigation-menu-link"
       ref={ref}
-      className={cn(menuLinkClassName, itemMotionClassName, className)}
+      className={cn(menuLinkClassName, menuLinkSizes[size ?? sectionSize], itemMotionClassName, className)}
       onClick={(event) => {
         onClick?.(event);
         if (submenu == null || !level) return;
@@ -677,10 +693,13 @@ export function NavigationMenuLink({
 }
 
 export function NavigationSection({
+  size = "lg",
   heading,
   children,
   className,
 }: {
+  /** Default size of the links in this section. */
+  size?: NavigationSectionSize;
   /** Section label. Omit it for the first mobile section, which has no heading. */
   heading?: string;
   children?: React.ReactNode;
@@ -690,7 +709,7 @@ export function NavigationSection({
     <section
       data-slot="navigation-section"
       className={cn(
-        "flex w-full flex-col items-start gap-(--primitives-spacing-2) px-(--primitives-spacing-2) py-(--primitives-spacing-1) md:w-auto",
+        "flex w-full flex-col items-start gap-(--primitives-spacing-2) px-(--primitives-spacing-2) py-(--primitives-spacing-1) md:w-auto md:px-(--primitives-spacing-0)",
         groupIndexClassName,
         className,
       )}
@@ -698,7 +717,7 @@ export function NavigationSection({
       {heading ? (
         <h2
           data-slot="navigation-section-heading"
-          className={`${itemMotionClassName} px-(--primitives-spacing-2) font-sans
+          className={`${itemMotionClassName} px-(--primitives-spacing-2) md:px-(--primitives-spacing-1) font-sans
             [font-weight:var(--semantics-typography-body-font-weight)]
             text-(length:--semantics-typography-label-label-sm-font-size)
             leading-(--semantics-typography-label-label-sm-lh-snug)
@@ -714,7 +733,9 @@ export function NavigationSection({
           itemIndexClassName,
         )}
       >
-        {children}
+        <NavigationSectionSizeContext.Provider value={size}>
+          {children}
+        </NavigationSectionSizeContext.Provider>
       </div>
     </section>
   );
@@ -1300,6 +1321,7 @@ export function NavigationBagTrigger({
         <NavigationMenu.Content
           className={cn(
             panelContentClassName,
+            "justify-start",
             bagLoaded
               ? "pb-(--primitives-spacing-20)"
               : "pb-(--primitives-spacing-32)",
@@ -1307,7 +1329,7 @@ export function NavigationBagTrigger({
         >
           <div
             className={cn(
-              "w-full max-w-(--primitives-max-width-max-w-2xl)",
+              "ml-[var(--navigation-content-offset,0px)] w-[min(100%,var(--navigation-content-width,100%))]",
               itemMotionClassName,
             )}
           >
@@ -1749,8 +1771,8 @@ function NavigationProduct({
   }, [barElement, positionerElement, isDesktop]);
 
   // The bar height is shared with the mobile panel, and the content width (mark to search
-  // button) with the desktop search field, which is portaled. Both depend on the items of the
-  // bar, so the bar and the items that size its content are observed.
+  // bag button) with the desktop search and bag panels, which are portaled. Both depend on the
+  // items of the bar, so the bar and the items that size its content are observed.
   React.useLayoutEffect(() => {
     if (!barElement || !wrapperElement) return;
     const bar = barElement;
@@ -1762,10 +1784,17 @@ function NavigationProduct({
         `${bar.getBoundingClientRect().height}px`,
       );
       const first = bar.firstElementChild;
-      const last = bar.querySelector("[data-slot=navigation-search-trigger]");
+      const last =
+        bar.querySelector("[data-slot=navigation-bag-trigger]") ??
+        bar.querySelector("[data-slot=navigation-search-trigger]");
+      const sectionEnd = bar.querySelector("[data-slot=navigation-list]");
       if (first && last && positionerElement) {
         const barLeft = bar.getBoundingClientRect().left;
         const firstLeft = first.getBoundingClientRect().left;
+        if (sectionEnd) positionerElement.style.setProperty(
+          "--navigation-sections-width",
+          `${sectionEnd.getBoundingClientRect().right - firstLeft}px`,
+        );
         positionerElement.style.setProperty(
           "--navigation-content-width",
           `${last.getBoundingClientRect().right - firstLeft}px`,
@@ -1781,7 +1810,7 @@ function NavigationProduct({
     const observer = new ResizeObserver(measure);
     observer.observe(bar);
     for (const node of bar.querySelectorAll(
-      ":scope > a, [data-slot=navigation-list], [data-slot=navigation-search-trigger]",
+      ":scope > a, [data-slot=navigation-list], [data-slot=navigation-search-trigger], [data-slot=navigation-bag-trigger]",
     )) {
       observer.observe(node);
     }

@@ -2,12 +2,14 @@ import type { AuthError } from "@supabase/supabase-js";
 
 import { authRedirect, setRememberSession, supabase } from "@/lib/supabase";
 
-export type RegisterAuthResult = "network" | "confirm-email" | "signed-in";
+export type AuthFormError = { type: "error"; message: string };
+export type RegisterAuthResult = "network" | "confirm-email" | "signed-in" | AuthFormError;
 export type LoginAuthResult =
   | "network"
   | "invalid-credentials"
   | "email-not-confirmed"
-  | "signed-in";
+  | "signed-in"
+  | AuthFormError;
 export type ForgotAuthResult =
   | "network"
   | "sent"
@@ -15,7 +17,7 @@ export type ForgotAuthResult =
       type: "wait";
       seconds?: number;
     };
-export type ResetAuthResult = "network" | "updated";
+export type ResetAuthResult = "network" | "updated" | "expired" | AuthFormError;
 export type ConfirmEmailAuthResult =
   | "network"
   | "sent"
@@ -40,6 +42,20 @@ function isRateLimit(error: AuthError) {
   );
 }
 
+function formError(error: AuthError): AuthFormError {
+  let message = "Something went wrong. Please try again.";
+  if (isRateLimit(error)) message = "Too many attempts. Please wait before trying again.";
+  if (error.code === "weak_password") {
+    message = "This password doesn’t meet the account’s security requirements. Choose a stronger password.";
+  }
+  if (error.code === "same_password") message = "Choose a password different from your current password.";
+  if (error.code === "email_address_invalid") message = "Enter a valid email address.";
+  if (error.code === "reauthentication_needed" || error.code === "reauthentication_not_valid") {
+    message = "Please request a new password reset link to continue.";
+  }
+  return { type: "error", message };
+}
+
 export function readAuthLinkError() {
   const search = new URLSearchParams(window.location.search);
   const hash = new URLSearchParams(window.location.hash.replace(/^#/, ""));
@@ -57,33 +73,40 @@ function stripAuthCode() {
   window.history.replaceState({}, "", `${url.pathname}${search ? `?${search}` : ""}`);
 }
 
-let authCallbackExchange: Promise<"ok" | "expired" | "none"> | null = null;
+type AuthCallbackResult = "ok" | "expired" | "none" | "network";
+let authCallbackExchange: Promise<AuthCallbackResult> | null = null;
 let authCallbackCode: string | null = null;
 
 /**
  * Exchanges the email-link code once. Shared across StrictMode remounts so the
  * one-time code is not consumed twice. `detectSessionInUrl` stays off.
  */
-export async function consumeAuthCallback(): Promise<"ok" | "expired" | "none"> {
+export async function consumeAuthCallback(): Promise<AuthCallbackResult> {
   if (!supabase) return "none";
   if (readAuthLinkError()) return "expired";
 
   const code = readAuthCode();
-  if (!code) return authCallbackExchange ?? "none";
+  if (!code) return "none";
 
   if (authCallbackExchange && authCallbackCode === code) return authCallbackExchange;
 
   authCallbackCode = code;
-  authCallbackExchange = (async () => {
+  const exchange = (async (): Promise<AuthCallbackResult> => {
     const { error } = await supabase.auth.exchangeCodeForSession(code);
+    if (error && isNetwork(error)) return "network";
     stripAuthCode();
-    if (!error) return "ok";
-
-    const { data } = await supabase.auth.getSession();
-    return data.session ? "ok" : "expired";
+    return error ? "expired" : "ok";
   })();
-
-  return authCallbackExchange;
+  authCallbackExchange = exchange;
+  try {
+    return await exchange;
+  } finally {
+    // Share only an in-flight exchange. Reopening a consumed code must validate it again.
+    if (authCallbackExchange === exchange) {
+      authCallbackExchange = null;
+      authCallbackCode = null;
+    }
+  }
 }
 
 export async function registerAccount(values: {
@@ -107,7 +130,7 @@ export async function registerAccount(values: {
     if (error.code === "user_already_exists" || /already registered/i.test(error.message)) {
       return "confirm-email";
     }
-    return "network";
+    return formError(error);
   }
 
   if ((data.user?.identities?.length ?? 0) === 0 || !data.session) return "confirm-email";
@@ -129,16 +152,13 @@ export async function signInAccount(values: {
 
   if (!error) return "signed-in";
   if (isNetwork(error)) return "network";
-  if (/email not confirmed/i.test(error.message)) return "email-not-confirmed";
-  return "invalid-credentials";
+  if (error.code === "email_not_confirmed" || /email not confirmed/i.test(error.message)) return "email-not-confirmed";
+  if (error.code === "invalid_credentials") return "invalid-credentials";
+  return formError(error);
 }
 
 export async function requestPasswordReset(email: string): Promise<ForgotAuthResult> {
   if (!supabase) return "network";
-
-  // A failed exchange caches "expired" for that code; a new email needs a fresh attempt.
-  authCallbackExchange = null;
-  authCallbackCode = null;
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: authRedirect("/reset-password"),
@@ -158,7 +178,11 @@ export async function updatePassword(password: string): Promise<ResetAuthResult>
   if (!supabase) return "network";
 
   const { error } = await supabase.auth.updateUser({ password });
-  if (error) return "network";
+  if (error) {
+    if (isNetwork(error)) return "network";
+    if (error.name === "AuthSessionMissingError" || error.code === "session_not_found" || error.code === "session_expired") return "expired";
+    return formError(error);
+  }
 
   // Do not sign out here: ResetPasswordRoute treats a mid-submit logout as an
   // expired recovery link and navigates away from /password-updated.
@@ -188,7 +212,12 @@ export async function resendConfirmationEmail(
   return "network";
 }
 
-export async function signOutAccount() {
-  if (!supabase) return;
-  await supabase.auth.signOut();
+export async function signOutAccount(): Promise<"signed-out" | "network"> {
+  if (!supabase) return "signed-out";
+  try {
+    const { error } = await supabase.auth.signOut();
+    return error ? "network" : "signed-out";
+  } catch {
+    return "network";
+  }
 }
