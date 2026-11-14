@@ -233,8 +233,12 @@ function motionToken(name: string) {
 }
 
 function motionMs(name: string) {
-  const value = Number.parseFloat(motionToken(name));
-  return Number.isFinite(value) ? value : 0;
+  const token = motionToken(name);
+  const value = Number.parseFloat(token);
+  if (!Number.isFinite(value)) return 0;
+  if (token.endsWith("ms")) return value;
+  if (token.endsWith("s")) return value * 1000;
+  return 0;
 }
 
 const ease = "ease-(--semantics-motion-easing-standard)";
@@ -304,7 +308,13 @@ function useAnimatedHeight(
     // callback changes sizes Base UI observes and raises a resize loop error.
     const observer = new MutationObserver(() => {
       const next = viewport.offsetHeight;
-      if (next === previous) return;
+      // Closing can clear the viewport before the popup finishes animating out.
+      // Preserve its last visible height for the clip-path exit transition.
+      if (
+        next === previous ||
+        next <= 0 ||
+        popup.hasAttribute("data-ending-style")
+      ) return;
 
       const settled =
         !popup.hasAttribute("data-starting-style") &&
@@ -315,6 +325,9 @@ function useAnimatedHeight(
           : previous;
       animation?.cancel();
       animation = null;
+      // Base UI can retain the previous --popup-height when content switches
+      // before the opening transition settles. Use the measured content height.
+      popup.style.height = `${next}px`;
 
       if (
         settled &&
@@ -337,6 +350,7 @@ function useAnimatedHeight(
     return () => {
       observer.disconnect();
       animation?.cancel();
+      popup.style.removeProperty("height");
     };
   }, [popup, viewport]);
 }
