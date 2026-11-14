@@ -1,3 +1,32 @@
-@import "@weaveui/ds/styles.css";
+@import "@weaveui/ds/preset.css";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+@import "tw-animate-css";
 @source "./**/*.{ts,tsx}";
-@source "../../../packages/ds/src/**/*.{ts,tsx}";
+
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+  }
+
+  @supports not selector(::-webkit-scrollbar) {
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: var(--semantics-colors-interaction-scrollbar-thumb) transparent;
+    }
+  }
+
+  html::-webkit-scrollbar {
+    width: var(--primitives-spacing-out-of-scale-0-5);
+    height: var(--primitives-spacing-out-of-scale-0-5);
+  }
+
+  html::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  html::-webkit-scrollbar-thumb {
+    border-radius: var(--primitives-radius-rounded-full);
+    background-color: var(--semantics-colors-interaction-scrollbar-thumb);
+  }
+}

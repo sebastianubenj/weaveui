@@ -174,6 +174,7 @@ const requiredArgs = {
 };
 
 export const Desktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
   args: requiredArgs,
   render: () => <SampleNavigation />,
   play: async ({ canvasElement }) => {
@@ -366,6 +367,7 @@ export const DesktopNavigates: Story = {
 };
 
 export const DesktopOpen: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
   args: requiredArgs,
   render: () => (
     <SampleNavigation defaultValue="products" menu={<SampleMenu />} />

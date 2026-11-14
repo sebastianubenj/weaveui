@@ -1,0 +1,21 @@
+@import "./preflight.css";
+@import "./package.css";
+
+@layer base {
+  *,
+  ::before,
+  ::after {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply text-foreground;
+    background-color: var(--semantics-colors-background-page);
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}

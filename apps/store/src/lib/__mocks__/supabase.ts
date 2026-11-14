@@ -19,5 +19,6 @@ export const supabase = {
     resend: fn(), updateUser: fn(), signOut: fn(),
   },
 } as unknown as SupabaseClient;
+export const getSupabase = fn(async () => supabase);
 export const setRememberSession = fn();
 export const authRedirect = (path: string) => `${window.location.origin}${path}`;

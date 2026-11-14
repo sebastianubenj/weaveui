@@ -1,4 +1,4 @@
-import { createClient, type SupportedStorage } from "@supabase/supabase-js";
+import type { SupportedStorage, SupabaseClient } from "@supabase/supabase-js";
 
 const REMEMBER_KEY = "weaveui-auth-remember";
 
@@ -40,21 +40,30 @@ const authStorage: SupportedStorage = {
   },
 };
 
-const url = import.meta.env.VITE_SUPABASE_URL;
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+let clientPromise: Promise<SupabaseClient | null> | undefined;
 
-export const supabase =
-  url && key
-    ? createClient(url, key, {
-        auth: {
-          storage: authStorage,
-          persistSession: true,
-          autoRefreshToken: true,
-          detectSessionInUrl: false,
-          flowType: "pkce",
-        },
-      })
-    : null;
+export function getSupabase() {
+  if (!clientPromise) {
+    const url = import.meta.env.VITE_SUPABASE_URL;
+    const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+    clientPromise = url && key
+      ? import("@supabase/supabase-js").then(({ createClient }) =>
+          createClient(url, key, {
+            auth: {
+              storage: authStorage,
+              persistSession: true,
+              autoRefreshToken: true,
+              detectSessionInUrl: false,
+              flowType: "pkce",
+            },
+          }),
+        )
+      : Promise.resolve(null);
+  }
+
+  return clientPromise;
+}
 
 export function authRedirect(path: string) {
   return `${window.location.origin}${path}`;

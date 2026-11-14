@@ -81,6 +81,7 @@ export const Mobile: Story = {
 };
 
 export const BrowseProduct: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const body = within(document.body);

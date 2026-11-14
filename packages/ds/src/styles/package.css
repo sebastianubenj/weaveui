@@ -1,0 +1,72 @@
+@import "./generated/tokens.css";
+@import "./generated/tokens.dark.css";
+@import "tailwindcss/theme.css";
+@import "tailwindcss/utilities.css";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+@import "@fontsource-variable/inter";
+
+@source "../**/*.{ts,tsx}";
+@source not "../**/*.stories.tsx";
+@source not "../**/*.browser.test.tsx";
+
+@custom-variant intent-keyboard (&:is(:root[data-weaveui-focus-intent="keyboard"] *));
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Inter Variable', sans-serif;
+  --color-ring: var(--weaveui-ring);
+  --color-input: var(--weaveui-input);
+  --color-border: var(--weaveui-border);
+  --color-destructive: var(--weaveui-destructive);
+  --color-destructive-foreground: var(--weaveui-destructive-foreground);
+  --color-accent-foreground: var(--weaveui-accent-foreground);
+  --color-accent: var(--weaveui-accent);
+  --color-muted-foreground: var(--weaveui-muted-foreground);
+  --color-muted: var(--weaveui-muted);
+  --color-secondary-foreground: var(--weaveui-secondary-foreground);
+  --color-secondary: var(--weaveui-secondary);
+  --color-primary-foreground: var(--weaveui-primary-foreground);
+  --color-primary: var(--weaveui-primary);
+  --color-popover-foreground: var(--weaveui-popover-foreground);
+  --color-popover: var(--weaveui-popover);
+  --color-card-foreground: var(--weaveui-card-foreground);
+  --color-card: var(--weaveui-card);
+  --color-foreground: var(--weaveui-foreground);
+  --color-background: var(--weaveui-background);
+  --radius-sm: calc(var(--weaveui-radius) * 0.6);
+  --radius-md: calc(var(--weaveui-radius) * 0.8);
+  --radius-lg: var(--weaveui-radius);
+  --radius-xl: calc(var(--weaveui-radius) * 1.4);
+  --radius-2xl: calc(var(--weaveui-radius) * 1.8);
+  --radius-3xl: calc(var(--weaveui-radius) * 2.2);
+  --radius-4xl: calc(var(--weaveui-radius) * 2.6);
+}
+
+:root,
+[data-weaveui-theme="dark"] {
+  --weaveui-background: var(--semantics-colors-background-default);
+  --weaveui-foreground: var(--semantics-colors-foreground-default);
+  --weaveui-card: var(--semantics-colors-background-default);
+  --weaveui-card-foreground: var(--semantics-colors-foreground-default);
+  --weaveui-popover: var(--semantics-colors-background-default);
+  --weaveui-popover-foreground: var(--semantics-colors-foreground-default);
+  --weaveui-primary: var(--semantics-colors-background-primary);
+  --weaveui-primary-foreground: var(--semantics-colors-foreground-primary);
+  --weaveui-secondary: var(--semantics-colors-background-secondary);
+  --weaveui-secondary-foreground: var(--semantics-colors-foreground-default);
+  --weaveui-accent: var(--semantics-colors-background-subtle);
+  --weaveui-accent-foreground: var(--semantics-colors-foreground-default);
+  --weaveui-destructive: var(--semantics-colors-background-destructive-op10);
+  --weaveui-destructive-foreground: var(--semantics-colors-foreground-destructive);
+  --weaveui-border: var(--semantics-colors-border-default);
+  --weaveui-ring: var(--semantics-colors-border-ring-focus);
+  --weaveui-input: var(--semantics-colors-border-default);
+  --weaveui-muted: var(--semantics-colors-background-subtle);
+  --weaveui-muted-foreground: var(--semantics-colors-foreground-subtle);
+  --weaveui-radius: var(--primitives-radius-rounded-10);
+}
+
+[data-weaveui-theme="dark"] {
+  color-scheme: dark;
+}

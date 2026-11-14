@@ -1,7 +1,7 @@
 let installed = false;
 
 function setFocusIntent(intent: "pointer" | "keyboard") {
-  document.documentElement.dataset.focusIntent = intent;
+  document.documentElement.dataset.weaveuiFocusIntent = intent;
 }
 
 function installFocusIntent() {

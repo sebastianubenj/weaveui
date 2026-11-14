@@ -9,7 +9,7 @@ sb.mock(import("../src/lib/password-security.ts"));
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme === "dark" ? "dark" : "light";
-  document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.weaveuiTheme = theme;
   return <Story />;
 };
 

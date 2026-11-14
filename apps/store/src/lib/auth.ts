@@ -1,6 +1,6 @@
 import type { AuthError } from "@supabase/supabase-js";
 
-import { authRedirect, setRememberSession, supabase } from "@/lib/supabase";
+import { authRedirect, getSupabase, setRememberSession } from "@/lib/supabase";
 
 export type AuthFormError = { type: "error"; message: string };
 export type RegisterAuthResult = "network" | "confirm-email" | "signed-in" | AuthFormError;
@@ -82,6 +82,7 @@ let authCallbackCode: string | null = null;
  * one-time code is not consumed twice. `detectSessionInUrl` stays off.
  */
 export async function consumeAuthCallback(): Promise<AuthCallbackResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "none";
   if (readAuthLinkError()) return "expired";
 
@@ -114,6 +115,7 @@ export async function registerAccount(values: {
   email: string;
   password: string;
 }): Promise<RegisterAuthResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "network";
 
   const { data, error } = await supabase.auth.signUp({
@@ -142,6 +144,7 @@ export async function signInAccount(values: {
   password: string;
   rememberMe: boolean;
 }): Promise<LoginAuthResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "network";
 
   setRememberSession(values.rememberMe);
@@ -158,6 +161,7 @@ export async function signInAccount(values: {
 }
 
 export async function requestPasswordReset(email: string): Promise<ForgotAuthResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "network";
 
   const { error } = await supabase.auth.resetPasswordForEmail(email, {
@@ -175,6 +179,7 @@ export async function requestPasswordReset(email: string): Promise<ForgotAuthRes
 }
 
 export async function updatePassword(password: string): Promise<ResetAuthResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "network";
 
   const { error } = await supabase.auth.updateUser({ password });
@@ -192,6 +197,7 @@ export async function updatePassword(password: string): Promise<ResetAuthResult>
 export async function resendConfirmationEmail(
   email: string,
 ): Promise<ConfirmEmailAuthResult> {
+  const supabase = await getSupabase();
   if (!supabase) return "network";
 
   const { error } = await supabase.auth.resend({
@@ -213,6 +219,7 @@ export async function resendConfirmationEmail(
 }
 
 export async function signOutAccount(): Promise<"signed-out" | "network"> {
+  const supabase = await getSupabase();
   if (!supabase) return "signed-out";
   try {
     const { error } = await supabase.auth.signOut();

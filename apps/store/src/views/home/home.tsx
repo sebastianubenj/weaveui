@@ -13,13 +13,25 @@ import { addProductToBag, useBag } from "@/lib/bag";
 import { PRODUCTS } from "@/lib/catalog";
 import { HomeProducts } from "@/patterns/home-products/home-products";
 
-interface ProductGroup { heading: string; productIds: string[] }
+interface ProductGroup {
+  heading: string;
+  productIds: string[];
+}
 
 const groups = {
-  synthesizers: { heading: "Synthesizers", productIds: ["op-1-field", "op-xy"] },
+  synthesizers: {
+    heading: "Synthesizers",
+    productIds: ["op-1-field", "op-xy"],
+  },
   samplers: { heading: "Samplers", productIds: ["ep-40", "ko-ii-fx-mic"] },
-  recording: { heading: "Recording & mixing", productIds: ["tp-7", "cm-15", "tx-6"] },
-  accessories: { heading: "Accessories & audio", productIds: ["ep-2350", "ko-pedal", "life-is-fantastic"] },
+  recording: {
+    heading: "Recording & Mixing",
+    productIds: ["tp-7", "cm-15", "tx-6"],
+  },
+  accessories: {
+    heading: "Accessories & Audio",
+    productIds: ["ep-2350", "ko-pedal", "life-is-fantastic"],
+  },
 } satisfies Record<string, ProductGroup>;
 
 type HomeMenu = { label: string } & (
@@ -30,14 +42,33 @@ type HomeMenu = { label: string } & (
 const menus: HomeMenu[] = [
   { label: "Products", groups: Object.values(groups) },
   { label: "Services", links: ["Repairs", "Maintenance", "Customization"] },
-  { label: "Discover", links: ["Collections", "Collaborations", "Stories", "Artists"] },
-  { label: "Support", links: ["Help Center", "Orders & Shipping", "Product Resources"] },
-  { label: "About", links: ["Our Story", "Design Philosophy", "Careers", "Contact"] },
+  {
+    label: "Discover",
+    links: ["Collections", "Collaborations", "Stories", "Artists"],
+  },
+  {
+    label: "Support",
+    links: ["Help Center", "Orders & Shipping", "Product Resources"],
+  },
+  {
+    label: "About",
+    links: ["Our Story", "Design Philosophy", "Careers", "Contact"],
+  },
 ];
 
-function MenuContent({ menu, onSelect }: { menu: HomeMenu; onSelect: (id: string) => void }) {
+function MenuContent({
+  menu,
+  onSelect,
+}: {
+  menu: HomeMenu;
+  onSelect: (id: string) => void;
+}) {
   const links = menu.links?.map((label) => (
-    <NavigationMenuLink key={label} href="#" onClick={(event) => event.preventDefault()}>
+    <NavigationMenuLink
+      key={label}
+      href="#"
+      onClick={(event) => event.preventDefault()}
+    >
       {label}
     </NavigationMenuLink>
   ));
@@ -46,7 +77,7 @@ function MenuContent({ menu, onSelect }: { menu: HomeMenu; onSelect: (id: string
     <>
       <div className="contents md:hidden">
         {menu.groups ? (
-          <ProductLinks groups={menu.groups} onSelect={onSelect} />
+          <ProductLinks groups={menu.groups} onSelect={onSelect} mobile />
         ) : (
           <NavigationSection>{links}</NavigationSection>
         )}
@@ -55,31 +86,59 @@ function MenuContent({ menu, onSelect }: { menu: HomeMenu; onSelect: (id: string
         {menu.groups ? (
           <ProductLinks groups={menu.groups} onSelect={onSelect} />
         ) : (
-          <NavigationSection heading={`Explore ${menu.label}`}>{links}</NavigationSection>
+          <NavigationSection heading={`Explore ${menu.label}`}>
+            {links}
+          </NavigationSection>
         )}
       </div>
     </>
   );
 }
 
-function ProductLinks({ groups: sections, onSelect }: { groups: ProductGroup[]; onSelect: (id: string) => void }) {
+function ProductLinks({
+  groups: sections,
+  onSelect,
+  mobile = false,
+}: {
+  groups: ProductGroup[];
+  onSelect: (id: string) => void;
+  mobile?: boolean;
+}) {
   return sections.map((group) => (
     <NavigationSection
       key={group.heading}
-      heading={group.heading}
+      heading={
+        mobile && group.heading === groups.synthesizers.heading
+          ? undefined
+          : group.heading
+      }
       size={group.heading === groups.synthesizers.heading ? "lg" : "sm"}
+      className={mobile ? "[&>h2]:pl-(--primitives-spacing-8)" : undefined}
     >
       {group.productIds.flatMap((id) => {
         const product = PRODUCTS.find((candidate) => candidate.id === id);
-        return product ? [
-          <NavigationMenuLink key={id} href={`#product-${id}`} onClick={(event) => {
-            if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-            event.preventDefault();
-            onSelect(id);
-          }}>
-            {product.name}
-          </NavigationMenuLink>,
-        ] : [];
+        return product
+          ? [
+              <NavigationMenuLink
+                key={id}
+                href={`#product-${id}`}
+                onClick={(event) => {
+                  if (
+                    event.metaKey ||
+                    event.ctrlKey ||
+                    event.shiftKey ||
+                    event.altKey
+                  )
+                    return;
+                  event.preventDefault();
+                  onSelect(id);
+                }}
+                className={mobile ? "pl-(--primitives-spacing-8)" : undefined}
+              >
+                {product.name}
+              </NavigationMenuLink>,
+            ]
+          : [];
       })}
     </NavigationSection>
   ));
@@ -126,8 +185,11 @@ export function Home({ onReview }: HomeProps) {
         menu={
           <NavigationSection>
             {menus.map((menu) => (
-              <NavigationMenuLink key={menu.label} href="#products"
-                submenu={<MenuContent menu={menu} onSelect={selectProduct} />}>
+              <NavigationMenuLink
+                key={menu.label}
+                href="#products"
+                submenu={<MenuContent menu={menu} onSelect={selectProduct} />}
+              >
                 {menu.label}
               </NavigationMenuLink>
             ))}
@@ -158,7 +220,11 @@ export function Home({ onReview }: HomeProps) {
         />
       </Navigation>
       <main>
-        {error ? <FormAlert className="px-(--semantics-layout-mobile-grid-margin) md:px-(--semantics-layout-desktop-grid-margin)">{error}</FormAlert> : null}
+        {error ? (
+          <FormAlert className="px-(--semantics-layout-mobile-grid-margin) md:px-(--semantics-layout-desktop-grid-margin)">
+            {error}
+          </FormAlert>
+        ) : null}
         <HomeProducts onAction={addProductToBag} />
       </main>
     </>

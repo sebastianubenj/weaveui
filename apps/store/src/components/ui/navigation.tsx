@@ -35,7 +35,8 @@ const linkClassName = `inline-flex h-(--primitives-spacing-8) shrink-0 items-cen
   ${focusRing}`;
 
 export type NavigationSectionSize = "lg" | "sm";
-const NavigationSectionSizeContext = React.createContext<NavigationSectionSize>("lg");
+const NavigationSectionSizeContext =
+  React.createContext<NavigationSectionSize>("lg");
 
 const menuLinkClassName = `flex w-full items-center justify-start no-underline
   font-sans [font-weight:var(--semantics-typography-heading-font-weight)]
@@ -645,7 +646,9 @@ export function NavigationLink({
       >
         <Icon name="chevron-down" size="var(--primitives-spacing-3)" />
       </NavigationMenu.Trigger>
-      <NavigationMenu.Content className={cn(panelContentClassName, "justify-start")}>
+      <NavigationMenu.Content
+        className={cn(panelContentClassName, "justify-start")}
+      >
         <div className="ml-[var(--navigation-content-offset,0px)] flex w-[min(100%,var(--navigation-sections-width,100%))] items-start gap-(--primitives-spacing-12)">
           {menu}
         </div>
@@ -680,7 +683,12 @@ export function NavigationMenuLink({
     <a
       data-slot="navigation-menu-link"
       ref={ref}
-      className={cn(menuLinkClassName, menuLinkSizes[size ?? sectionSize], itemMotionClassName, className)}
+      className={cn(
+        menuLinkClassName,
+        menuLinkSizes[size ?? sectionSize],
+        itemMotionClassName,
+        className,
+      )}
       onClick={(event) => {
         onClick?.(event);
         if (submenu == null || !level) return;
@@ -868,14 +876,12 @@ export function NavigationIconButton({
   );
 }
 
-export function NavigationSearchTrigger({
-  className,
-}: {
-  className?: string;
-}) {
+export function NavigationSearchTrigger({ className }: { className?: string }) {
   const navigation = React.useContext(NavigationContext);
   if (!navigation) {
-    throw new Error("NavigationSearchTrigger must be rendered inside Navigation.");
+    throw new Error(
+      "NavigationSearchTrigger must be rendered inside Navigation.",
+    );
   }
 
   const {
@@ -1057,7 +1063,10 @@ function NavigationBagEmpty({
   return (
     <div className="flex w-full flex-col items-start gap-(--primitives-spacing-6)">
       <div className="flex w-full flex-col items-start gap-(--primitives-spacing-4)">
-        <h2 data-slot="navigation-bag-empty-title" className={bagHeadingClassName}>
+        <h2
+          data-slot="navigation-bag-empty-title"
+          className={bagHeadingClassName}
+        >
           {emptyTitle}
         </h2>
         <p className={bagHintClassName}>
@@ -1106,69 +1115,92 @@ function NavigationBagLoaded({
   items: NavigationBagItem[];
   device: BagPreviewProductCardDevice;
 } & NavigationBagProfileProps) {
-  return (
-    <div
-      className={cn(
-        "flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-6)",
-        device === "mobile" && "min-h-0 flex-1",
-      )}
+  const products = items.slice(0, BAG_PREVIEW_LIMIT).map((item, index) => (
+    <BagPreviewProductCard
+      key={`${item.name}-${index}`}
+      device={device}
+      name={item.name}
+      src={item.src}
+      alt={item.alt}
+      showQuantity={item.quantity != null}
+      quantity={item.quantity}
+    />
+  ));
+  const overflow =
+    items.length > BAG_PREVIEW_LIMIT ? (
+      <p
+        data-slot="navigation-bag-overflow"
+        className={`m-0 font-sans
+          [font-weight:var(--semantics-typography-body-font-weight)]
+          text-(length:--semantics-typography-body-body-md-font-size)
+          leading-(--semantics-typography-body-body-md-lh-normal)
+          tracking-(--semantics-typography-body-body-md-tracking-tight)
+          [color:var(--semantics-colors-foreground-subtle-on-subtlest)]`}
+      >
+        {bagOverflowLabel(items.length - BAG_PREVIEW_LIMIT)}
+      </p>
+    ) : null;
+  const profile = (
+    <NavigationBagProfile
+      signInHref={signInHref}
+      signInLabel={signInLabel}
+      onSignInClick={onSignInClick}
+      loggedIn={loggedIn}
+      profileTitle={profileTitle}
+      logOutLabel={logOutLabel}
+      onLogOut={onLogOut}
+    />
+  );
+  const reviewButton = (
+    <Button
+      type="button"
+      variant="primary"
+      size="md"
+      onClick={onReview}
+      className={device === "mobile" ? "w-full" : undefined}
     >
+      {reviewLabel}
+    </Button>
+  );
+
+  if (device === "mobile") {
+    return (
+      <div className="flex min-h-0 w-full min-w-0 flex-1 flex-col items-start gap-(--primitives-spacing-6)">
+        <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-6)">
+          <h2 data-slot="navigation-bag-title" className={bagHeadingClassName}>
+            {title}
+          </h2>
+          <div
+            className={cn(
+              "flex min-h-0 w-full flex-1 flex-col items-start gap-(--primitives-spacing-2) overflow-y-auto [scrollbar-gutter:stable]",
+              scrollbarClassName,
+            )}
+          >
+            {products}
+          </div>
+          {overflow}
+          {reviewButton}
+        </div>
+        {profile}
+      </div>
+    );
+  }
+
+  return (
+    <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-6)">
       <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-4)">
         <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-(--primitives-spacing-4)">
           <h2 data-slot="navigation-bag-title" className={bagHeadingClassName}>
             {title}
           </h2>
-          <Button
-            type="button"
-            variant="primary"
-            size="md"
-            onClick={onReview}
-          >
-            {reviewLabel}
-          </Button>
+          {reviewButton}
         </div>
-        <div
-          className={cn(
-            "flex w-full flex-col items-start gap-(--primitives-spacing-2)",
-            device === "mobile" &&
-              `min-h-0 flex-1 overflow-y-auto [scrollbar-gutter:stable] ${scrollbarClassName}`,
-          )}
-        >
-          {items.slice(0, BAG_PREVIEW_LIMIT).map((item, index) => (
-            <BagPreviewProductCard
-              key={`${item.name}-${index}`}
-              device={device}
-              name={item.name}
-              src={item.src}
-              alt={item.alt}
-              showQuantity={item.quantity != null}
-              quantity={item.quantity}
-            />
-          ))}
-          {items.length > BAG_PREVIEW_LIMIT ? (
-            <p
-              data-slot="navigation-bag-overflow"
-              className={`m-0 font-sans
-                [font-weight:var(--semantics-typography-body-font-weight)]
-                text-(length:--semantics-typography-body-body-md-font-size)
-                leading-(--semantics-typography-body-body-md-lh-normal)
-                tracking-(--semantics-typography-body-body-md-tracking-tight)
-                [color:var(--semantics-colors-foreground-subtle-on-subtlest)]`}
-            >
-              {bagOverflowLabel(items.length - BAG_PREVIEW_LIMIT)}
-            </p>
-          ) : null}
+        <div className="flex w-full flex-col items-start gap-(--primitives-spacing-2)">
+          {products}
+          {overflow}
         </div>
       </div>
-      <NavigationBagProfile
-        signInHref={signInHref}
-        signInLabel={signInLabel}
-        onSignInClick={onSignInClick}
-        loggedIn={loggedIn}
-        profileTitle={profileTitle}
-        logOutLabel={logOutLabel}
-        onLogOut={onLogOut}
-      />
+      {profile}
     </div>
   );
 }
@@ -1493,7 +1525,11 @@ function NavigationEmpty({
         {...props}
       >
         <div className="flex w-full items-center md:max-w-(--primitives-max-width-max-w-2xl)">
-          <a href={logoHref} aria-label={logoLabel} className={iconButtonClassName}>
+          <a
+            href={logoHref}
+            aria-label={logoLabel}
+            className={iconButtonClassName}
+          >
             <span className="inline-flex size-(--primitives-spacing-4) items-center justify-center">
               <NavigationMark />
             </span>
@@ -1670,7 +1706,12 @@ function NavigationProduct({
     () => ({
       openFromHover(next) {
         window.clearTimeout(openTimer.current);
-        if (next === null && (activeValueRef.current === SEARCH_VALUE || activeValueRef.current === BAG_VALUE)) return;
+        if (
+          next === null &&
+          (activeValueRef.current === SEARCH_VALUE ||
+            activeValueRef.current === BAG_VALUE)
+        )
+          return;
         if (next === activeValueRef.current) return;
         if (next === null) {
           closeByPointer();
@@ -1791,10 +1832,11 @@ function NavigationProduct({
       if (first && last && positionerElement) {
         const barLeft = bar.getBoundingClientRect().left;
         const firstLeft = first.getBoundingClientRect().left;
-        if (sectionEnd) positionerElement.style.setProperty(
-          "--navigation-sections-width",
-          `${sectionEnd.getBoundingClientRect().right - firstLeft}px`,
-        );
+        if (sectionEnd)
+          positionerElement.style.setProperty(
+            "--navigation-sections-width",
+            `${sectionEnd.getBoundingClientRect().right - firstLeft}px`,
+          );
         positionerElement.style.setProperty(
           "--navigation-content-width",
           `${last.getBoundingClientRect().right - firstLeft}px`,
@@ -1880,7 +1922,8 @@ function NavigationProduct({
 
     function onKeyDown(event: KeyboardEvent) {
       if (event.key !== "Escape") return;
-      if (mobileMode === "search" || mobileMode === "bag") changeValueRef.current(null);
+      if (mobileMode === "search" || mobileMode === "bag")
+        changeValueRef.current(null);
       else {
         if (openProp === undefined) setUncontrolledOpen(false);
         onOpenChange?.(false);
@@ -1907,11 +1950,10 @@ function NavigationProduct({
       data-slot="navigation"
       ref={setBarRef}
       className={cn(
-        `fixed inset-x-0 top-0 z-(--semantics-layer-navigation) flex w-full items-center justify-between
+        `fixed inset-x-0 top-0 z-(--semantics-layer-navigation) flex w-full items-center justify-center
          [color:var(--semantics-colors-foreground-default)]
          [transition-property:background-color] duration-(--semantics-motion-duration-320) ${ease}
          motion-reduce:transition-none
-         md:justify-center md:gap-(--primitives-spacing-12)
          px-(--primitives-spacing-2) py-(--primitives-spacing-out-of-scale-1-5)
          md:px-(--primitives-spacing-6)`,
         menuChromeOpen
@@ -1921,108 +1963,111 @@ function NavigationProduct({
       )}
       {...props}
     >
-      <a
-        href={logoHref}
-        aria-label={logoLabel}
-        onPointerEnter={(event) => {
-          if (event.pointerType === "mouse")
-            navigationContext.openFromHover(null);
-        }}
-        className={cn(iconButtonClassName, expanded && "max-md:hidden")}
-      >
-        <span className="inline-flex size-(--primitives-spacing-4) items-center justify-center">
-          <NavigationMark />
-        </span>
-      </a>
-      {/* The back control fades out when going back, but leaves at once when the menu closes, so it never shows next to the mark of the closed bar. */}
-      {backPresence.mounted && mobileMode !== null ? (
-        <button
-          ref={backButtonRef}
-          {...backPresence.attributes}
-          inert={!showBack}
-          type="button"
-          aria-label={backLabel}
-          onClick={level !== null ? goBack : onBack}
-          className={cn(
-            iconButtonClassName,
-            `[transition-property:opacity] duration-(--semantics-motion-duration-240) ${ease} motion-reduce:transition-none
-            data-starting-style:opacity-0 data-ending-style:opacity-0 md:hidden`,
-          )}
-        >
-          <Icon name="chevron-left" size={iconBox16} />
-        </button>
-      ) : null}
-      <NavigationContext.Provider value={navigationContext}>
-        <NavigationMenu.Root
-          aria-label="Primary"
-          value={activeValue}
-          onValueChange={(next, details) => {
-            if (details.reason === "trigger-hover") return;
-            changeValue(next as string | null);
+      <div className="mx-auto flex w-full items-center justify-between md:max-w-(--primitives-max-width-max-w-2xl) md:justify-center md:gap-(--primitives-spacing-12)">
+        <a
+          href={logoHref}
+          aria-label={logoLabel}
+          onPointerEnter={(event) => {
+            if (event.pointerType === "mouse")
+              navigationContext.openFromHover(null);
           }}
-          className="contents"
+          className={cn(iconButtonClassName, expanded && "max-md:hidden")}
         >
-          <div className="flex items-center gap-(--primitives-spacing-4) max-md:ml-auto md:contents">
-            <NavigationMenu.List
-              data-slot="navigation-list"
-              className="m-0 flex list-none items-center gap-(--primitives-spacing-4) p-0 md:gap-(--primitives-spacing-12)"
-            >
-              {children}
-            </NavigationMenu.List>
-            <button
-              ref={menuButtonRef}
-              type="button"
-              aria-label={expanded ? closeLabel : menuLabel}
-              aria-expanded={
-                mobileMode === "search" ? undefined : mobileMode === "menu"
-              }
-              aria-controls={mobilePanel.mounted ? mobilePanelId : undefined}
-              onClick={expanded ? closeMobile : requestOpen}
-              className={cn(iconButtonClassName, "md:hidden")}
-            >
-              <NavigationMenuIcon open={expanded} />
-            </button>
-          </div>
-          <NavigationMenu.Portal>
-            <NavigationMenu.Backdrop
-              data-slot="navigation-scrim"
-              className="fixed inset-0 z-(--semantics-layer-scrim) max-md:hidden
+          <span className="inline-flex size-(--primitives-spacing-4) items-center justify-center">
+            <NavigationMark />
+          </span>
+        </a>
+        {/* The back control fades out when going back, but leaves at once when the menu closes, so it never shows next to the mark of the closed bar. */}
+        {backPresence.mounted && mobileMode !== null ? (
+          <button
+            ref={backButtonRef}
+            {...backPresence.attributes}
+            inert={!showBack}
+            type="button"
+            aria-label={backLabel}
+            onClick={level !== null ? goBack : onBack}
+            className={cn(
+              iconButtonClassName,
+              `[transition-property:opacity] duration-(--semantics-motion-duration-240) ${ease} motion-reduce:transition-none
+            data-starting-style:opacity-0 data-ending-style:opacity-0 md:hidden`,
+            )}
+          >
+            <Icon name="chevron-left" size={iconBox16} />
+          </button>
+        ) : null}
+        <NavigationContext.Provider value={navigationContext}>
+          <NavigationMenu.Root
+            aria-label="Primary"
+            value={activeValue}
+            onValueChange={(next, details) => {
+              if (details.reason === "trigger-hover") return;
+              changeValue(next as string | null);
+            }}
+            className="contents"
+          >
+            <div className="flex items-center gap-(--primitives-spacing-4) max-md:ml-auto md:contents">
+              <NavigationMenu.List
+                data-slot="navigation-list"
+                className="m-0 flex list-none items-center gap-(--primitives-spacing-4) p-0 md:gap-(--primitives-spacing-12)"
+              >
+                {children}
+              </NavigationMenu.List>
+              <button
+                ref={menuButtonRef}
+                type="button"
+                aria-label={expanded ? closeLabel : menuLabel}
+                aria-expanded={
+                  mobileMode === "search" ? undefined : mobileMode === "menu"
+                }
+                aria-controls={mobilePanel.mounted ? mobilePanelId : undefined}
+                onClick={expanded ? closeMobile : requestOpen}
+                className={cn(iconButtonClassName, "md:hidden")}
+              >
+                <NavigationMenuIcon open={expanded} />
+              </button>
+            </div>
+            <NavigationMenu.Portal>
+              <NavigationMenu.Backdrop
+                data-slot="navigation-scrim"
+                className="fixed inset-0 z-(--semantics-layer-scrim) max-md:hidden
               [background-color:var(--semantics-colors-background-primary-op60)]
               [backdrop-filter:blur(var(--semantics-background-blur-navigation))]
               transition-opacity duration-(--semantics-motion-duration-320) delay-(--semantics-motion-delay-scrim) ease-(--semantics-motion-easing-standard)
               motion-reduce:transition-none
               data-starting-style:opacity-0 data-ending-style:opacity-0"
-            />
-            <NavigationMenu.Positioner
-              ref={setPositionerElement}
-              anchor={barElement}
-              positionMethod="fixed"
-              side="bottom"
-              align="start"
-              sideOffset={0}
-              collisionAvoidance={{ side: "none" }}
-              collisionPadding={0}
-              className="z-(--semantics-layer-panel) w-(--anchor-width) max-md:hidden"
-            >
-              <NavigationMenu.Popup
-                ref={setPopupElement}
-                data-slot="navigation-panel"
-                data-switch={switching ? "" : undefined}
-                onClick={(event) => {
-                  if ((event.target as Element).closest("a")) changeValue(null);
-                }}
-                className={cn(
-                  "group/popup h-(--popup-height) w-full overflow-hidden",
-                  "[background-color:var(--semantics-colors-background-subtlest)] [color:var(--semantics-colors-foreground-default)]",
-                  panelMotionClassName,
-                )}
+              />
+              <NavigationMenu.Positioner
+                ref={setPositionerElement}
+                anchor={barElement}
+                positionMethod="fixed"
+                side="bottom"
+                align="start"
+                sideOffset={0}
+                collisionAvoidance={{ side: "none" }}
+                collisionPadding={0}
+                className="z-(--semantics-layer-panel) w-(--anchor-width) max-md:hidden"
               >
-                <NavigationMenu.Viewport ref={setViewportElement} />
-              </NavigationMenu.Popup>
-            </NavigationMenu.Positioner>
-          </NavigationMenu.Portal>
-        </NavigationMenu.Root>
-      </NavigationContext.Provider>
+                <NavigationMenu.Popup
+                  ref={setPopupElement}
+                  data-slot="navigation-panel"
+                  data-switch={switching ? "" : undefined}
+                  onClick={(event) => {
+                    if ((event.target as Element).closest("a"))
+                      changeValue(null);
+                  }}
+                  className={cn(
+                    "group/popup h-(--popup-height) w-full overflow-hidden",
+                    "[background-color:var(--semantics-colors-background-subtlest)] [color:var(--semantics-colors-foreground-default)]",
+                    panelMotionClassName,
+                  )}
+                >
+                  <NavigationMenu.Viewport ref={setViewportElement} />
+                </NavigationMenu.Popup>
+              </NavigationMenu.Positioner>
+            </NavigationMenu.Portal>
+          </NavigationMenu.Root>
+        </NavigationContext.Provider>
+      </div>
     </header>
   );
 

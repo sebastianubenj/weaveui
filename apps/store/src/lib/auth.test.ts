@@ -10,7 +10,7 @@ const { auth, setRememberSession } = vi.hoisted(() => ({
 }));
 
 vi.mock("./supabase", () => ({
-  supabase: { auth }, setRememberSession,
+  getSupabase: async () => ({ auth }), setRememberSession,
   authRedirect: (path: string) => `https://store.test${path}`,
 }));
 

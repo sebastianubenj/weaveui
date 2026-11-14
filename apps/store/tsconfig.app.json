@@ -17,9 +17,7 @@
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
     "paths": {
-      "@/*": ["./src/*"],
-      "@weaveui/ds": ["../../packages/ds/src/index.ts"],
-      "#/*": ["../../packages/ds/src/*"]
+      "@/*": ["./src/*"]
     },
     "noUnusedLocals": true,
     "noUnusedParameters": true,

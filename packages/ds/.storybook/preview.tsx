@@ -5,7 +5,7 @@ import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 
 const withTheme: Decorator = (Story, context) => {
   const theme = context.globals.theme === 'dark' ? 'dark' : 'light';
-  document.documentElement.dataset.theme = theme;
+  document.documentElement.dataset.weaveuiTheme = theme;
   return <Story />;
 };
 

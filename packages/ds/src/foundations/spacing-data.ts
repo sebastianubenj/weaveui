@@ -35,7 +35,6 @@ const USED_STEPS = new Set([
 
 /** Steps outside the default scale. Figma groups them as `spacing/out-of-scale/*`. */
 const OUT_OF_SCALE_STEPS = new Set([
-  "0,25",
   "0,125",
   "0,25",
   "0,5",
@@ -72,7 +71,6 @@ const OUT_OF_SCALE_STEPS = new Set([
 
 const SCALE: { step: string; px: number }[] = [
   { step: "0", px: 0 },
-  { step: "0,25", px: 1 },
   { step: "0,125", px: 0.5 },
   { step: "0,25", px: 1 },
   { step: "0,5", px: 2 },

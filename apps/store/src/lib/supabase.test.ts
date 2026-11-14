@@ -25,6 +25,7 @@ afterEach(() => { vi.unstubAllGlobals(); vi.unstubAllEnvs(); });
 
 async function setupStorage() {
   const module = await import("./supabase");
+  await module.getSupabase();
   const options = createClient.mock.calls[0]?.[2] as { auth: { storage: SupportedStorage } };
   return { storage: options.auth.storage, setRememberSession: module.setRememberSession };
 }

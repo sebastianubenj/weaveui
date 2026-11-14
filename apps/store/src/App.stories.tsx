@@ -8,10 +8,10 @@ import { App } from "./App";
 import { AuthProvider } from "./lib/auth-provider";
 import { BAG_STORAGE_KEY } from "./lib/bag";
 import { checkCompromisedPassword } from "./lib/password-security";
-import { exampleSession } from "./lib/__mocks__/supabase";
-import { supabase } from "./lib/supabase";
+import { exampleSession, supabase as mockSupabase } from "./lib/__mocks__/supabase";
+import { getSupabase } from "./lib/supabase";
 
-const mockAuth = mocked(supabase!.auth, true);
+const mockAuth = mocked(mockSupabase.auth, true);
 
 function resetSupabaseMock(initialSession: Session | null = null) {
   let session = initialSession;
@@ -42,6 +42,7 @@ function resetSupabaseMock(initialSession: Session | null = null) {
   mockAuth.resetPasswordForEmail.mockReset().mockResolvedValue({ data: {}, error: null });
   mockAuth.resend.mockReset().mockResolvedValue({ data: { user: null, session: null }, error: null });
   mockAuth.updateUser.mockReset().mockResolvedValue({ data: { user: exampleSession.user }, error: null });
+  mocked(getSupabase).mockResolvedValue(mockSupabase);
 }
 
 
@@ -102,10 +103,10 @@ export const UnconfirmedEmail: Story = {
 
 async function submitRegistration(element: HTMLElement) {
   const canvas = within(element);
-  await userEvent.type(canvas.getByLabelText("Full name"), "Alex Example");
-  await userEvent.type(canvas.getByLabelText("Email"), "alex@example.com");
-  await userEvent.type(canvas.getByLabelText("Password"), "a-long-test-password");
-  await userEvent.type(canvas.getByLabelText("Confirm your password"), "a-long-test-password");
+  await userEvent.type(await canvas.findByLabelText("Full name"), "Alex Example");
+  await userEvent.type(await canvas.findByLabelText("Email"), "alex@example.com");
+  await userEvent.type(await canvas.findByLabelText("Password"), "a-long-test-password");
+  await userEvent.type(await canvas.findByLabelText("Confirm your password"), "a-long-test-password");
   await userEvent.click(canvas.getByRole("button", { name: "Create account" }));
 }
 
@@ -125,7 +126,7 @@ export const RecoveryRequest: Story = {
   parameters: { route: "/forgot-password" },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.type(canvas.getByLabelText("Email"), "alex@example.com");
+    await userEvent.type(await canvas.findByLabelText("Email"), "alex@example.com");
     await userEvent.click(canvas.getByRole("button", { name: /send/i }));
     await expect(await canvas.findByRole("heading", { name: "Check your email" })).toBeVisible();
     await expect(mockAuth.resetPasswordForEmail).toHaveBeenCalledWith("alex@example.com", {

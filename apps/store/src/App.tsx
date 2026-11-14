@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
 import { confirmEmailErrorMessage } from "@weaveui/ds";
@@ -11,13 +11,28 @@ import {
 } from "@/lib/auth";
 import { useAuth } from "@/lib/auth-context";
 import { checkCompromisedPassword } from "@/lib/password-security";
-import { ExpiredLink } from "@/views/expired-link/expired-link";
-import { ForgotPassword } from "@/views/forgot-password/forgot-password";
-import { Home } from "@/views/home/home";
-import { Login } from "@/views/login/login";
-import { PasswordUpdated } from "@/views/password-updated/password-updated";
-import { Register } from "@/views/register/register";
-import { ResetPassword } from "@/views/reset-password/reset-password";
+
+const ExpiredLink = lazy(() =>
+  import("@/views/expired-link/expired-link").then(({ ExpiredLink }) => ({ default: ExpiredLink })),
+);
+const ForgotPassword = lazy(() =>
+  import("@/views/forgot-password/forgot-password").then(({ ForgotPassword }) => ({ default: ForgotPassword })),
+);
+const Home = lazy(() =>
+  import("@/views/home/home").then(({ Home }) => ({ default: Home })),
+);
+const Login = lazy(() =>
+  import("@/views/login/login").then(({ Login }) => ({ default: Login })),
+);
+const PasswordUpdated = lazy(() =>
+  import("@/views/password-updated/password-updated").then(({ PasswordUpdated }) => ({ default: PasswordUpdated })),
+);
+const Register = lazy(() =>
+  import("@/views/register/register").then(({ Register }) => ({ default: Register })),
+);
+const ResetPassword = lazy(() =>
+  import("@/views/reset-password/reset-password").then(({ ResetPassword }) => ({ default: ResetPassword })),
+);
 
 const EMAIL_NOT_CONFIRMED =
   "Confirm your email before signing in. Check your inbox for the confirmation link.";
@@ -191,22 +206,24 @@ export function App() {
   return (
     <>
       <AuthLinkRedirect />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<LoginRoute />} />
-        <Route path="/register" element={<RegisterRoute />} />
-        <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
-        <Route path="/reset-password" element={<ResetPasswordRoute />} />
-        <Route
-          path="/password-updated"
-          element={<PasswordUpdatedRoute />}
-        />
-        <Route
-          path="/expired-link"
-          element={<ExpiredLink logoHref="/" forgotPasswordHref="/forgot-password" />}
-        />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
+      <Suspense fallback={null}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<LoginRoute />} />
+          <Route path="/register" element={<RegisterRoute />} />
+          <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
+          <Route path="/reset-password" element={<ResetPasswordRoute />} />
+          <Route
+            path="/password-updated"
+            element={<PasswordUpdatedRoute />}
+          />
+          <Route
+            path="/expired-link"
+            element={<ExpiredLink logoHref="/" forgotPasswordHref="/forgot-password" />}
+          />
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Suspense>
     </>
   );
 }

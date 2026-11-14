@@ -2,20 +2,42 @@
   "name": "@weaveui/ds",
   "private": true,
   "version": "0.0.0",
+  "license": "MIT",
   "type": "module",
   "imports": {
-    "#/*": "./src/*"
+    "#/*": {
+      "types": "./dist/types/*.d.ts"
+    }
   },
   "exports": {
-    ".": "./src/index.ts",
-    "./styles.css": "./src/index.css"
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./preflight.css": "./dist/preflight.css",
+    "./preset.css": "./dist/preset.css"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "LICENSES"
+  ],
+  "sideEffects": [
+    "**/*.css"
+  ],
   "scripts": {
     "build:tokens": "node build-tokens.js",
     "tokens:normalize": "node scripts/normalize-figma-variables.js",
     "tokens:test": "node --test scripts/normalize-figma-variables.test.js",
+    "build:types": "tsc -p tsconfig.types.json",
+    "build:package:js": "vite build --config vite.lib.config.ts",
+    "build:package:css": "vite build --config vite.styles.config.ts",
+    "build:package:artifacts": "npm run build:package:js && npm run build:types && npm run build:package:css",
+    "build:package": "npm run build:tokens && npm run build:package:artifacts",
     "dev": "npm run build:tokens && vite",
-    "build": "npm run build:tokens && tsc -b && vite build",
+    "build": "npm run build:tokens && tsc -b && vite build && npm run build:package:artifacts",
     "lint": "eslint .",
     "preview": "vite preview",
     "typecheck": "tsc -b",

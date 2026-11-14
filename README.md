@@ -3,9 +3,9 @@
 React + TypeScript design system and storefront in one git repo. Visual language comes from [Figma](https://www.figma.com/design/PMZpYxijxLhjDlvMbtVY5j/weaveui).
 
 - `packages/ds` (`@weaveui/ds`): tokens, foundations, controls, icons, and the six form patterns. Storybook on port 6006 is the DS catalog.
-- `apps/store` (`@weaveui/store`): routes, AuthLayout, Navigation, ProductCard, Home, product assets. Consumes the DS. `npm run dev` runs this app.
+- `apps/store` (`@weaveui/store`): routes, AuthLayout, Navigation, ProductCard, Home, product assets. Consumes the DS through its package exports. `npm run dev` runs this app.
 
-Do not copy Button or other DS components into the store. Do not publish an npm package until another repo consumes it.
+Do not copy Button or other DS components into the store. The DS can be built and packed for local validation; it remains private and is not published to a registry.
 
 ## Run
 
@@ -22,6 +22,8 @@ npm run dev
 ```
 
 Store: [http://localhost:5173](http://localhost:5173)
+
+Build the local DS package artifact with `npm run build:package --workspace @weaveui/ds`. Store resolves the compiled package entry, declarations, and stylesheet through npm workspace exports; it does not alias the DS source tree.
 
 Copy `apps/store/.env.example` to `apps/store/.env` and set the Supabase project URL and public anon key to enable authentication. Configure the project's allowed email redirects for `/login` and `/reset-password` on your local and deployed origins. The forms require passwords of at least 15 characters; configure the backend password policy accordingly in [Supabase Auth](https://supabase.com/docs/guides/auth/password-security).
 
@@ -54,9 +56,11 @@ Full exports use the development plugin in `packages/ds/figma/export-variables/`
 After either update path, run `npm run tokens:normalize` to rewrite primitives and semantics in `packages/ds/tokens/tokens.json` and the Dark mode of Semantic Colors in `packages/ds/tokens/tokens.dark.json`. Font, typography, and effect styles in `tokens.json` stay as they are.
 Then run `npm run build:tokens` to write `packages/ds/src/styles/generated/tokens.css` and `tokens.dark.css`.
 
-Dark mode is applied with `data-theme="dark"` on `<html>`. Storybook has a Theme switch in the toolbar.
+Dark mode is applied with `data-weaveui-theme="dark"` on `<html>` or a theme wrapper. Storybook has a Theme switch in the toolbar.
 
-Implementation rules (tokens, components, patterns, testing) live in `.cursor/rules/design-system.mdc`. This file does not restate them.
+The DS package exposes `@weaveui/ds/styles.css` for component tokens, fonts, and utilities without a global reset, `@weaveui/ds/preflight.css` for an optional Tailwind reset, and `@weaveui/ds/preset.css` for the complete Store defaults. Store uses the preset; consumers with their own reset or global theme can import only `styles.css`.
+
+Shared implementation instructions for coding agents (tokens, components, patterns, and testing) live in [`AGENTS.md`](AGENTS.md). `.cursor/rules/` is reserved for Cursor-specific guidance.
 
 ## Layout
 
@@ -76,4 +80,4 @@ Each DS UI component has `.tsx`, `.stories.tsx`, and `.mdx`. Usage pages are the
 
 ## License
 
-Private. Not published as an npm package yet.
+The `packages/ds` package is licensed under MIT. The bundled Inter font remains under SIL Open Font License 1.1; see [`packages/ds/LICENSES/Inter-OFL-1.1.txt`](packages/ds/LICENSES/Inter-OFL-1.1.txt). This license does not extend to the rest of the repository.

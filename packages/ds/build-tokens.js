@@ -453,7 +453,7 @@ await sd.buildAllPlatforms();
 // Dark mode. It is merged over tokens.json so aliases resolve, and only the
 // tokens that come from the dark file are written under the theme selector.
 const DARK_SOURCE = 'tokens/tokens.dark.json';
-const DARK_SELECTOR = '[data-theme="dark"]';
+const DARK_SELECTOR = '[data-weaveui-theme="dark"]';
 const darkTokens = JSON.parse(readFileSync(DARK_SOURCE, 'utf-8'));
 
 if (Object.keys(darkTokens).length > 0) {

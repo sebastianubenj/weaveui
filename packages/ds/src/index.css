@@ -8,71 +8,76 @@
 @import "shadcn/tailwind.css";
 @import "@fontsource-variable/inter";
 
-@custom-variant intent-keyboard (&:is(:root[data-focus-intent="keyboard"] *));
+@source "./**/*.{ts,tsx}";
+@source not "./**/*.stories.tsx";
+@source not "./**/*.browser.test.tsx";
+
+@custom-variant intent-keyboard (&:is(:root[data-weaveui-focus-intent="keyboard"] *));
 
 @theme inline {
     --font-heading: var(--font-sans);
     --font-sans: 'Inter Variable', sans-serif;
-    --color-ring: var(--ring);
-    --color-input: var(--input);
-    --color-border: var(--border);
-    --color-destructive: var(--destructive);
-    --color-destructive-foreground: var(--destructive-foreground);
-    --color-accent-foreground: var(--accent-foreground);
-    --color-accent: var(--accent);
-    --color-muted-foreground: var(--muted-foreground);
-    --color-muted: var(--muted);
-    --color-secondary-foreground: var(--secondary-foreground);
-    --color-secondary: var(--secondary);
-    --color-primary-foreground: var(--primary-foreground);
-    --color-primary: var(--primary);
-    --color-popover-foreground: var(--popover-foreground);
-    --color-popover: var(--popover);
-    --color-card-foreground: var(--card-foreground);
-    --color-card: var(--card);
-    --color-foreground: var(--foreground);
-    --color-background: var(--background);
-    --radius-sm: calc(var(--radius) * 0.6);
-    --radius-md: calc(var(--radius) * 0.8);
-    --radius-lg: var(--radius);
-    --radius-xl: calc(var(--radius) * 1.4);
-    --radius-2xl: calc(var(--radius) * 1.8);
-    --radius-3xl: calc(var(--radius) * 2.2);
-    --radius-4xl: calc(var(--radius) * 2.6);
+    --color-ring: var(--weaveui-ring);
+    --color-input: var(--weaveui-input);
+    --color-border: var(--weaveui-border);
+    --color-destructive: var(--weaveui-destructive);
+    --color-destructive-foreground: var(--weaveui-destructive-foreground);
+    --color-accent-foreground: var(--weaveui-accent-foreground);
+    --color-accent: var(--weaveui-accent);
+    --color-muted-foreground: var(--weaveui-muted-foreground);
+    --color-muted: var(--weaveui-muted);
+    --color-secondary-foreground: var(--weaveui-secondary-foreground);
+    --color-secondary: var(--weaveui-secondary);
+    --color-primary-foreground: var(--weaveui-primary-foreground);
+    --color-primary: var(--weaveui-primary);
+    --color-popover-foreground: var(--weaveui-popover-foreground);
+    --color-popover: var(--weaveui-popover);
+    --color-card-foreground: var(--weaveui-card-foreground);
+    --color-card: var(--weaveui-card);
+    --color-foreground: var(--weaveui-foreground);
+    --color-background: var(--weaveui-background);
+    --radius-sm: calc(var(--weaveui-radius) * 0.6);
+    --radius-md: calc(var(--weaveui-radius) * 0.8);
+    --radius-lg: var(--weaveui-radius);
+    --radius-xl: calc(var(--weaveui-radius) * 1.4);
+    --radius-2xl: calc(var(--weaveui-radius) * 1.8);
+    --radius-3xl: calc(var(--weaveui-radius) * 2.2);
+    --radius-4xl: calc(var(--weaveui-radius) * 2.6);
 }
 
 /* 3. VINCULAR SHADCN CON TUS DESIGN TOKENS */
-:root {
+:root,
+[data-weaveui-theme="dark"] {
     /* Mapea las variables que consume shadcn hacia tus tokens de Figma */
-    --background: var(--semantics-colors-background-default);
-    --foreground: var(--semantics-colors-foreground-default);
+    --weaveui-background: var(--semantics-colors-background-default);
+    --weaveui-foreground: var(--semantics-colors-foreground-default);
 
-    --card: var(--semantics-colors-background-default);
-    --card-foreground: var(--semantics-colors-foreground-default);
-    --popover: var(--semantics-colors-background-default);
-    --popover-foreground: var(--semantics-colors-foreground-default);
+    --weaveui-card: var(--semantics-colors-background-default);
+    --weaveui-card-foreground: var(--semantics-colors-foreground-default);
+    --weaveui-popover: var(--semantics-colors-background-default);
+    --weaveui-popover-foreground: var(--semantics-colors-foreground-default);
 
-    --primary: var(--semantics-colors-background-primary);
-    --primary-foreground: var(--semantics-colors-foreground-primary);
-    --secondary: var(--semantics-colors-background-secondary);
-    --secondary-foreground: var(--semantics-colors-foreground-default);
-    --accent: var(--semantics-colors-background-subtle);
-    --accent-foreground: var(--semantics-colors-foreground-default);
-    --destructive: var(--semantics-colors-background-destructive-op10);
-    --destructive-foreground: var(--semantics-colors-foreground-destructive);
-    --border: var(--semantics-colors-border-default);
-    --ring: var(--semantics-colors-border-ring-focus);
-    --input: var(--semantics-colors-border-default);
+    --weaveui-primary: var(--semantics-colors-background-primary);
+    --weaveui-primary-foreground: var(--semantics-colors-foreground-primary);
+    --weaveui-secondary: var(--semantics-colors-background-secondary);
+    --weaveui-secondary-foreground: var(--semantics-colors-foreground-default);
+    --weaveui-accent: var(--semantics-colors-background-subtle);
+    --weaveui-accent-foreground: var(--semantics-colors-foreground-default);
+    --weaveui-destructive: var(--semantics-colors-background-destructive-op10);
+    --weaveui-destructive-foreground: var(--semantics-colors-foreground-destructive);
+    --weaveui-border: var(--semantics-colors-border-default);
+    --weaveui-ring: var(--semantics-colors-border-ring-focus);
+    --weaveui-input: var(--semantics-colors-border-default);
 
-    --muted: var(--semantics-colors-background-subtle);
-    --muted-foreground: var(--semantics-colors-foreground-subtle);
-    --radius: var(--primitives-radius-rounded-10);
+    --weaveui-muted: var(--semantics-colors-background-subtle);
+    --weaveui-muted-foreground: var(--semantics-colors-foreground-subtle);
+    --weaveui-radius: var(--primitives-radius-rounded-10);
 }
 
 /* Dark mode comes from the Semantic Colors collection in Figma. It is applied with
-   `data-theme="dark"` on <html>, and tokens.dark.css overrides the --semantics-colors-* variables.
+   `data-weaveui-theme="dark"` on <html> or a theme wrapper, and tokens.dark.css overrides the --semantics-colors-* variables.
    Do not add `.dark` or `dark:` utilities. `npx shadcn add` may restore a `.dark` block — delete it again. */
-:root[data-theme="dark"] {
+[data-weaveui-theme="dark"] {
     color-scheme: dark;
 }
 
