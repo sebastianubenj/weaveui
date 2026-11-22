@@ -20,5 +20,10 @@
     "test": "npm run test --workspaces --if-present",
     "build": "npm run build --workspaces --if-present",
     "check": "npm run check --workspaces --if-present"
+  },
+  "devDependencies": {
+    "@vitest/browser": "^4.1.12",
+    "@vitest/browser-playwright": "^4.1.12",
+    "vitest": "^4.1.12"
   }
 }
