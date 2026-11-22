@@ -1,10 +1,8 @@
 import type { SupportedStorage, SupabaseClient } from "@supabase/supabase-js";
 
-const REMEMBER_KEY = "weaveui-auth-remember";
-
-function remembered() {
-  return localStorage.getItem(REMEMBER_KEY) !== "0";
-}
+// Each tab keeps its own choice. On reload, recover it from the location of
+// the existing session; another tab's sign-in cannot change this choice.
+let rememberSession: boolean | undefined;
 
 /** PKCE verifiers must survive a new tab from the email client. */
 function isPkceKey(key: string) {
@@ -13,7 +11,7 @@ function isPkceKey(key: string) {
 
 /** Called before sign-in so the session lands in localStorage or sessionStorage. */
 export function setRememberSession(remember: boolean) {
-  localStorage.setItem(REMEMBER_KEY, remember ? "1" : "0");
+  rememberSession = remember;
 }
 
 const authStorage: SupportedStorage = {
@@ -21,7 +19,9 @@ const authStorage: SupportedStorage = {
     if (isPkceKey(key)) {
       return localStorage.getItem(key) ?? sessionStorage.getItem(key);
     }
-    return (remembered() ? localStorage : sessionStorage).getItem(key);
+    const tabSession = sessionStorage.getItem(key);
+    if (rememberSession === undefined) rememberSession = tabSession === null;
+    return rememberSession ? localStorage.getItem(key) : tabSession;
   },
   setItem(key, value) {
     if (isPkceKey(key)) {
@@ -29,9 +29,8 @@ const authStorage: SupportedStorage = {
       sessionStorage.removeItem(key);
       return;
     }
-    const target = remembered() ? localStorage : sessionStorage;
-    const other = remembered() ? sessionStorage : localStorage;
-    other.removeItem(key);
+    const target = rememberSession === false ? sessionStorage : localStorage;
+    if (rememberSession !== false) sessionStorage.removeItem(key);
     target.setItem(key, value);
   },
   removeItem(key) {

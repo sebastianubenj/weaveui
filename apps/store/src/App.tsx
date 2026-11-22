@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 
-import { confirmEmailErrorMessage } from "@weaveui/ds";
+import { Button, confirmEmailErrorMessage } from "@weaveui/ds";
 import {
   registerAccount,
   requestPasswordReset,
@@ -11,6 +11,7 @@ import {
 } from "@/lib/auth";
 import { useAuth } from "@/lib/auth-context";
 import { checkCompromisedPassword } from "@/lib/password-security";
+import { AuthLayout } from "@/views/auth-layout";
 
 const ExpiredLink = lazy(() =>
   import("@/views/expired-link/expired-link").then(({ ExpiredLink }) => ({ default: ExpiredLink })),
@@ -142,7 +143,7 @@ function ForgotPasswordRoute() {
 
 function ResetPasswordRoute() {
   const navigate = useNavigate();
-  const { ready, loggedIn, linkError, error, logOut } = useAuth();
+  const { ready, loggedIn, linkError, error, logOut, retry } = useAuth();
   const [completing, setCompleting] = useState(false);
 
   useEffect(() => {
@@ -152,7 +153,7 @@ function ResetPasswordRoute() {
     if (!loggedIn) navigate("/expired-link", { replace: true });
   }, [ready, loggedIn, linkError, error, completing, navigate]);
 
-  if (error && !loggedIn) return <LoginRoute />;
+  if (error && !loggedIn) return <AuthLayout logoHref="/"><Button onClick={retry}>Try again</Button></AuthLayout>;
   if (!ready || linkError || (!loggedIn && !completing)) return null;
 
   return (

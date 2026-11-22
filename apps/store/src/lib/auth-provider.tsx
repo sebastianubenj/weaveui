@@ -10,6 +10,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [ready, setReady] = React.useState(false);
   const [linkError, setLinkError] = React.useState(false);
   const [error, setError] = React.useState<string>();
+  const [attempt, setAttempt] = React.useState(0);
 
   React.useEffect(() => {
     let cancelled = false;
@@ -41,7 +42,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           return;
         }
         if (result === "network") {
-          setError("We couldn’t verify this link. Check your connection and reload to try again.");
+          setError("We couldn’t verify this link. Check your connection and try again.");
           return;
         }
 
@@ -60,6 +61,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       cancelled = true;
       unsubscribe?.();
     };
+  }, [attempt]);
+
+  const retry = React.useCallback(() => {
+    setError(undefined);
+    setReady(false);
+    setAttempt((current) => current + 1);
   }, []);
 
   const logOut = React.useCallback(async () => {
@@ -77,9 +84,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       linkError,
       error,
       clearLinkError,
+      retry,
       logOut,
     }),
-    [ready, session, linkError, error, clearLinkError, logOut],
+    [ready, session, linkError, error, clearLinkError, retry, logOut],
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

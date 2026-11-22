@@ -276,9 +276,16 @@ export const CallbackConnectionFailure: Story = {
   },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await expect(await canvas.findByRole("alert")).toHaveTextContent("Check your connection and reload");
+    await expect(await canvas.findByRole("alert")).toHaveTextContent("Check your connection and try again");
     await expect(canvas.queryByRole("heading", { name: "This link is not valid" })).not.toBeInTheDocument();
     await expect(window.location.search).toBe("?code=offline-recovery");
+    mockAuth.exchangeCodeForSession.mockImplementation(async () => {
+      return { data: { user: exampleSession.user, session: exampleSession, redirectType: "recovery" }, error: null };
+    });
+    mockAuth.getSession.mockResolvedValue({ data: { session: exampleSession }, error: null });
+    await userEvent.click(canvas.getByRole("button", { name: "Try again" }));
+    await expect(await canvas.findByRole("button", { name: "Update password" })).toBeVisible();
+    await expect(mockAuth.exchangeCodeForSession).toHaveBeenCalledTimes(2);
   },
 };
 

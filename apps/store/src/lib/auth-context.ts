@@ -6,6 +6,7 @@ export interface AuthState {
   linkError: boolean;
   error?: string;
   clearLinkError: () => void;
+  retry: () => void;
   logOut: () => Promise<"signed-out" | "network">;
 }
 
@@ -14,6 +15,7 @@ export const AuthContext = React.createContext<AuthState>({
   loggedIn: false,
   linkError: false,
   clearLinkError: () => {},
+  retry: () => {},
   logOut: async () => "signed-out",
 });
 

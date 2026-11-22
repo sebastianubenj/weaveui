@@ -30,16 +30,39 @@ async function setupStorage() {
   return { storage: options.auth.storage, setRememberSession: module.setRememberSession };
 }
 
-test("stores remembered sessions persistently and moves unremembered sessions to the current tab", async () => {
+test("stores remembered sessions persistently and unremembered sessions in the current tab", async () => {
   const { storage, setRememberSession } = await setupStorage();
   setRememberSession(true);
   await storage.setItem("session", "remembered-session");
   expect(localStorage.getItem("session")).toBe("remembered-session");
   setRememberSession(false);
   await storage.setItem("session", "tab-session");
-  expect(localStorage.getItem("session")).toBeNull();
+  expect(localStorage.getItem("session")).toBe("remembered-session");
   expect(sessionStorage.getItem("session")).toBe("tab-session");
   expect(await storage.getItem("session")).toBe("tab-session");
+});
+
+test("keeps a tab session in session storage when another tab changes its preference", async () => {
+  const first = await setupStorage();
+  first.setRememberSession(false);
+  await first.storage.setItem("session", "tab-session");
+  vi.resetModules();
+  const second = await import("./supabase");
+  second.setRememberSession(true);
+  await first.storage.setItem("session", "refreshed-tab-session");
+  expect(sessionStorage.getItem("session")).toBe("refreshed-tab-session");
+  expect(localStorage.getItem("session")).toBeNull();
+  expect(await first.storage.getItem("session")).toBe("refreshed-tab-session");
+});
+
+test("restores the tab's choice from its stored session after reload", async () => {
+  sessionStorage.setItem("session", "tab-session");
+  localStorage.setItem("session", "persistent-session");
+  const { storage } = await setupStorage();
+  expect(await storage.getItem("session")).toBe("tab-session");
+  await storage.setItem("session", "refreshed-tab-session");
+  expect(sessionStorage.getItem("session")).toBe("refreshed-tab-session");
+  expect(localStorage.getItem("session")).toBe("persistent-session");
 });
 
 test("keeps email-link PKCE verifiers available to a new tab regardless of remember-me", async () => {
