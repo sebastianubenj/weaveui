@@ -82,7 +82,7 @@ export function FocusRingSpecimen(record: BorderTokenRecord) {
             border-solid border-(length:--primitives-stroke-width-stroke)
             [border-color:var(--semantics-colors-border-default)]
             [background-color:var(--semantics-colors-background-default)]
-            [outline-color:var(--semantics-colors-border-ring-focus)]
+            [outline-color:var(--semantics-colors-border-highlight)]
             [outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
             [outline-style:solid]`}
           style={{ outlineWidth: `var(${record.cssVar})` }}

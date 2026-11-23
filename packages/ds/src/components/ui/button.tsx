@@ -10,7 +10,7 @@ const buttonVariants = cva(
   `inline-flex items-center justify-center shrink-0 whitespace-nowrap
    font-sans [font-weight:var(--semantics-typography-button-font-weight)] tracking-(--semantics-typography-button-tracking-normal)
    transition-colors outline-none cursor-pointer
-   focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+   focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
    focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
    disabled:pointer-events-none disabled:cursor-default
    aria-disabled:pointer-events-none aria-disabled:cursor-default

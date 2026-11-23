@@ -20,7 +20,7 @@ import {
 const focusRing = `relative outline-none
   after:pointer-events-none after:absolute after:content-[''] after:hidden
   after:[inset:calc(-1*(var(--primitives-spacing-out-of-scale-0-75)+var(--primitives-ring-focus-width-ring-2)))]
-  after:[border:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+  after:[border:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
   after:[border-radius:var(--primitives-radius-rounded-sm)]
   focus-visible:after:block`;
 
@@ -996,7 +996,7 @@ const navPanelButtonClassName = `inline-flex items-center justify-center gap-(--
   [color:var(--semantics-colors-foreground-default)]
   no-underline cursor-pointer
   rounded-(--primitives-radius-rounded-10) outline-none
-  focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+  focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
   focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]`;
 
 type NavigationBagProfileProps = Pick<
@@ -1838,7 +1838,7 @@ function NavigationProduct({
         "--navigation-bar-height",
         `${bar.getBoundingClientRect().height}px`,
       );
-      const first = bar.firstElementChild;
+      const first = bar.querySelector(":scope > div > a");
       const last =
         bar.querySelector("[data-slot=navigation-bag-trigger]") ??
         bar.querySelector("[data-slot=navigation-search-trigger]");
@@ -1977,7 +1977,7 @@ function NavigationProduct({
       )}
       {...props}
     >
-      <div className="mx-auto flex w-full items-center justify-between md:max-w-(--primitives-max-width-max-w-2xl) md:justify-center md:gap-(--primitives-spacing-12)">
+      <div className="mx-auto flex w-full items-center justify-between md:max-w-(--semantics-layout-desktop-content-max-width-658) md:justify-center md:gap-(--primitives-spacing-12)">
         <a
           href={logoHref}
           aria-label={logoLabel}
@@ -2022,7 +2022,7 @@ function NavigationProduct({
             <div className="flex items-center gap-(--primitives-spacing-4) max-md:ml-auto md:contents">
               <NavigationMenu.List
                 data-slot="navigation-list"
-                className="m-0 flex list-none items-center gap-(--primitives-spacing-4) p-0 md:gap-(--primitives-spacing-12)"
+                className="m-0 flex list-none items-center gap-(--primitives-spacing-4) p-0 md:flex-1 md:justify-between md:gap-(--primitives-spacing-12)"
               >
                 {children}
               </NavigationMenu.List>

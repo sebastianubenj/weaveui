@@ -25,9 +25,9 @@ export function HomeProducts({ onAction }: HomeProductsProps) {
 
   return (
     <div
-      className="flex min-h-dvh w-full flex-col items-center px-(--semantics-layout-mobile-grid-margin) md:px-(--semantics-layout-desktop-grid-margin) [background-color:var(--semantics-colors-background-page)]"
+      className="flex min-h-dvh w-full flex-col items-center px-(--semantics-layout-mobile-grid-margin) md:px-(--primitives-spacing-8) [background-color:var(--semantics-colors-background-page)]"
     >
-      <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) flex-col items-start pb-(--primitives-spacing-32)">
+      <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) flex-col items-start pb-(--primitives-spacing-16)">
         <div className="flex w-full items-start py-(--primitives-spacing-4)">
           <h1 id="products" className={headingClassName}>All products</h1>
         </div>
@@ -41,7 +41,7 @@ export function HomeProducts({ onAction }: HomeProductsProps) {
               aria-label={product.name}
               tabIndex={-1}
               className={cn(
-                "scroll-mt-(--primitives-spacing-20) outline-none focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)] focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]",
+                "scroll-mt-(--primitives-spacing-20) outline-none focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)] focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]",
                 product.layout === "horizontal" && "md:col-span-2",
               )}
               layout={isDesktop ? product.layout : "square"}

@@ -29,7 +29,7 @@ const triggerClassName = `
   data-popup-open:px-(--primitives-spacing-out-of-scale-2-25)
   data-popup-open:[border-color:var(--semantics-colors-border-strong)]
   aria-invalid:data-popup-open:[border-color:var(--semantics-colors-border-destructive)]
-  intent-keyboard:focus:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+  intent-keyboard:focus:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
   intent-keyboard:focus:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
   disabled:opacity-(--primitives-opacity-opacity-40)
   disabled:cursor-default

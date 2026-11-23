@@ -15,8 +15,8 @@ import {
 
 const sampleLinks = [
   "Products",
-  "Services",
   "Discover",
+  "Learn",
   "Support",
   "About",
 ] as const;
@@ -25,7 +25,7 @@ type SampleLink = (typeof sampleLinks)[number];
 
 const panels: Record<SampleLink, { sections: number; links: number }> = {
   Products: { sections: 3, links: 8 },
-  Services: { sections: 2, links: 4 },
+  Learn: { sections: 2, links: 4 },
   Discover: { sections: 2, links: 6 },
   Support: { sections: 1, links: 5 },
   About: { sections: 1, links: 3 },
@@ -209,7 +209,7 @@ export const DesktopHover: Story = {
       body.getAllByRole("link", { name: "Navigation menu link" }),
     ).toHaveLength(24);
 
-    await userEvent.hover(canvas.getByRole("link", { name: "Services" }));
+    await userEvent.hover(canvas.getByRole("link", { name: "Learn" }));
     await waitFor(() => expect(headings()).toHaveLength(2));
 
     await userEvent.hover(canvas.getByRole("link", { name: "Support" }));
@@ -631,7 +631,7 @@ export const DesktopHoverCloses: Story = {
     await userEvent.hover(canvas.getByRole("button", { name: "Search" }));
     await waitFor(() => expect(panel()).toBeNull());
 
-    await userEvent.hover(canvas.getByRole("link", { name: "Services" }));
+    await userEvent.hover(canvas.getByRole("link", { name: "Learn" }));
     await waitFor(() => expect(panel()).not.toBeNull());
     await userEvent.hover(canvas.getByRole("link", { name: "Home" }));
     await waitFor(() => expect(panel()).toBeNull());

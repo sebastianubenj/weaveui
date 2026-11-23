@@ -4,7 +4,7 @@
       "id": "VariableCollectionId:9:2",
       "name": "Primitives",
       "remote": false,
-      "key": "ad89497ba375026d5476b88c27af8c2f0b093b78",
+      "key": "430b36a16df186906ee6f280d782400bf1f21622",
       "defaultModeId": "9:0",
       "hiddenFromPublishing": false,
       "modes": [
@@ -42,9 +42,10 @@
         "VariableID:9:2059",
         "VariableID:9:2057",
         "VariableID:9:2060",
-        "VariableID:503:147",
         "VariableID:9:2066",
         "VariableID:9:2056",
+        "VariableID:503:147",
+        "VariableID:2066:11880",
         "VariableID:9:2058",
         "VariableID:9:2062",
         "VariableID:9:2065",
@@ -64,10 +65,12 @@
         "VariableID:9:2039",
         "VariableID:527:2946",
         "VariableID:527:2947",
+        "VariableID:2073:4723",
         "VariableID:9:1877",
         "VariableID:9:1876",
         "VariableID:9:1875",
         "VariableID:9:1874",
+        "VariableID:2029:6872",
         "VariableID:9:1873",
         "VariableID:9:1888",
         "VariableID:9:1886",
@@ -146,6 +149,7 @@
         "VariableID:243:2875",
         "VariableID:554:7249",
         "VariableID:9:1520",
+        "VariableID:2029:6869",
         "VariableID:369:1512",
         "VariableID:248:2955",
         "VariableID:9:1505",
@@ -165,6 +169,7 @@
         "VariableID:9:1512",
         "VariableID:9:1599",
         "VariableID:9:1597",
+        "VariableID:2029:6862",
         "VariableID:9:1598",
         "VariableID:60:525",
         "VariableID:61:560",
@@ -214,7 +219,7 @@
       "id": "VariableCollectionId:450:1530",
       "name": "Semantic Colors",
       "remote": false,
-      "key": "b307b5ae1090628301807fd508efcbd29022848d",
+      "key": "32bae4f74c147844389bf49fe844f70f80e74a9e",
       "defaultModeId": "450:1",
       "hiddenFromPublishing": false,
       "modes": [
@@ -232,6 +237,7 @@
         "VariableID:450:1640",
         "VariableID:575:3902",
         "VariableID:450:1639",
+        "VariableID:2038:12497",
         "VariableID:459:691",
         "VariableID:450:1642",
         "VariableID:450:1641",
@@ -245,11 +251,13 @@
         "VariableID:450:1670",
         "VariableID:450:1672",
         "VariableID:486:1331",
+        "VariableID:2029:6859",
         "VariableID:450:1659",
         "VariableID:450:1656",
         "VariableID:450:1655",
         "VariableID:450:1658",
         "VariableID:450:1657",
+        "VariableID:2066:11879",
         "VariableID:500:5856",
         "VariableID:486:1328",
         "VariableID:450:1691",
@@ -268,7 +276,7 @@
       "id": "VariableCollectionId:9:3",
       "name": "Semantics",
       "remote": false,
-      "key": "2c91cb27dfd95c989ae00bf9b33844340cc72f66",
+      "key": "ed8e0cb2425eebfa4dfe009495acb11ceb8de2dc",
       "defaultModeId": "9:1",
       "hiddenFromPublishing": false,
       "modes": [
@@ -297,6 +305,8 @@
         "VariableID:427:576",
         "VariableID:427:573",
         "VariableID:526:2944",
+        "VariableID:2073:4722",
+        "VariableID:2029:6875",
         "VariableID:526:2940",
         "VariableID:526:2936",
         "VariableID:526:2939",
@@ -371,9 +381,12 @@
         "VariableID:34:1805",
         "VariableID:40:32",
         "VariableID:39:19",
-        "VariableID:649:3538",
-        "VariableID:649:3539",
-        "VariableID:649:3540",
+        "VariableID:2066:7984",
+        "VariableID:2066:7985",
+        "VariableID:2066:7986",
+        "VariableID:2029:6863",
+        "VariableID:2029:6864",
+        "VariableID:2029:6865",
         "VariableID:118:8604",
         "VariableID:118:8607",
         "VariableID:118:8609",
@@ -395,7 +408,7 @@
       "id": "VariableID:10:2169",
       "name": "colors/amber/100",
       "remote": false,
-      "key": "8487eecd0749b7126374657f959d541f1c698d0d",
+      "key": "6ed3b8d07fac20ebe308f187f46d2c787297a2f5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -415,7 +428,7 @@
       "id": "VariableID:10:2165",
       "name": "colors/amber/200",
       "remote": false,
-      "key": "3fa1fbc73f3e874890eff48d32388b7fd43910f8",
+      "key": "ca5ee2afc9be3183560d163441083bbdccd412b2",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -435,7 +448,7 @@
       "id": "VariableID:10:2164",
       "name": "colors/amber/300",
       "remote": false,
-      "key": "6c363e478567540d992c29fa1717701a93b94408",
+      "key": "36875106d353efcee1cfc40472b5a9f2476624f1",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -455,7 +468,7 @@
       "id": "VariableID:10:2163",
       "name": "colors/amber/400",
       "remote": false,
-      "key": "47411971c76061295615c2fc0c4ef52b18cb15ac",
+      "key": "18bfa6349a60c7d310a6df76d66a40b9063da2d6",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -475,7 +488,7 @@
       "id": "VariableID:10:2170",
       "name": "colors/amber/50",
       "remote": false,
-      "key": "d92f612d69649ddb5780fe93c7c4bb45f4178cee",
+      "key": "8bc00c03fb3db68fac4c70529f4a4a1603d0dfaa",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -495,7 +508,7 @@
       "id": "VariableID:10:2168",
       "name": "colors/amber/500",
       "remote": false,
-      "key": "c53d3883cdca5c1e6aef737984246c27f282fb42",
+      "key": "70ba3c0cd909a29e14e6765093dc1d990cd28691",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -515,7 +528,7 @@
       "id": "VariableID:10:2161",
       "name": "colors/amber/600",
       "remote": false,
-      "key": "4d3c4b919a8b3e9322a3c081ab39892172fd7ab2",
+      "key": "5cd4cfe7759d4f51e514829cab10d24f6d8b166f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -535,7 +548,7 @@
       "id": "VariableID:10:2160",
       "name": "colors/amber/700",
       "remote": false,
-      "key": "bdf0775208a73c7f5c43ccf336531fb93b1f1a2a",
+      "key": "da9fb73004ead46550e5e877ff15e49ec953ac77",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -555,7 +568,7 @@
       "id": "VariableID:10:2167",
       "name": "colors/amber/800",
       "remote": false,
-      "key": "e2325d04d296aa8e24cd779949b034bb6e29b847",
+      "key": "298c393fb547064754c3b913cce79aedefa2d316",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -575,7 +588,7 @@
       "id": "VariableID:10:2162",
       "name": "colors/amber/900",
       "remote": false,
-      "key": "5ac05fe10b14c03f21298fb5403a58b08820626d",
+      "key": "cc389f4350f477b19b1499629a5a286ac434ddeb",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -595,7 +608,7 @@
       "id": "VariableID:10:2166",
       "name": "colors/amber/950",
       "remote": false,
-      "key": "f1edfe8058bd7680f4c4c81037186821025663b4",
+      "key": "f707cd02773bec40b9928c82bdbc378bf52d9877",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -615,7 +628,7 @@
       "id": "VariableID:9:2040",
       "name": "colors/black",
       "remote": false,
-      "key": "071f54864e15d188904db52ac076c301744273db",
+      "key": "6bff53971b1db9bba2e6eb6585fef8b86560fdee",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -635,7 +648,7 @@
       "id": "VariableID:165:1027",
       "name": "colors/blue/500",
       "remote": false,
-      "key": "e053d2c8d382177bcb1d27911daabb508b09fcac",
+      "key": "9abfd28dc64f841e7c0a12f261016d08c6c928f7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -655,7 +668,7 @@
       "id": "VariableID:454:21972",
       "name": "colors/cyan/100",
       "remote": false,
-      "key": "2001e2a089681ae550275cf1a30747a2d7735fdb",
+      "key": "b5e96d8c561e477f7125e40fde56d653541990a0",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -675,7 +688,7 @@
       "id": "VariableID:454:21971",
       "name": "colors/cyan/200",
       "remote": false,
-      "key": "3f08edcad41bf8c23397befeda9961bfb1e0edfd",
+      "key": "5c64237878534d49e970682eb963834862eb1544",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -695,7 +708,7 @@
       "id": "VariableID:454:21970",
       "name": "colors/cyan/300",
       "remote": false,
-      "key": "6f714c6a7840c7c6abb91f3309233cf5879c5bfe",
+      "key": "d445b44bd38986c0c2be386877ee4c3096310400",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -715,7 +728,7 @@
       "id": "VariableID:454:21969",
       "name": "colors/cyan/400",
       "remote": false,
-      "key": "3d11916213c96cfcd4237866f29712ce72f40588",
+      "key": "027efb74ad5d45563e3126cdbb65458641020c5d",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -735,7 +748,7 @@
       "id": "VariableID:445:4234",
       "name": "colors/cyan/500",
       "remote": false,
-      "key": "220173a2a30cd21b622aaf86cd00e1313418b280",
+      "key": "de2a1cf0074b86987ff34efd3dc46292c189e10a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -755,7 +768,7 @@
       "id": "VariableID:445:4235",
       "name": "colors/cyan/600",
       "remote": false,
-      "key": "b4a37e1253bdbc40cfeb0fdf5e5d665900afad73",
+      "key": "a821accc2f45447b72cad28836aea271790958a5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -775,7 +788,7 @@
       "id": "VariableID:454:21982",
       "name": "colors/cyan/700",
       "remote": false,
-      "key": "2aab48482330f70ffd0f1adc14344b63fecd26c4",
+      "key": "67774b6b9700ab54e10c42aa15bf4584f8f34026",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -795,7 +808,7 @@
       "id": "VariableID:454:21081",
       "name": "colors/gray/500",
       "remote": false,
-      "key": "8da6e3a47e096b34097017f5ddd3e02f52802688",
+      "key": "8457021556883ff01abe905f51038a75f5a1ba6c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -815,7 +828,7 @@
       "id": "VariableID:577:5543",
       "name": "colors/green/500",
       "remote": false,
-      "key": "7734f999948dfa3e4ed13454625569aa831343f2",
+      "key": "2bcab33ce3959636fd555b6652dbb1f2c925c81a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -835,7 +848,7 @@
       "id": "VariableID:489:1582",
       "name": "colors/green/600",
       "remote": false,
-      "key": "0c95979da8c57183e90270ca681c296f30896535",
+      "key": "7e7c1742c460cbc92c932f2f142cbdbd53b414ac",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -855,7 +868,7 @@
       "id": "VariableID:10:2196",
       "name": "colors/green/700",
       "remote": false,
-      "key": "1cdab5f8c52e5b1beb9727ef9aa18f5b432fd5e0",
+      "key": "861caa9ee47019aeb60d773f57cb78dda9165bad",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -875,7 +888,7 @@
       "id": "VariableID:9:2063",
       "name": "colors/neutral/100",
       "remote": false,
-      "key": "0a9a930ebaf3af9a120254adb25e35e3155266be",
+      "key": "01ebdfdbaebfd193f1fa76359969efcc6aef436e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -895,7 +908,7 @@
       "id": "VariableID:9:2059",
       "name": "colors/neutral/200",
       "remote": false,
-      "key": "1605d5c2d10d048b5b14a05e3ecc1e4d60280741",
+      "key": "0ef2baf1d1fe3728e64de11fde987a4da0f93d4f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -915,7 +928,7 @@
       "id": "VariableID:9:2057",
       "name": "colors/neutral/300",
       "remote": false,
-      "key": "85634b5618a36d9fe2e747823a6da76d1e7c2343",
+      "key": "1290aadcb6e932347fe135ec4c82a310a584eb02",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -935,7 +948,7 @@
       "id": "VariableID:9:2060",
       "name": "colors/neutral/400",
       "remote": false,
-      "key": "99e399d38d60ce1f4e5a7a81de50ab8db90fb85a",
+      "key": "6d56bdccd28685411d3a6840b0bbd44c41aa024f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -952,30 +965,10 @@
       }
     },
     {
-      "id": "VariableID:503:147",
-      "name": "colors/neutral/495",
-      "remote": false,
-      "key": "a6df6e60261d8ceaf92d45c77a325566bdbd716a",
-      "variableCollectionId": "VariableCollectionId:9:2",
-      "resolvedType": "COLOR",
-      "scopes": [],
-      "codeSyntax": {},
-      "hiddenFromPublishing": false,
-      "description": "",
-      "valuesByMode": {
-        "9:0": {
-          "r": 0.45098039507865906,
-          "g": 0.45098039507865906,
-          "b": 0.45098039507865906,
-          "a": 1
-        }
-      }
-    },
-    {
       "id": "VariableID:9:2066",
       "name": "colors/neutral/50",
       "remote": false,
-      "key": "0bf7b438b66bfdb11e28fa351fd76b8c0e5a3388",
+      "key": "4c4fc08d4ab72a9e83e12729599f0aa5e0f69643",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -995,7 +988,7 @@
       "id": "VariableID:9:2056",
       "name": "colors/neutral/500",
       "remote": false,
-      "key": "005eccebd54c1da9b9a11b1be5b1374c92e95d6e",
+      "key": "f74ac57d9eda8a243777b201cc39126944760ccf",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1012,10 +1005,50 @@
       }
     },
     {
+      "id": "VariableID:503:147",
+      "name": "colors/neutral/505",
+      "remote": false,
+      "key": "1661ced612004f1a7f5980da101c6dccf44726d7",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:0": {
+          "r": 0.45098039507865906,
+          "g": 0.45098039507865906,
+          "b": 0.45098039507865906,
+          "a": 1
+        }
+      }
+    },
+    {
+      "id": "VariableID:2066:11880",
+      "name": "colors/neutral/510",
+      "remote": false,
+      "key": "92ac81ffe03c75d3b1ba5a3878195674ea69e099",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:0": {
+          "r": 0.43921568989753723,
+          "g": 0.43921568989753723,
+          "b": 0.43921568989753723,
+          "a": 1
+        }
+      }
+    },
+    {
       "id": "VariableID:9:2058",
       "name": "colors/neutral/600",
       "remote": false,
-      "key": "ab8b8325949daa392423a07b86f0508b8e58e13c",
+      "key": "d3d77a68d2a4f079363243b3cb1549054f879eb4",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1035,7 +1068,7 @@
       "id": "VariableID:9:2062",
       "name": "colors/neutral/700",
       "remote": false,
-      "key": "0f3d25500263c89e077d10bb19109be21e5442e7",
+      "key": "59cc8e04f27ead539b9a11f795df7fe7f8cbeca7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1055,7 +1088,7 @@
       "id": "VariableID:9:2065",
       "name": "colors/neutral/800",
       "remote": false,
-      "key": "c43e06cb473ca7a84c133d2df15dc8dd83c2d3a0",
+      "key": "52bd9836b53ffc3d8b4cde69d1ab38aeca448c84",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1075,7 +1108,7 @@
       "id": "VariableID:9:2064",
       "name": "colors/neutral/900",
       "remote": false,
-      "key": "75eb78e0e3db3b828eb3639e5bdde761c0eb6fa0",
+      "key": "1fc625f6fd3b406e335042f3ca1ad9a5fe2984cf",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1095,7 +1128,7 @@
       "id": "VariableID:9:2061",
       "name": "colors/neutral/950",
       "remote": false,
-      "key": "eba5d3819cc2f65beff8c8ff1e7bc84cdab7c595",
+      "key": "dbfdb7e79c5736b54e894ce19c9abb1a5f0885b3",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1115,7 +1148,7 @@
       "id": "VariableID:10:2110",
       "name": "colors/red/100",
       "remote": false,
-      "key": "13aa10554ddd84e3b9fb1ea068266a0f9d61225a",
+      "key": "cd57267bde136f506db7ddf8f94e4c3c1ec57d7c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1135,7 +1168,7 @@
       "id": "VariableID:10:2112",
       "name": "colors/red/200",
       "remote": false,
-      "key": "db870c879bbaa71ea5753d0d076bbc1c7341cd78",
+      "key": "f107286b9f235604787b765a8997891ece72640b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1155,7 +1188,7 @@
       "id": "VariableID:10:2107",
       "name": "colors/red/300",
       "remote": false,
-      "key": "f20d396e76021164d872a8446bff95613adca220",
+      "key": "6025fb975d9c477f3fc48d6341b7f0ad03b05595",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1175,7 +1208,7 @@
       "id": "VariableID:10:2109",
       "name": "colors/red/400",
       "remote": false,
-      "key": "3a29bac136bd55813c8730590e4cdd64d0a19523",
+      "key": "f791134c0d36cbacdf1ed6f7227ac8ebb466fae7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1195,7 +1228,7 @@
       "id": "VariableID:10:2113",
       "name": "colors/red/50",
       "remote": false,
-      "key": "ca8a895822543b7efabe17c09160122185b77f8c",
+      "key": "40289fd21e94a1c5c0e2044416ffdc8b0a8588fc",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1215,7 +1248,7 @@
       "id": "VariableID:10:2106",
       "name": "colors/red/500",
       "remote": false,
-      "key": "08fd2b26e70035f990bb207bef544bc16e3705c2",
+      "key": "ebb236ff58407ba3a1ff150ce9bad4186473884f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1235,7 +1268,7 @@
       "id": "VariableID:10:2105",
       "name": "colors/red/600",
       "remote": false,
-      "key": "b022d502ffd3bc4cc72081c0cad2e6a8be0b5d6b",
+      "key": "d072875b2df6b2e11efd6824c528df6f5c0e80a3",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1255,7 +1288,7 @@
       "id": "VariableID:10:2104",
       "name": "colors/red/700",
       "remote": false,
-      "key": "cc964a3b150e03292354d427fc84ef88cacf4e47",
+      "key": "d38df25925407355a4963c03a6ee07bf42e2e08c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1275,7 +1308,7 @@
       "id": "VariableID:10:2103",
       "name": "colors/red/800",
       "remote": false,
-      "key": "54f214962d9ff4ec26fb6281f0d66209aecb677b",
+      "key": "1aaf3cbf2a6014e5bcf9fa62e1f6a9ca49fb437d",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1295,7 +1328,7 @@
       "id": "VariableID:10:2111",
       "name": "colors/red/900",
       "remote": false,
-      "key": "142640ca13bd742b8e1c637ac400d1f2ea71bae4",
+      "key": "f8686a4f29621e7b3c77ae2a4ab3b8db843fe9d2",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1315,7 +1348,7 @@
       "id": "VariableID:10:2108",
       "name": "colors/red/950",
       "remote": false,
-      "key": "59d2bf88e4958e155cae19bdab4b780c4711d679",
+      "key": "226db71b395d7b9011cef330be30650c57447a30",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1335,7 +1368,7 @@
       "id": "VariableID:9:2039",
       "name": "colors/white",
       "remote": false,
-      "key": "7cb37f97ddb2488b8b398044c7c78a5d28a620b4",
+      "key": "b3c8d074b4f567e0c59c3ca22026e734091f899c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "COLOR",
       "scopes": [],
@@ -1355,7 +1388,7 @@
       "id": "VariableID:527:2946",
       "name": "grid/columns/12",
       "remote": false,
-      "key": "7055c6d27d2b0d7b3fc77d35a4a9f388d7508b99",
+      "key": "2aa20004bb2eb4dce67f2ded19b53759e0989cad",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1370,7 +1403,7 @@
       "id": "VariableID:527:2947",
       "name": "grid/columns/4",
       "remote": false,
-      "key": "d60314e4761cfadcdf1e32fef4a78d4d825bf733",
+      "key": "b37309306ab0ab8a0e53b6f3f646d328f2735180",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1382,10 +1415,25 @@
       }
     },
     {
+      "id": "VariableID:2073:4723",
+      "name": "max-width/max-w-1062",
+      "remote": false,
+      "key": "0f0801d51a50259301b40e7963027490a7ea65f7",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "FLOAT",
+      "scopes": [],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:0": 1062
+      }
+    },
+    {
       "id": "VariableID:9:1877",
       "name": "max-width/max-w-2xl",
       "remote": false,
-      "key": "c1129dd0deb423eb8e3f546a406df8c6206fc1e0",
+      "key": "10938ff1193d38cae5bbfdb905b835bed2da475e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1400,7 +1448,7 @@
       "id": "VariableID:9:1876",
       "name": "max-width/max-w-3xl",
       "remote": false,
-      "key": "10a028ad20be58d139d37346e16edc14b703e65c",
+      "key": "d6296b6c7060199283900a6bea78ce31837d9f0a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1415,7 +1463,7 @@
       "id": "VariableID:9:1875",
       "name": "max-width/max-w-4xl",
       "remote": false,
-      "key": "bd8735117174cfded98438c82ff170fb7c56580a",
+      "key": "654b93c0f2e71678fee663acaa6beb781df9b788",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1430,7 +1478,7 @@
       "id": "VariableID:9:1874",
       "name": "max-width/max-w-5xl",
       "remote": false,
-      "key": "3f4a97b13655c878a20aa4714d897ba877b4d0b7",
+      "key": "95e3b4553d1a0d6ce6cc0fafab0a0961027bf861",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1442,10 +1490,25 @@
       }
     },
     {
+      "id": "VariableID:2029:6872",
+      "name": "max-width/max-w-658",
+      "remote": false,
+      "key": "d4fbca0b0b386596821617b9baf8dd0450d97cce",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "FLOAT",
+      "scopes": [],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "9:0": 658
+      }
+    },
+    {
       "id": "VariableID:9:1873",
       "name": "max-width/max-w-6xl",
       "remote": false,
-      "key": "367174c5a32c675b9b800af517c8306848ee018e",
+      "key": "a04ba521a536f45d3c52086344b9d0092081f717",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1460,7 +1523,7 @@
       "id": "VariableID:9:1888",
       "name": "max-width/max-w-7xl",
       "remote": false,
-      "key": "5a5a7e90f6d159ac3e4b6d2fd642e0a7881b5fc0",
+      "key": "013a67231e45c1be500d20b562ba295d63126e62",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1475,7 +1538,7 @@
       "id": "VariableID:9:1886",
       "name": "max-width/max-w-lg",
       "remote": false,
-      "key": "8a8cc3d56270cf968a8bbbfe3a5a9b8d4d326356",
+      "key": "b985a789c36e047760ff9c12d18673d618176867",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1490,12 +1553,10 @@
       "id": "VariableID:9:1887",
       "name": "max-width/max-w-md",
       "remote": false,
-      "key": "64665ef15465e458e7e22c4f8c719120158453ea",
+      "key": "79b5c70571ba432c3fe9e5b0fc77981e2d3b374e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "WIDTH_HEIGHT"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -1507,7 +1568,7 @@
       "id": "VariableID:9:1880",
       "name": "max-width/max-w-screen-2xl",
       "remote": false,
-      "key": "39561afb023134c000679e76ee5b480a492bd861",
+      "key": "c45b9e7417a8127f548a3d70611b1dea10413f25",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1522,7 +1583,7 @@
       "id": "VariableID:9:1882",
       "name": "max-width/max-w-screen-lg",
       "remote": false,
-      "key": "5be45ccbe4f8ab9008ab2ee8804a290ce2da86dc",
+      "key": "ddec3a81c4a7ed45bdaea1ced04faf99de88dcae",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1537,7 +1598,7 @@
       "id": "VariableID:9:1879",
       "name": "max-width/max-w-screen-md",
       "remote": false,
-      "key": "6d78a782801538c859c06b4096a60ff53b941c3e",
+      "key": "5023ee835f0b316f2a1046ceb5bf9f2fdd47b592",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1552,7 +1613,7 @@
       "id": "VariableID:9:1885",
       "name": "max-width/max-w-screen-sm",
       "remote": false,
-      "key": "dc33900a34235cb16cc1de7b495dd51394418366",
+      "key": "b2a16bd0e1bb79773c9fa36d9caf8a90801ad082",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1567,7 +1628,7 @@
       "id": "VariableID:9:1883",
       "name": "max-width/max-w-screen-xl",
       "remote": false,
-      "key": "453af04bf0ca0d583b2898f9953c450147fd5705",
+      "key": "1d4a929034de81e3a008c1ca9d18a63c9b8a01a6",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1582,7 +1643,7 @@
       "id": "VariableID:9:1881",
       "name": "max-width/max-w-sm",
       "remote": false,
-      "key": "f18062b3b5125391ab89ffdd9920112ff04f6b36",
+      "key": "ee20e6ddeaf8a23d3de6b26c3fea79bc13172754",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1599,7 +1660,7 @@
       "id": "VariableID:9:1878",
       "name": "max-width/max-w-xl",
       "remote": false,
-      "key": "d85d2efc88b61c6947dfd03f25f9ab5e348867b4",
+      "key": "21099f565e0c7ae1f138aa8ddbb9bcc102ce7890",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1614,7 +1675,7 @@
       "id": "VariableID:9:1884",
       "name": "max-width/max-w-xs",
       "remote": false,
-      "key": "717c7c008c75399a6f17997748f7a5c20a7fa575",
+      "key": "3805d18afe9fbb8693f2cdee01f095fadc796a56",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -1629,7 +1690,7 @@
       "id": "VariableID:9:2038",
       "name": "opacity/opacity-0",
       "remote": false,
-      "key": "ec91b88a3d2084a63cd82b140c56dc6928a08f1b",
+      "key": "8eb81b8e6f4659db2187cac485caf00e812b2d6b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1649,7 +1710,7 @@
       "id": "VariableID:9:2031",
       "name": "opacity/opacity-10",
       "remote": false,
-      "key": "c94a5b31464a92d23571454ab784397ad70d45de",
+      "key": "57786c8c54858d2ce3cff617838ba9e7a93f082a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1669,7 +1730,7 @@
       "id": "VariableID:9:2035",
       "name": "opacity/opacity-100",
       "remote": false,
-      "key": "1f3cb3a46bd750ab0c70ad80b68bfd6c7f3c38ee",
+      "key": "acf8918187a6056e334c57fa8f7aba8b3e58ab33",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1689,7 +1750,7 @@
       "id": "VariableID:70:1930",
       "name": "opacity/opacity-15",
       "remote": false,
-      "key": "8b5a9f1151cf896e40fa428dace1246f63afc1a4",
+      "key": "6cadb8b9e6d44bd313c7da35ae549184f80ffa6a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1709,7 +1770,7 @@
       "id": "VariableID:9:2030",
       "name": "opacity/opacity-20",
       "remote": false,
-      "key": "85d57e3dcbb780014e1cf187270d79002ba3de4b",
+      "key": "c11c1d080c242f7126cccca8db78bf4d5952c3a1",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1729,7 +1790,7 @@
       "id": "VariableID:9:2028",
       "name": "opacity/opacity-25",
       "remote": false,
-      "key": "8713233ffe1b77d284a94a4fbbb7cec01f3cbca5",
+      "key": "9236461c0a8a4b0aa03a1872f09e74906ba9e5ac",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1749,7 +1810,7 @@
       "id": "VariableID:9:2029",
       "name": "opacity/opacity-30",
       "remote": false,
-      "key": "5b37b0cfa0486f465ebe82b251e27fd39dc7f41f",
+      "key": "2ad85bd9529c8aa7e054e05295033784aa0b8031",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1769,7 +1830,7 @@
       "id": "VariableID:70:2812",
       "name": "opacity/opacity-35",
       "remote": false,
-      "key": "7d7de77254d394ec7b71e1feaa66bca218657502",
+      "key": "0009218835d0b752ac30d8deeaae73e1b7299776",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1789,7 +1850,7 @@
       "id": "VariableID:9:2027",
       "name": "opacity/opacity-40",
       "remote": false,
-      "key": "92b24bcdc680df51fef639cc6a32aeaae491076a",
+      "key": "b317f5933c320f63d670133ad1108c0bdba1ffb3",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1809,7 +1870,7 @@
       "id": "VariableID:71:1701",
       "name": "opacity/opacity-45",
       "remote": false,
-      "key": "8f25d319c50bcf6dada0247df0f45150be7e09b4",
+      "key": "6e97bcc9396b204a7a7079eb032d148fc5b42685",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1829,7 +1890,7 @@
       "id": "VariableID:9:2032",
       "name": "opacity/opacity-5",
       "remote": false,
-      "key": "e09efec74b8543ca3745777807bb0b4cd3bd8bda",
+      "key": "860f8c01770e46017a3220b2b5b04e346c0bf750",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1849,7 +1910,7 @@
       "id": "VariableID:9:2036",
       "name": "opacity/opacity-50",
       "remote": false,
-      "key": "e513aa37ce5ef1c1f92b6ac162cf2e16a2e7180c",
+      "key": "66f92bb63be75bb302194360b23064f54b227f27",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1869,7 +1930,7 @@
       "id": "VariableID:238:1628",
       "name": "opacity/opacity-55",
       "remote": false,
-      "key": "ccd1b1689c1c6a28959119de52b5dd80e0b6eabe",
+      "key": "ebc3e7c5d7d6c5b316fd8b8901f4f1316035ba15",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1889,7 +1950,7 @@
       "id": "VariableID:9:2026",
       "name": "opacity/opacity-60",
       "remote": false,
-      "key": "bbf03975ffd8c9d2999e639a8300923620d4d729",
+      "key": "cb64ab4804af8f3c19199ba5beaa3b8f3948aa27",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1909,7 +1970,7 @@
       "id": "VariableID:9:2025",
       "name": "opacity/opacity-70",
       "remote": false,
-      "key": "995bff837a92db7381d64b43c1d334dbb09f19ef",
+      "key": "dc1aeeffd3a85751997227886204922524741dd2",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1929,7 +1990,7 @@
       "id": "VariableID:9:2034",
       "name": "opacity/opacity-80",
       "remote": false,
-      "key": "d01515cf4ac9012e9011f2ddfa976f355b487cec",
+      "key": "dd8e2af2006acc5b8f53012d6a00633abd51e4d4",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1949,7 +2010,7 @@
       "id": "VariableID:453:20918",
       "name": "opacity/opacity-85",
       "remote": false,
-      "key": "7fa3c6743b19df7795781df1750b6f4c58ac2cb8",
+      "key": "279de58e68fa6e99d9c48c163b0fde580116f15e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1969,7 +2030,7 @@
       "id": "VariableID:9:2033",
       "name": "opacity/opacity-90",
       "remote": false,
-      "key": "4879e3b412876d2beffea7d96a27e8b5bac94e36",
+      "key": "5871501ce6e2e42bdea7579a4145452f35c1bd2f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -1989,7 +2050,7 @@
       "id": "VariableID:9:2037",
       "name": "opacity/opacity-95",
       "remote": false,
-      "key": "03d364f232d9589862b6284c4a93561ce62d6d65",
+      "key": "94d7fd99834c84a6178f57873f6ef2ef86d7a8fb",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2009,7 +2070,7 @@
       "id": "VariableID:9:1572",
       "name": "radius/rounded-10",
       "remote": false,
-      "key": "017ccbbde77ae3ffcdc9dc53b272741367fdb696",
+      "key": "f1881fc6a083ae31a04905d08cace23c9e1f2294",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2028,7 +2089,7 @@
       "id": "VariableID:60:548",
       "name": "radius/rounded-14",
       "remote": false,
-      "key": "9c8e1adeaef05af6856cea63c5d419a3246a7b7c",
+      "key": "7f94af64dc5d2fffa3788257e968a0558bc18aef",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2047,7 +2108,7 @@
       "id": "VariableID:237:2109",
       "name": "radius/rounded-18",
       "remote": false,
-      "key": "ecb64bc8db0692b7b205b2e1660757401503a61b",
+      "key": "9808ddf2c0f2df0c05a4acb389a3d853a5be83c8",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2066,7 +2127,7 @@
       "id": "VariableID:9:1569",
       "name": "radius/rounded-20",
       "remote": false,
-      "key": "0a08588932ab29d71c8467abd6fef83957815435",
+      "key": "481094e7d071301044780ecde6098dd42a827c36",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2085,7 +2146,7 @@
       "id": "VariableID:9:1570",
       "name": "radius/rounded-2xl",
       "remote": false,
-      "key": "fe163ff49860d4cba0e9661184a6ec13c9d73bfb",
+      "key": "4e3139417eba38d5d5b2ee23a82e1935c16502af",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2104,7 +2165,7 @@
       "id": "VariableID:9:1575",
       "name": "radius/rounded-3xl",
       "remote": false,
-      "key": "051f141a1e459814f684186ccab19e4990471bc0",
+      "key": "abaaff554cd6dc55d2bfde544bc55d1ccfe13d2a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2123,7 +2184,7 @@
       "id": "VariableID:9:1576",
       "name": "radius/rounded-5",
       "remote": false,
-      "key": "635e04bc5216f5c58800972926fe4c1c2627109a",
+      "key": "748f948e73620ad62f8d18aea2945003caaa8aa2",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2140,7 +2201,7 @@
       "id": "VariableID:9:1577",
       "name": "radius/rounded-full",
       "remote": false,
-      "key": "a1263859d5503faaa6ad9ba40f58b8b720a93747",
+      "key": "05bbc6ef9c50112fc9116a03a0a5d9dc97921683",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2159,7 +2220,7 @@
       "id": "VariableID:9:1573",
       "name": "radius/rounded-lg",
       "remote": false,
-      "key": "fc9b30b6d32552bbe6566c7e75ffcea506fe6e87",
+      "key": "86d96654e8649c125429999ecbd77037eb92cbd8",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2178,7 +2239,7 @@
       "id": "VariableID:9:1574",
       "name": "radius/rounded-md",
       "remote": false,
-      "key": "28eb12edca6af1cfb75e5df3cd9888e3c80ed555",
+      "key": "3eacb7735c664261a4fcc6f73fc0ae3579c02553",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2197,7 +2258,7 @@
       "id": "VariableID:9:1579",
       "name": "radius/rounded-none",
       "remote": false,
-      "key": "7f122346298d9e4829442dd2dabccd7f72b43d8b",
+      "key": "74597f0a0a6836fd7f381908f3da898bb5ebe7aa",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2216,7 +2277,7 @@
       "id": "VariableID:9:1578",
       "name": "radius/rounded-sm",
       "remote": false,
-      "key": "4d864a70cb9467308d470bce8aaedf95e2c3f516",
+      "key": "037e521c79e0a771b7ee1afa0588deed40992e3b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2235,7 +2296,7 @@
       "id": "VariableID:9:1571",
       "name": "radius/rounded-xl",
       "remote": false,
-      "key": "2b30df5855ff7e6f6bd78516df5827b6ddc2cee9",
+      "key": "3af51b0de1df7194c45c2d5723f83caa04ae0376",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2254,7 +2315,7 @@
       "id": "VariableID:50:1676",
       "name": "radius/rounded-xs",
       "remote": false,
-      "key": "9e9eb489543f5af854d0a5952377bdbcb5808694",
+      "key": "da58dc1ba8a12027dd00d333fd3156f9e8d59bb3",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2271,7 +2332,7 @@
       "id": "VariableID:11:2238",
       "name": "ring-focus-width/ring-0",
       "remote": false,
-      "key": "0120101457ff96ea295c3cf98556f708adf4eb7f",
+      "key": "c12bdfb70252fbfdbda258faa6b528c2cc1d8e77",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2286,7 +2347,7 @@
       "id": "VariableID:11:2239",
       "name": "ring-focus-width/ring-1",
       "remote": false,
-      "key": "e7f0909364e7ae2a62ae4453fa297777297a991a",
+      "key": "a4591218d15422e22e1746d520ca3bb5015df970",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2301,7 +2362,7 @@
       "id": "VariableID:11:2236",
       "name": "ring-focus-width/ring-2",
       "remote": false,
-      "key": "185295ea60324549d76dfbb9ba27b9e382822e91",
+      "key": "d289945105635dcc293aa10e6fc6499d81a0797d",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2318,7 +2379,7 @@
       "id": "VariableID:11:2235",
       "name": "ring-focus-width/ring-3",
       "remote": false,
-      "key": "cbabf3d36891f966f9d8ee179e102fc5db9cfc1c",
+      "key": "d14bc33fca3c3adf79a918a80c69e0007d93845e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2333,7 +2394,7 @@
       "id": "VariableID:9:1451",
       "name": "spacing/0",
       "remote": false,
-      "key": "e213ba867e0779185a6b7817db5e85a296b72229",
+      "key": "64d31eb03967e96000c25eb9c28cd2ceccd80a82",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2351,7 +2412,7 @@
       "id": "VariableID:9:1506",
       "name": "spacing/1",
       "remote": false,
-      "key": "e6372dc49f90bd8fc98c70ee548ac5199d97b2f0",
+      "key": "5f8e0c50410ba3b5f9619caf0469a03a8e968373",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2369,7 +2430,7 @@
       "id": "VariableID:9:1517",
       "name": "spacing/10",
       "remote": false,
-      "key": "4d7065e48e4f7173dc4afa799b50f052554e31e9",
+      "key": "fea3d785bdbeb0280e9a5fc71ce2f0feab21cb96",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2387,7 +2448,7 @@
       "id": "VariableID:9:1511",
       "name": "spacing/12",
       "remote": false,
-      "key": "67f70c83da9cc2e97133334989bd77060fd3c1c7",
+      "key": "7dc2792ca12f47a8f4b04052575c3fdc255d6a67",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2405,7 +2466,7 @@
       "id": "VariableID:9:1496",
       "name": "spacing/16",
       "remote": false,
-      "key": "3accdcab5f1bc7e267c9b6fc4f6c4b3ab0171fc4",
+      "key": "952f7205b3806e43bf2bd849f9bcb1e36bf896e5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2422,7 +2483,7 @@
       "id": "VariableID:9:1490",
       "name": "spacing/2",
       "remote": false,
-      "key": "c09d4877ec3105a3fd1ca504c3ac4a6a7531e22d",
+      "key": "bdbd87e71a1fd05e786bf8c17bd231bef63f688e",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2440,7 +2501,7 @@
       "id": "VariableID:9:1495",
       "name": "spacing/20",
       "remote": false,
-      "key": "32b3d70eb2c906c617eccc1d3a8d41d7593cc98a",
+      "key": "2636608921e3709a27512d6d43b90f27c9e23df5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2457,7 +2518,7 @@
       "id": "VariableID:9:1503",
       "name": "spacing/24",
       "remote": false,
-      "key": "e879de479e7da7e237ba13fa310932d8474ab2ea",
+      "key": "d1272213442afd6affb97d9e0a0e8aa25d41628a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2472,7 +2533,7 @@
       "id": "VariableID:9:1489",
       "name": "spacing/3",
       "remote": false,
-      "key": "b1d897784c57dc49cc5cab432051f975d6c88e38",
+      "key": "356af87eb2da6d26abaf5429f0f4ac9cb542e96f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2490,7 +2551,7 @@
       "id": "VariableID:9:1501",
       "name": "spacing/32",
       "remote": false,
-      "key": "0c658a1bbf50a2731dbe16ca15a1688efe3f44bd",
+      "key": "cca5cf62f7ba6d6a56be923aca56ec822a12a210",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2507,7 +2568,7 @@
       "id": "VariableID:9:1493",
       "name": "spacing/4",
       "remote": false,
-      "key": "e6afc4c6177b5f25163534e013005d61495f5db1",
+      "key": "78d97e14f2b7eea1074f99f33cd6b872e6ee859f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2525,7 +2586,7 @@
       "id": "VariableID:9:1510",
       "name": "spacing/6",
       "remote": false,
-      "key": "772ca218d6c67d0ab2bc8a8edb7fb0870ffdaf1d",
+      "key": "15fcfc063a53017a3bec88a2b4603409f0eb2ccc",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2542,7 +2603,7 @@
       "id": "VariableID:9:1519",
       "name": "spacing/8",
       "remote": false,
-      "key": "dc10dff2c90229018e3024f2740bd097bf438fd1",
+      "key": "da69bacebac0ef51f066e260e2da8bb59212eaed",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2560,7 +2621,7 @@
       "id": "VariableID:554:7247",
       "name": "spacing/out-of-scale/0,125",
       "remote": false,
-      "key": "b0adf4ed1ac92dcd86eb93cfdddcb0cfd955c1e9",
+      "key": "d31ef33fd1a43da04c3ed4f059aa3f243ef4758a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2578,7 +2639,7 @@
       "id": "VariableID:237:4354",
       "name": "spacing/out-of-scale/0,25",
       "remote": false,
-      "key": "265f0baa526613fe96abf13c85cc62795a6f3ae6",
+      "key": "7b5c8ef73ba7f894573c523c29eb33851b42ad4c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2596,7 +2657,7 @@
       "id": "VariableID:9:1514",
       "name": "spacing/out-of-scale/0,5",
       "remote": false,
-      "key": "9645ccfe70fc93e38181bf6a53bf98f15b4d612d",
+      "key": "7472e772c381e62f7c74673f33b94cabf368d0e7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2614,7 +2675,7 @@
       "id": "VariableID:237:1627",
       "name": "spacing/out-of-scale/0,75",
       "remote": false,
-      "key": "fba9accbdb780fdf9954de69b5f072ad6fc4ba65",
+      "key": "5f91f2c14605372d35324229d4ec58b58b59ce0c",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2632,7 +2693,7 @@
       "id": "VariableID:238:1589",
       "name": "spacing/out-of-scale/1,25",
       "remote": false,
-      "key": "81e6872df932a705c84e4f5b54e6715974da6b53",
+      "key": "fede175994b21da845b8d068f600a49083fcf49f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2649,7 +2710,7 @@
       "id": "VariableID:9:1504",
       "name": "spacing/out-of-scale/1,5",
       "remote": false,
-      "key": "949873514431cc217e37c38e60dcd001b18ba630",
+      "key": "dde68ea2d0d9f98218b71d9ebfd2297d9a72c0c6",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2667,7 +2728,7 @@
       "id": "VariableID:283:1057",
       "name": "spacing/out-of-scale/1,75",
       "remote": false,
-      "key": "8915c0a18737f4eb8d566310acb7e0d302bdabed",
+      "key": "a96bd049db7258c83d94a7c4e73ccc96fed8c498",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2684,7 +2745,7 @@
       "id": "VariableID:9:1498",
       "name": "spacing/out-of-scale/11",
       "remote": false,
-      "key": "ceb5fedb1c715993c94854179e30a4a6d048da65",
+      "key": "d66eee9b8781a38116e1145ab780121f26436016",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2702,7 +2763,7 @@
       "id": "VariableID:9:1508",
       "name": "spacing/out-of-scale/14",
       "remote": false,
-      "key": "fbb1994a6c0e821f1bebb0c8b8daf42d5c9cc124",
+      "key": "45419c6bfa7649a41292045087d3602867e9ff83",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2717,7 +2778,7 @@
       "id": "VariableID:258:7911",
       "name": "spacing/out-of-scale/2,25",
       "remote": false,
-      "key": "196d804ab4569f69c991b84dee6be2e3b347b804",
+      "key": "020112a0cb054c4c0c1784e5ba32b8293bd5c0e9",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2734,7 +2795,7 @@
       "id": "VariableID:9:1509",
       "name": "spacing/out-of-scale/2,5",
       "remote": false,
-      "key": "3c91919de61c94917c1b88393f4cc5199569b5e4",
+      "key": "918e9e3afff0684f5e8bf849057d7ea51718493f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2752,7 +2813,7 @@
       "id": "VariableID:248:2888",
       "name": "spacing/out-of-scale/22",
       "remote": false,
-      "key": "ea2629d8ff12fd583cff8deb9d7c6aed3c2e5991",
+      "key": "6a04014e2f63397ab93de82e14fcc6be3c460210",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2769,7 +2830,7 @@
       "id": "VariableID:9:1507",
       "name": "spacing/out-of-scale/28",
       "remote": false,
-      "key": "41289329834c2a6dd416a2c3f447d57147f2e4ef",
+      "key": "6ceee847e2447807dc4f22803eeb3255a9265654",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2784,7 +2845,7 @@
       "id": "VariableID:243:2875",
       "name": "spacing/out-of-scale/28,5",
       "remote": false,
-      "key": "1ea629e4c81d403fbe54fc01f5904802b2554cfa",
+      "key": "da33c4730c71e6492c23276981c87b1e4ab0a1b9",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2802,7 +2863,7 @@
       "id": "VariableID:554:7249",
       "name": "spacing/out-of-scale/3,25",
       "remote": false,
-      "key": "4b21b2a6e7d0179bdfe3b4f6086f917e93d77dbc",
+      "key": "b7507e5ac2aa56c1b50a6537ae2f629875a56b4a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2820,7 +2881,7 @@
       "id": "VariableID:9:1520",
       "name": "spacing/out-of-scale/3,5",
       "remote": false,
-      "key": "31925fa0e7233e9e018aa9a6913a0fd0ee004bb1",
+      "key": "32d9b5c6aa6fd28d917259c8abb5e56d3320044d",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2835,10 +2896,28 @@
       }
     },
     {
+      "id": "VariableID:2029:6869",
+      "name": "spacing/out-of-scale/3,75",
+      "remote": false,
+      "key": "99819cd3a82b8ab3a0af32da02e2b2817034a478",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "WIDTH_HEIGHT",
+        "GAP"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "9:0": 15
+      }
+    },
+    {
       "id": "VariableID:369:1512",
       "name": "spacing/out-of-scale/30",
       "remote": false,
-      "key": "1b5135fdad645a2ed665a51fda360cc783a4d633",
+      "key": "3a7e9bc45658d253a8552beb97f6e12ce01806de",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2856,7 +2935,7 @@
       "id": "VariableID:248:2955",
       "name": "spacing/out-of-scale/35",
       "remote": false,
-      "key": "9dac8aded4c65fac3397c2091a613952c8039375",
+      "key": "937f5e92adf79c9113d0dead9b1ef1d04323285b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2873,7 +2952,7 @@
       "id": "VariableID:9:1505",
       "name": "spacing/out-of-scale/36",
       "remote": false,
-      "key": "2dfbd03e69cfa0e2ab2a757f4bf910709630ad09",
+      "key": "78c91ebeb6b176d6a29a82214256c7c692da3217",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2888,7 +2967,7 @@
       "id": "VariableID:245:2876",
       "name": "spacing/out-of-scale/4,5",
       "remote": false,
-      "key": "cdf94be2c9771da55229ae06528cca917e552ee6",
+      "key": "09980082b78027c5060a6449c856b2e185d438ed",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -2905,7 +2984,7 @@
       "id": "VariableID:9:1499",
       "name": "spacing/out-of-scale/40",
       "remote": false,
-      "key": "5fc12b8c36fad707a6813f18b7c29b78402f74b1",
+      "key": "fee30e1abc2a0acbecbfbcc38a021aa4fbd1220b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2920,7 +2999,7 @@
       "id": "VariableID:9:1500",
       "name": "spacing/out-of-scale/44",
       "remote": false,
-      "key": "6f1f70807631ad7d8098436f12e617883bb1763b",
+      "key": "e2c2656be1b8097056c0a08f85d5f5191c8342aa",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2935,7 +3014,7 @@
       "id": "VariableID:9:1502",
       "name": "spacing/out-of-scale/48",
       "remote": false,
-      "key": "ca3577b3a6435f77a12a6203274e0574c90cc151",
+      "key": "5e7d79c45f12b2316f978a16b19e90fffbd18b78",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2950,11 +3029,12 @@
       "id": "VariableID:9:1488",
       "name": "spacing/out-of-scale/5",
       "remote": false,
-      "key": "8741381994431208f7c8ca142f77b2e36584c4ef",
+      "key": "57a2a0fa042e878749a0b4235fbf45b3cce15d77",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
-        "WIDTH_HEIGHT"
+        "WIDTH_HEIGHT",
+        "GAP"
       ],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
@@ -2967,7 +3047,7 @@
       "id": "VariableID:9:1497",
       "name": "spacing/out-of-scale/52",
       "remote": false,
-      "key": "f132ffcdd74d87639814dd840a5ef17a3ab67253",
+      "key": "619ab0f979782b466f21efc17f2bbd0335ccb6c9",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2982,7 +3062,7 @@
       "id": "VariableID:9:1513",
       "name": "spacing/out-of-scale/56",
       "remote": false,
-      "key": "b25bc93a2a9d92c6b69e8d954e172fc64f5e39ed",
+      "key": "2b7cc6a0c334372f99429138cfcff4059c57f508",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -2997,7 +3077,7 @@
       "id": "VariableID:9:1518",
       "name": "spacing/out-of-scale/60",
       "remote": false,
-      "key": "9882aa4d547729f5a7bde59b4da2e290d1ef1b39",
+      "key": "bb7dedddf91ad5b0fe8c17985c8c73cd5ef34eb9",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3012,7 +3092,7 @@
       "id": "VariableID:9:1494",
       "name": "spacing/out-of-scale/64",
       "remote": false,
-      "key": "7a85fbacfdb04abdef49edd2015101ae33b49a71",
+      "key": "2a91dc310b9d5ae0c54945e7c5c21e86a5ea98b5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3027,7 +3107,7 @@
       "id": "VariableID:9:1515",
       "name": "spacing/out-of-scale/7",
       "remote": false,
-      "key": "ac59c7dfbc2e57d7d3b937a443ba7fd5ae3f239c",
+      "key": "5d320b7af3aa38ab3bb8e708a37f8fcb9d7a9c23",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3042,7 +3122,7 @@
       "id": "VariableID:9:1492",
       "name": "spacing/out-of-scale/72",
       "remote": false,
-      "key": "34f8bf25f43376559b0b0e486e35aee8c23a5910",
+      "key": "f4bbf08c0e1a575bacc90e6d7470a402efef3e8a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3057,7 +3137,7 @@
       "id": "VariableID:9:1491",
       "name": "spacing/out-of-scale/80",
       "remote": false,
-      "key": "12a4bce7411f180056d18a32816a03581d4b49f7",
+      "key": "cf16f759630b2f3aa4ebc32bd7e18c7893560a4f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3072,7 +3152,7 @@
       "id": "VariableID:9:1516",
       "name": "spacing/out-of-scale/9",
       "remote": false,
-      "key": "642fa421919d63dd16058d1ab296c674f172002f",
+      "key": "b739b8161c5e2b79442824803baae363044580a7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3090,7 +3170,7 @@
       "id": "VariableID:9:1512",
       "name": "spacing/out-of-scale/96",
       "remote": false,
-      "key": "3e0e4f98381e9cd25b6e813a8edaf288ddc81fa5",
+      "key": "defbd4564d0b27cb7469fa592612b045f7b14cfe",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3105,7 +3185,7 @@
       "id": "VariableID:9:1599",
       "name": "stroke-width/stroke",
       "remote": false,
-      "key": "98345f04704d8a43b9408f1ff87b73003e13b368",
+      "key": "bbf145a46af53c3cea3f89da0763e5bd0b3884f7",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3122,7 +3202,7 @@
       "id": "VariableID:9:1597",
       "name": "stroke-width/stroke-0,5",
       "remote": false,
-      "key": "d356be3154235c22e9fc6582e84583843ce14ee3",
+      "key": "6cd84f51faf8f887ea1a9326ab9dca9cb099644f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3136,10 +3216,27 @@
       }
     },
     {
+      "id": "VariableID:2029:6862",
+      "name": "stroke-width/stroke-0,75",
+      "remote": false,
+      "key": "46543c0bdde64929f20a6b54fdade84160d7335b",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "STROKE_FLOAT"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "9:0": 0.75
+      }
+    },
+    {
       "id": "VariableID:9:1598",
       "name": "stroke-width/stroke-1,33",
       "remote": false,
-      "key": "30dc5811aad50220ef0f50c3bc06b283e0b67498",
+      "key": "b38af6d506feb4d17a2a4bf13a0381f5a0f2d404",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3156,7 +3253,7 @@
       "id": "VariableID:60:525",
       "name": "stroke-width/stroke-1,5",
       "remote": false,
-      "key": "ffa6b5e85674bf67d458199e315f64cc2e11f16f",
+      "key": "ba43dfbf35437b2c875234b09302126e2dbc1d45",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3173,7 +3270,7 @@
       "id": "VariableID:61:560",
       "name": "stroke-width/stroke-1,66",
       "remote": false,
-      "key": "c11a52174d4d83867a34b3e71f8039f5ff67d3f2",
+      "key": "b437cae935778581a4baa38154b5b1ef69f117cc",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3190,7 +3287,7 @@
       "id": "VariableID:9:1600",
       "name": "stroke-width/stroke-2",
       "remote": false,
-      "key": "261fb9274d15797bf3aaf1f6064c9d9d2edde545",
+      "key": "9c25776387159a70eaaf7ca172360e20924e0674",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -3207,7 +3304,7 @@
       "id": "VariableID:30:1781",
       "name": "typography/font-family/font-sans",
       "remote": false,
-      "key": "baf87b06c041399418397bab36f95a0a6c37d3b6",
+      "key": "a5d3f894aeef8f85237ced8dccc3323a62a36113",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "STRING",
       "scopes": [],
@@ -3222,7 +3319,7 @@
       "id": "VariableID:9:1640",
       "name": "typography/font-size/text-2xl",
       "remote": false,
-      "key": "39367aeb6d79d107ab2c18bf5fe581072febd05e",
+      "key": "b9f133417ff0a3858ba7019dbe4a3aebe477a0c1",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3237,7 +3334,7 @@
       "id": "VariableID:9:1639",
       "name": "typography/font-size/text-2xs",
       "remote": false,
-      "key": "3f6088cd6bf07fa71732924208650c3086466049",
+      "key": "7634de7a75f871ac0c3078e227e279460c4d5334",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3252,7 +3349,7 @@
       "id": "VariableID:9:1646",
       "name": "typography/font-size/text-3xl",
       "remote": false,
-      "key": "f49d200cd25f46bc71bca3181c78424fa34cb597",
+      "key": "9125d1b758ba4aee79caffc2e659a1de869df780",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3267,7 +3364,7 @@
       "id": "VariableID:9:1638",
       "name": "typography/font-size/text-4xl",
       "remote": false,
-      "key": "50691ec2613bdd8e36b9c20a550936696885c134",
+      "key": "b57e1b84c3dea258f9a40e29380228413d1e08b4",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3282,7 +3379,7 @@
       "id": "VariableID:9:1637",
       "name": "typography/font-size/text-5xl",
       "remote": false,
-      "key": "b9bc54d69a7a173ab9088db6ee1c6c1b9e20a898",
+      "key": "798453756d31a7848d88503487d71d432babb8aa",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3297,7 +3394,7 @@
       "id": "VariableID:9:1647",
       "name": "typography/font-size/text-6xl",
       "remote": false,
-      "key": "419b2d40ad47402926c3ead7d1c9ce618c9aea3a",
+      "key": "880ea189e7ba8bedbcd3a7582dd54ebcfdd5c801",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3312,7 +3409,7 @@
       "id": "VariableID:9:1644",
       "name": "typography/font-size/text-7xl",
       "remote": false,
-      "key": "2589856b018ee29a8b0b6831a539b2907fcb0a10",
+      "key": "81f334490b4500b6960680776cb6739cfc071771",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3327,7 +3424,7 @@
       "id": "VariableID:9:1645",
       "name": "typography/font-size/text-8xl",
       "remote": false,
-      "key": "e28bf3d14b4941cb49da5e1519aabd63f138e95c",
+      "key": "caf22b30f137bb087d23661aed341a44b337ce1f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3342,7 +3439,7 @@
       "id": "VariableID:9:1648",
       "name": "typography/font-size/text-9xl",
       "remote": false,
-      "key": "77a6a835ae1d7ea247dfc2d0ffe09e96a4f018a7",
+      "key": "3e6809ea5411d4432f698ee803b28db5239ef4af",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3357,7 +3454,7 @@
       "id": "VariableID:9:1643",
       "name": "typography/font-size/text-base",
       "remote": false,
-      "key": "d76bfa9785787a41c299e2a6771861d1f91286dc",
+      "key": "097fd7f8e5ff43f5a681ad862b334b602f567733",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3372,7 +3469,7 @@
       "id": "VariableID:9:1642",
       "name": "typography/font-size/text-lg",
       "remote": false,
-      "key": "f65542efd400adb7fd5e647631852ade01a6b6dd",
+      "key": "1180fe32b9a836a18bb6dfd95af58b0874c05504",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3387,7 +3484,7 @@
       "id": "VariableID:9:1649",
       "name": "typography/font-size/text-sm",
       "remote": false,
-      "key": "da4d6775fcbab29e8d7733430eb5d26bbe5063f1",
+      "key": "01b04d53e7d715bee64b3add8992999b601907f9",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3402,7 +3499,7 @@
       "id": "VariableID:9:1641",
       "name": "typography/font-size/text-xl",
       "remote": false,
-      "key": "429a829d4f6f1da213e889c9f68f315ccdd288fc",
+      "key": "24249551d8715efa4552c633336e5e7e2c45794a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3417,7 +3514,7 @@
       "id": "VariableID:9:1650",
       "name": "typography/font-size/text-xs",
       "remote": false,
-      "key": "ae1844bfa816a505225cda5c50cb1c8d1e5e94b6",
+      "key": "7a0ded8132a9e55b2e3250d93d989932780b8c7f",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3432,7 +3529,7 @@
       "id": "VariableID:9:1667",
       "name": "typography/font-weight/black",
       "remote": false,
-      "key": "44163a4f6e8878790c4dd4302251fa2b40074083",
+      "key": "6bc0d9f7c59f97aaa313065b4a881ce13ca05447",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3447,7 +3544,7 @@
       "id": "VariableID:9:1665",
       "name": "typography/font-weight/bold",
       "remote": false,
-      "key": "f47d9f4ed6013df76aafda1d3059550c07428f87",
+      "key": "d98c9ce3acc73fa0a92a077eb362d2cbe9a52e2b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3462,7 +3559,7 @@
       "id": "VariableID:9:1662",
       "name": "typography/font-weight/extrabold",
       "remote": false,
-      "key": "c3c89edca7fd464e6d2271e7fc0891ba07c50bc8",
+      "key": "75e976681289175d4749cfbd46158ef5283249ec",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3477,7 +3574,7 @@
       "id": "VariableID:9:1663",
       "name": "typography/font-weight/extralight",
       "remote": false,
-      "key": "437e0d13707ea3f3b21050e9a528d8a2e25f24ad",
+      "key": "fdc414c869a576cb6e9f70ed3dd070f8f75882af",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3492,7 +3589,7 @@
       "id": "VariableID:9:1669",
       "name": "typography/font-weight/light",
       "remote": false,
-      "key": "9684f5470083baa542f9acb58b7bf6f91741fb74",
+      "key": "b0e02234403b216f96b29fb657be72748ff12d6b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3507,7 +3604,7 @@
       "id": "VariableID:9:1668",
       "name": "typography/font-weight/medium",
       "remote": false,
-      "key": "204bb0a04ac719be3d5e38bec8f8bb39c8c30b1c",
+      "key": "ce87d8cf890a2be646545ed98d5bf33fae0ce475",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3522,7 +3619,7 @@
       "id": "VariableID:9:1670",
       "name": "typography/font-weight/regular",
       "remote": false,
-      "key": "0975ee5bd48e77914153fb78e1beb63c047c1e56",
+      "key": "6378b61db9b0d8640d24c8c6f71c1baee5e8190b",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3537,7 +3634,7 @@
       "id": "VariableID:9:1666",
       "name": "typography/font-weight/semibold",
       "remote": false,
-      "key": "ff41799c27c8c5ade4d03304bc8ebb1d64edb4e9",
+      "key": "e7bc99b0554805a4aac6d98f1ff7c99d765742f5",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3552,7 +3649,7 @@
       "id": "VariableID:9:1664",
       "name": "typography/font-weight/thin",
       "remote": false,
-      "key": "56a925754fb03e058d981bfd7a22d847758998e8",
+      "key": "4d460bdd0b926b13adca7f829b0a638bffe3fb33",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3567,7 +3664,7 @@
       "id": "VariableID:9:1719",
       "name": "typography/line-height/leading-loose",
       "remote": false,
-      "key": "e2c86ee0ef0f1bf63d28f689409e531d568bd7ac",
+      "key": "5b4b347dd2e20505026d84c088493d49d7662f55",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3582,7 +3679,7 @@
       "id": "VariableID:9:1722",
       "name": "typography/line-height/leading-none",
       "remote": false,
-      "key": "5d4fd18a3c6d4a6236a355ed2c9d3c1adaf33d4f",
+      "key": "a75c789a64b7a1fa751ab84b3e4b230a8e19f6b8",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3597,7 +3694,7 @@
       "id": "VariableID:9:1721",
       "name": "typography/line-height/leading-normal",
       "remote": false,
-      "key": "42d75b9711a29f61f590cc35a4b2939b0f665cd1",
+      "key": "27c8cb13ceb188adee1c687c9f380d595760c5f0",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3612,7 +3709,7 @@
       "id": "VariableID:9:1720",
       "name": "typography/line-height/leading-relaxed",
       "remote": false,
-      "key": "855d28ba05bf1d45e3098a2489d9740748994934",
+      "key": "237589aac3f4cda34e551fbb9ec37ffcdeb59110",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3627,7 +3724,7 @@
       "id": "VariableID:9:1723",
       "name": "typography/line-height/leading-snug",
       "remote": false,
-      "key": "46b937139efa7e4e49bea1751b5c6f8d5fc7bce4",
+      "key": "78d0652e2c13d67342cae6e7c249a253c8a22045",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3642,7 +3739,7 @@
       "id": "VariableID:9:1724",
       "name": "typography/line-height/leading-tight",
       "remote": false,
-      "key": "3ba66c414a8d71575c21f75412a4fa6ef096854e",
+      "key": "3cdb5caa9fa154c991775b20bbc92364d2cc2b11",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3657,7 +3754,7 @@
       "id": "VariableID:40:50",
       "name": "typography/line-height/leading-tighter",
       "remote": false,
-      "key": "00b56c1f0edf923cd59f41b5e85e39cdce73d172",
+      "key": "95ac94fd99f03203a9190cf45db7601c26a1236a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3672,7 +3769,7 @@
       "id": "VariableID:118:8616",
       "name": "typography/tracking/tracking-[-0,125]",
       "remote": false,
-      "key": "d89a21ecdb18896abe62804777feff4f807dd3e3",
+      "key": "3a356b8305f30968b3a4f9f42133041ec944d25a",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3687,7 +3784,7 @@
       "id": "VariableID:44:32",
       "name": "typography/tracking/tracking-[-0,1]",
       "remote": false,
-      "key": "dd35f32317bce1d467525a02f8e3badfe90ba2b1",
+      "key": "5be248f9020996fc97ce237ff0153480a2b6da55",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3702,7 +3799,7 @@
       "id": "VariableID:9:1743",
       "name": "typography/tracking/tracking-normal",
       "remote": false,
-      "key": "9ac9ced5ba10c57e22a555a53fc35cd339eb8420",
+      "key": "6f648250813844194b167f8d384c2b1803259957",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3717,7 +3814,7 @@
       "id": "VariableID:9:1744",
       "name": "typography/tracking/tracking-tight",
       "remote": false,
-      "key": "a62544245c51796e80a6c3c37634043b19e9fcba",
+      "key": "6c87715a190d3fbc929e48d737a019dd7092bb51",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3732,7 +3829,7 @@
       "id": "VariableID:9:1746",
       "name": "typography/tracking/tracking-tighter",
       "remote": false,
-      "key": "ff1c590936459081ab492c114529f0aa8aced7a7",
+      "key": "289531b9b87254c5d756222299a88609705411c6",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3747,7 +3844,7 @@
       "id": "VariableID:9:1745",
       "name": "typography/tracking/tracking-wide",
       "remote": false,
-      "key": "6ac720623bd79f0ced5077f53dec19e49b4b1469",
+      "key": "dc89698a74350c44cfb71f97093095f4e51cf396",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3762,7 +3859,7 @@
       "id": "VariableID:9:1742",
       "name": "typography/tracking/tracking-wider",
       "remote": false,
-      "key": "eb72a4b3d7c913aafcd5f1c9cd19a901ba68f81a",
+      "key": "be77f9a6f2513e873979828a9c3ca0b017d5fafd",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3777,7 +3874,7 @@
       "id": "VariableID:9:1741",
       "name": "typography/tracking/tracking-widest",
       "remote": false,
-      "key": "a69fae5b6bf28b992ddb078d9e87adc75542d7d8",
+      "key": "9abb8692bcae8b59f8524950f733703bc4b76056",
       "variableCollectionId": "VariableCollectionId:9:2",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -3792,7 +3889,7 @@
       "id": "VariableID:450:1637",
       "name": "colors/background/default",
       "remote": false,
-      "key": "d82851740185b7c3aec6c1e456fdde33f9f8506b",
+      "key": "279fdb5b3beb005af52d873c34b420e37d20e1c5",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3817,7 +3914,7 @@
       "id": "VariableID:450:1640",
       "name": "colors/background/destructive-op10",
       "remote": false,
-      "key": "14f549a6db14e6198c5b3b673b9517c9a4236b1a",
+      "key": "e1df9f3b80e241403207927f409bdd90d2aa87e3",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3854,7 +3951,7 @@
       "id": "VariableID:575:3902",
       "name": "colors/background/destructive-op5",
       "remote": false,
-      "key": "ed508cc74a8e772644ce2aa3f71284805a649cc4",
+      "key": "7a4cf5fecc265b89eb0f3b7d3f24d10197dfd263",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3891,7 +3988,7 @@
       "id": "VariableID:450:1639",
       "name": "colors/background/info",
       "remote": false,
-      "key": "5649e2c90b56661416ba09410a1ec113611fa222",
+      "key": "401cda86c3eb64f12500c1020d55f69a51faefb3",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3913,10 +4010,47 @@
       }
     },
     {
+      "id": "VariableID:2038:12497",
+      "name": "colors/background/info-op10",
+      "remote": false,
+      "key": "f3621845fa3d41d10367658b0cb5974d56edae76",
+      "variableCollectionId": "VariableCollectionId:450:1530",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "450:1": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:165:1027"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2031"
+          }
+        },
+        "450:2": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:165:1027"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2031"
+          }
+        }
+      }
+    },
+    {
       "id": "VariableID:459:691",
       "name": "colors/background/page",
       "remote": false,
-      "key": "12df77861db75a88052ff823e7d609aeb4899a22",
+      "key": "3386d657093b9d9601b35ee4fc8b6eb1d4a9c84a",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3940,7 +4074,7 @@
       "id": "VariableID:450:1642",
       "name": "colors/background/primary",
       "remote": false,
-      "key": "8d1222733c32786c488a1a372bc090e1e7d832d2",
+      "key": "e7f4a8f20381c7eb59b23236a27456d3827d9027",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -3965,7 +4099,7 @@
       "id": "VariableID:450:1641",
       "name": "colors/background/primary-op60",
       "remote": false,
-      "key": "d0ab1d6d63b0ae1257676aad0e6c2df211a12a76",
+      "key": "4f3fddf4e952ad71ec2c22e0a40293ec5218c089",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4002,7 +4136,7 @@
       "id": "VariableID:450:1638",
       "name": "colors/background/secondary",
       "remote": false,
-      "key": "9e78a4ba39deca531894c8eff56fb3931e900304",
+      "key": "ac434b38671e6c67c1a395f4510d3cdcaa5debbf",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4027,7 +4161,7 @@
       "id": "VariableID:450:1636",
       "name": "colors/background/subtle",
       "remote": false,
-      "key": "e038681a115dd3ef01c52b66c573e11475f87bae",
+      "key": "661c5abf9d4ca560c1760379219e0b57dbb24ae6",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4052,7 +4186,7 @@
       "id": "VariableID:500:5846",
       "name": "colors/background/subtlest",
       "remote": false,
-      "key": "e00e9a5b5901be815a0f34dc965617c243d39f83",
+      "key": "8825b9d1e3cf3332021a6cd7f7309d1a1c397afd",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4077,7 +4211,7 @@
       "id": "VariableID:450:1634",
       "name": "colors/background/success-op5",
       "remote": false,
-      "key": "1c88e13a139de2c8656d64de8a46d21fa2897751",
+      "key": "aa2a3d6710d07fee794e91b466989109afab646e",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4114,7 +4248,7 @@
       "id": "VariableID:450:1635",
       "name": "colors/background/warning",
       "remote": false,
-      "key": "578cc4e580bc776fc12298c20dc597c02ddc1ec9",
+      "key": "4e6b765a9666c55510a9096ff24ec9ce88f86eb8",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4139,7 +4273,7 @@
       "id": "VariableID:450:1673",
       "name": "colors/border/default",
       "remote": false,
-      "key": "cbc7dd4f576e0645f0a0bcd805bbb0ab7521c79b",
+      "key": "5ae977ea0d43db648d88dfd1c95c01dbeff924e1",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4163,7 +4297,7 @@
       "id": "VariableID:450:1671",
       "name": "colors/border/destructive",
       "remote": false,
-      "key": "ee7c8c5bc4d40d6eb25912a985818df23575036a",
+      "key": "ea764d423a2783110bddd1eb19031408b8703410",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4185,9 +4319,9 @@
     },
     {
       "id": "VariableID:450:1670",
-      "name": "colors/border/ring-focus",
+      "name": "colors/border/highlight",
       "remote": false,
-      "key": "0cd72ca4614ae18959b3119c440259ce2a9938c1",
+      "key": "2964248b72f8a8dba3ca1caa671ba4358782a7ed",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4211,7 +4345,7 @@
       "id": "VariableID:450:1672",
       "name": "colors/border/strong",
       "remote": false,
-      "key": "31f0a8531f25cb15d80fc25aa608270da1226e83",
+      "key": "2fd67f49d4c991fcd8ecfb3acaa07585f17b5088",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4235,7 +4369,7 @@
       "id": "VariableID:486:1331",
       "name": "colors/border/success",
       "remote": false,
-      "key": "49cabf6c038172e7a769ae8301b32e9eeb19d0d8",
+      "key": "a2e69ae7d7caa29260e235c6835176c142a623d2",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4256,10 +4390,46 @@
       }
     },
     {
+      "id": "VariableID:2029:6859",
+      "name": "colors/border/transparent",
+      "remote": false,
+      "key": "e4f9fc78eafdfeb1c4301610fb0ab1dee262392c",
+      "variableCollectionId": "VariableCollectionId:450:1530",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "STROKE_COLOR"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "450:1": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2059"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2038"
+          }
+        },
+        "450:2": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2062"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2038"
+          }
+        }
+      }
+    },
+    {
       "id": "VariableID:450:1659",
       "name": "colors/foreground/default",
       "remote": false,
-      "key": "83738ca3cdb0b9eecb1739167b2c80822d41ddb4",
+      "key": "5f1d544706d280791ff75fdd238794158e55370e",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4285,7 +4455,7 @@
       "id": "VariableID:450:1656",
       "name": "colors/foreground/destructive",
       "remote": false,
-      "key": "bfa3d609876b762c2ec4ff76b8fca9189bde3f74",
+      "key": "203b3a4acc0c9cb2fe7fa4e055a6e36a2adfb55e",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4311,7 +4481,7 @@
       "id": "VariableID:450:1655",
       "name": "colors/foreground/highlight",
       "remote": false,
-      "key": "b91a66e4d491dd7c2d7eb276b92983b8d77d223e",
+      "key": "f4178457099041faf2f5c0fbb39f3cdd1ab738ef",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4325,11 +4495,11 @@
       "valuesByMode": {
         "450:1": {
           "type": "VARIABLE_ALIAS",
-          "id": "VariableID:454:21982"
+          "id": "VariableID:165:1027"
         },
         "450:2": {
           "type": "VARIABLE_ALIAS",
-          "id": "VariableID:445:4234"
+          "id": "VariableID:165:1027"
         }
       }
     },
@@ -4337,7 +4507,7 @@
       "id": "VariableID:450:1658",
       "name": "colors/foreground/primary",
       "remote": false,
-      "key": "dd9e11f6a7568bd5f4b356bedeb025778d8a5ae4",
+      "key": "fc630f0b0ff7b94706bc9d794e6549f2bd0fcfd2",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4363,7 +4533,7 @@
       "id": "VariableID:450:1657",
       "name": "colors/foreground/subtle",
       "remote": false,
-      "key": "2820b0c317a8d7adf2e9af364c1737bfb53665ba",
+      "key": "c7197456703c6576a59a22ccae725e8e0b20e380",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4386,10 +4556,36 @@
       }
     },
     {
+      "id": "VariableID:2066:11879",
+      "name": "colors/foreground/subtle-on-subtle",
+      "remote": false,
+      "key": "3fa89ae7e9d6a671808e61d013ac861a9240268e",
+      "variableCollectionId": "VariableCollectionId:450:1530",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "SHAPE_FILL",
+        "TEXT_FILL",
+        "STROKE_COLOR"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "450:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2066:11880"
+        },
+        "450:2": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:454:21081"
+        }
+      }
+    },
+    {
       "id": "VariableID:500:5856",
       "name": "colors/foreground/subtle-on-subtlest",
       "remote": false,
-      "key": "40a847c07c9eb9288d56262f5fcfc64407d9d281",
+      "key": "20e2944c869c625ddcb2b7aee7db278d2a354d4e",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4415,7 +4611,7 @@
       "id": "VariableID:486:1328",
       "name": "colors/foreground/success",
       "remote": false,
-      "key": "980fbdb737fb630631c966107f9658abbdbba697",
+      "key": "3cfa51dc6e733bb8799c4fae06fdd3e0e9f9cf2f",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4441,7 +4637,7 @@
       "id": "VariableID:450:1691",
       "name": "colors/interaction/destructive/hover",
       "remote": false,
-      "key": "f36c54104838c4098f98343a9802a7ebe9e3a19d",
+      "key": "47e59e0529a382baea02bf7711ccf34f45521a03",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4478,7 +4674,7 @@
       "id": "VariableID:450:1690",
       "name": "colors/interaction/destructive/subtle-hover",
       "remote": false,
-      "key": "3187b1ab9d3e0e0a43a437dfe7495111bc74ae56",
+      "key": "dcd0fe645b60200c2feaffedb9bff7bad6c27ae0",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4515,7 +4711,7 @@
       "id": "VariableID:450:1695",
       "name": "colors/interaction/file-upload/drag-over",
       "remote": false,
-      "key": "8d71586c424336b6bd0db679684dfc1b3998a470",
+      "key": "503a9ef58310ac3a5c6ba9490c9a5dcdf58b6a43",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4552,7 +4748,7 @@
       "id": "VariableID:450:18627",
       "name": "colors/interaction/navigation-link/hover",
       "remote": false,
-      "key": "19d937099b8cc2bfa2ae580094e452b77abdf26d",
+      "key": "44818270a0f08236ed7c1b1a8ae68dffd011da3d",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4578,7 +4774,7 @@
       "id": "VariableID:450:1678",
       "name": "colors/interaction/primary/hover",
       "remote": false,
-      "key": "7dc076df010291a5f299583ef8dee9c0ec8a997b",
+      "key": "0d3d0e4b4ffb780a9a7c4f94c78d4394337b9c57",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4617,7 +4813,7 @@
       "id": "VariableID:451:18655",
       "name": "colors/interaction/primary/on-primary-hover",
       "remote": false,
-      "key": "45f293d7ec0e35744609ab36b3ecbaefea678a6a",
+      "key": "7868a1cd40845559c1a8e7322a0e39261fbfb477",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4654,7 +4850,7 @@
       "id": "VariableID:450:1700",
       "name": "colors/interaction/scrollbar/thumb",
       "remote": false,
-      "key": "9cc4f943d8493193692e612b518b8c7d57a3055a",
+      "key": "a10fdda21d40a7c1db6ce9e6987202ac04b62800",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4679,7 +4875,7 @@
       "id": "VariableID:450:1683",
       "name": "colors/interaction/secondary/hover",
       "remote": false,
-      "key": "9780feffeae06117490f7fd0e9a2a0cfe9238686",
+      "key": "2f5a0587fed2fe466f474536e88e20cd7e2cad10",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4710,7 +4906,7 @@
       "id": "VariableID:450:6313",
       "name": "shadow/popover/layer-1/color",
       "remote": false,
-      "key": "b79a1c0b1cbd514b21eab43af5c0e07b368d5001",
+      "key": "42f3660b1172020a3bb0b7b3832f46e4c031a22d",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4746,7 +4942,7 @@
       "id": "VariableID:450:6318",
       "name": "shadow/popover/layer-2/color",
       "remote": false,
-      "key": "2e45b953d1521e9f5fe9732023d375e1e2abc822",
+      "key": "0cbb3506243b994552b9058a9c5ba8b30e7e87c4",
       "variableCollectionId": "VariableCollectionId:450:1530",
       "resolvedType": "COLOR",
       "scopes": [
@@ -4782,7 +4978,7 @@
       "id": "VariableID:388:544",
       "name": "background-blur/navigation",
       "remote": false,
-      "key": "332900cf0fc9a9b4aa68dce8b7f3a56069b62002",
+      "key": "26e34131c5facdd9f0f0ce1ab35cd43e766c283e",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4799,7 +4995,7 @@
       "id": "VariableID:372:559",
       "name": "glass/navigation/depth",
       "remote": false,
-      "key": "600cc752b3ad0631fac70c7d1d5f119fb2da3b7f",
+      "key": "457526dfd8b4b30600cab6c1deba9890adb82802",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4816,7 +5012,7 @@
       "id": "VariableID:372:560",
       "name": "glass/navigation/dispersion",
       "remote": false,
-      "key": "aed349ae9a36f40c32cba17ddc1592263c928f77",
+      "key": "b2064741c1be82069c33b5b42c47ae93871aa5a9",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4833,7 +5029,7 @@
       "id": "VariableID:372:561",
       "name": "glass/navigation/frost",
       "remote": false,
-      "key": "2130d9e17e24d251d0e96b1160adaf77264954bd",
+      "key": "05c31e49c514645ff3562ef53e2cefb587daa2cd",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4850,7 +5046,7 @@
       "id": "VariableID:372:563",
       "name": "glass/navigation/light/-45",
       "remote": false,
-      "key": "dbcf40af55bed27e56fa69159419d488a0e32065",
+      "key": "4b7627d0fab3397293484f307641b22fa67cabca",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4867,7 +5063,7 @@
       "id": "VariableID:372:564",
       "name": "glass/navigation/light/0",
       "remote": false,
-      "key": "32e096a7e22deee56947c76c3d45bbdd045ee874",
+      "key": "49073ef869009ad46012ac92ea47525b79dbc121",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4884,7 +5080,7 @@
       "id": "VariableID:372:555",
       "name": "glass/navigation/refraction",
       "remote": false,
-      "key": "cb62585bb0080bad796a6649e754dd6244f5ee03",
+      "key": "11e694274fd18e445b30b89c9595061eb19e18ad",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4901,7 +5097,7 @@
       "id": "VariableID:372:562",
       "name": "glass/navigation/splay",
       "remote": false,
-      "key": "b5608bc35245594cfc8c7b1b22e7ea34ae3faf3a",
+      "key": "3881568ad09bf47fb3349e7845b46b2721ce1bc5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -4918,7 +5114,7 @@
       "id": "VariableID:55:6551",
       "name": "icon-library/huge",
       "remote": false,
-      "key": "2d3da42823ed93c56ebd192309dae6caf51f63f4",
+      "key": "473e020b6ce542f358c4fb7e8435beb4430e70db",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "BOOLEAN",
       "scopes": [
@@ -4935,7 +5131,7 @@
       "id": "VariableID:55:2050",
       "name": "icon-library/lucide",
       "remote": false,
-      "key": "f8875d5d192b7a92d4fc9ba949988010ecfd3b28",
+      "key": "c510b6e531eaf14ab5198b1868c9e96b4e5aaa4e",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "BOOLEAN",
       "scopes": [
@@ -4952,7 +5148,7 @@
       "id": "VariableID:55:6549",
       "name": "icon-library/phosphor",
       "remote": false,
-      "key": "10d7c02b22e77c50999bd2a83923269b3c67bc4a",
+      "key": "f67e54327b00bc472cfe974d039ca8a07688ee72",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "BOOLEAN",
       "scopes": [
@@ -4969,7 +5165,7 @@
       "id": "VariableID:55:6548",
       "name": "icon-library/remix",
       "remote": false,
-      "key": "e2756909f5e8ec8d321a72e37159ced0f44bb992",
+      "key": "37def93f2e70c5e63d981e44210483cfd68e6b59",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "BOOLEAN",
       "scopes": [
@@ -4986,7 +5182,7 @@
       "id": "VariableID:55:6550",
       "name": "icon-library/tabler",
       "remote": false,
-      "key": "80446e51132d6b1fe9a2bf9bf8821c8c6ab5eb80",
+      "key": "ba88214aa2b4e74e66ea791ab0251be572566f42",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "BOOLEAN",
       "scopes": [
@@ -5003,7 +5199,7 @@
       "id": "VariableID:427:569",
       "name": "layer/base",
       "remote": false,
-      "key": "4c93319457ba3bc8257f569a7d985a521cb8dc00",
+      "key": "4e5d21deb8c4821ed2538c9908760f8537026dcc",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -5018,7 +5214,7 @@
       "id": "VariableID:427:575",
       "name": "layer/navigation",
       "remote": false,
-      "key": "7c3ee8dba33cf57e935cdc2fd87de35e8bafe626",
+      "key": "d5c75c756ae21e04d52ab82bd49457352423748f",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -5033,7 +5229,7 @@
       "id": "VariableID:427:574",
       "name": "layer/panel",
       "remote": false,
-      "key": "fb5a9dbc57ace908be034739c51195e8faf413ee",
+      "key": "22ce3cdc3c8f32f9cec08f4577b8a9f233244266",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -5048,7 +5244,7 @@
       "id": "VariableID:427:576",
       "name": "layer/popover",
       "remote": false,
-      "key": "276328a66c54c9665b575f065dcfb45d83c85e44",
+      "key": "e107ba49f6dfc36f121ee2d2bdf996771705fe89",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -5063,7 +5259,7 @@
       "id": "VariableID:427:573",
       "name": "layer/scrim",
       "remote": false,
-      "key": "2f408f04580a03abe24e4955f5f115b79ba31c5f",
+      "key": "7532c8395302000495c7064256f273859caeb156",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [],
@@ -5078,11 +5274,11 @@
       "id": "VariableID:526:2944",
       "name": "layout/desktop/content-max-width",
       "remote": false,
-      "key": "60a4287fadf9f12fd82ce2f0bdf346a1d2b64367",
+      "key": "5cba2367d58918132becc39b8672219f7f4b82a5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "WIDTH_HEIGHT"
       ],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
@@ -5095,15 +5291,53 @@
       }
     },
     {
-      "id": "VariableID:526:2940",
-      "name": "layout/desktop/grid/columns",
+      "id": "VariableID:2073:4722",
+      "name": "layout/desktop/content-max-width-1062",
       "remote": false,
-      "key": "4b910161d2212b7ea3017f5cb6ab7f8ef0e1c918",
+      "key": "f1f3e8d873816d6479bc0e1ef1fae216dee174c5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
-        "ALL_SCOPES"
+        "WIDTH_HEIGHT"
       ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "9:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2073:4723"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2029:6875",
+      "name": "layout/desktop/content-max-width-658",
+      "remote": false,
+      "key": "c085a86d011ee2a2a655d88aed6f433483462b0f",
+      "variableCollectionId": "VariableCollectionId:9:3",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "WIDTH_HEIGHT"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": true,
+      "description": "",
+      "valuesByMode": {
+        "9:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:2029:6872"
+        }
+      }
+    },
+    {
+      "id": "VariableID:526:2940",
+      "name": "layout/desktop/grid/columns",
+      "remote": false,
+      "key": "1001adf887fc8514b5d019b98eba084555c00958",
+      "variableCollectionId": "VariableCollectionId:9:3",
+      "resolvedType": "FLOAT",
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5118,12 +5352,10 @@
       "id": "VariableID:526:2936",
       "name": "layout/desktop/grid/gutter",
       "remote": false,
-      "key": "211c9b34fbc45880e06a6a5986a2e472c628fb43",
+      "key": "4ad5ecaf4893c21983f91cc4c4d61ea1b9c17226",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "ALL_SCOPES"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5138,12 +5370,10 @@
       "id": "VariableID:526:2939",
       "name": "layout/desktop/grid/margin",
       "remote": false,
-      "key": "a58ddfdca375501f1569598ee5b6bbc2f4f681d8",
+      "key": "da155fb703357182d5b9fb35c038dccca782b903",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "ALL_SCOPES"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5158,12 +5388,10 @@
       "id": "VariableID:526:2938",
       "name": "layout/mobile/grid/columns",
       "remote": false,
-      "key": "94f6a9103df4fb3a4d92c9148f893d14008c17ea",
+      "key": "e030e6ed39d14edbfa8991c38a8656f6543c5e15",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "ALL_SCOPES"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5178,12 +5406,10 @@
       "id": "VariableID:526:2934",
       "name": "layout/mobile/grid/gutter",
       "remote": false,
-      "key": "2e8d76e44e6c520b712641ae2255d4c2dab6c65f",
+      "key": "d1e919e0305b149859943fd4ebb8f7d64827c4c8",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "ALL_SCOPES"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5198,12 +5424,10 @@
       "id": "VariableID:526:2935",
       "name": "layout/mobile/grid/margin",
       "remote": false,
-      "key": "3e76ea1202aa719d467f5e15f3dfa1ba80f89a8d",
+      "key": "32fd41ce0ffedd65f41ae787324c5309f5d388b1",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
-      "scopes": [
-        "ALL_SCOPES"
-      ],
+      "scopes": [],
       "codeSyntax": {},
       "hiddenFromPublishing": false,
       "description": "",
@@ -5218,7 +5442,7 @@
       "id": "VariableID:427:567",
       "name": "motion/delay/hover-close",
       "remote": false,
-      "key": "1dfa4a7656db38212f375c3b206cc2d55262c669",
+      "key": "44f332a37b4a9b990e74f71d995ad1ea5815f7d4",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5235,7 +5459,7 @@
       "id": "VariableID:427:566",
       "name": "motion/delay/hover-open",
       "remote": false,
-      "key": "1a4a6f487767a924903a24051765a0a10c362e5f",
+      "key": "69745cac87e8ad435e8bff7248f714caf94a10f9",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5252,7 +5476,7 @@
       "id": "VariableID:425:408",
       "name": "motion/delay/reveal",
       "remote": false,
-      "key": "b03a6038721f5220e356cbfb641df7638927eee1",
+      "key": "75e5ff6ca2bb53312a91f0ab9b15ac252ed2d0bc",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5269,7 +5493,7 @@
       "id": "VariableID:427:568",
       "name": "motion/delay/scrim",
       "remote": false,
-      "key": "ef257ad8758e5cc5602ea7888524435edf44f1e9",
+      "key": "b1f520c6d234213cb3242ed25fe44a49c7b45bb2",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5286,7 +5510,7 @@
       "id": "VariableID:425:404",
       "name": "motion/duration/120",
       "remote": false,
-      "key": "dff4c2ef8517e564bc4e06d2b34b63136c8b362b",
+      "key": "fdb8e6ca68dbe4729d424b7421f07cd0130412d1",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5303,7 +5527,7 @@
       "id": "VariableID:425:405",
       "name": "motion/duration/200",
       "remote": false,
-      "key": "7dc32e3ff9ebe77894596692a39462f0d7171f6f",
+      "key": "5c6a5b0ff0760625efa58b9c49efd94d90336c84",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5320,7 +5544,7 @@
       "id": "VariableID:427:561",
       "name": "motion/duration/240",
       "remote": false,
-      "key": "507c42a3c3adae2d61e1ec75f203a69e7a2cadeb",
+      "key": "3a488ebf1fcbfb6014c47c2c41174b3e1c86f0f3",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5337,7 +5561,7 @@
       "id": "VariableID:425:403",
       "name": "motion/duration/30",
       "remote": false,
-      "key": "7a29a6d9ffafcb7237013138e727236b3f4bd637",
+      "key": "1007a95b95435b7a2bd397e2990cde0e3adc8ada",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5354,7 +5578,7 @@
       "id": "VariableID:425:406",
       "name": "motion/duration/320",
       "remote": false,
-      "key": "564317af993e1001b78d8823e25373de63957e01",
+      "key": "cff5584a34c945fdbf29c71d5f5e1ae62f329270",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5371,7 +5595,7 @@
       "id": "VariableID:427:562",
       "name": "motion/duration/40",
       "remote": false,
-      "key": "86c835e47b9ffdae6795b716454c9efca45a9e6e",
+      "key": "5370e3d030b35f4ada84fae18b8585cde31f0ab2",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5388,7 +5612,7 @@
       "id": "VariableID:425:399",
       "name": "motion/easing/in",
       "remote": false,
-      "key": "d0e8a3aa4333a4b3b2084c1ec0c41405cd53f5b4",
+      "key": "f83ad887c8f020dafacbebc5a13ac11bebf585da",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "EASING",
       "scopes": [
@@ -5413,7 +5637,7 @@
       "id": "VariableID:425:401",
       "name": "motion/easing/out",
       "remote": false,
-      "key": "2b816fde3d84d5e750ec3c0935df66dedb80d3a7",
+      "key": "285a4e75d389c7a9bbaa719bc805c82a8792a487",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "EASING",
       "scopes": [
@@ -5438,7 +5662,7 @@
       "id": "VariableID:425:398",
       "name": "motion/easing/standard",
       "remote": false,
-      "key": "34dbda96bfa4ac0583fe708703d38319ff2588a0",
+      "key": "cccdc3399f6536cc8d30abd799422684a2451494",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "EASING",
       "scopes": [
@@ -5463,7 +5687,7 @@
       "id": "VariableID:425:407",
       "name": "motion/stagger",
       "remote": false,
-      "key": "be7b9a13a33ca096550177f7707493e16e0d7b7f",
+      "key": "cb81389f7b5b6ed53565a9621ad4b8682e7db23a",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "TIMING",
       "scopes": [
@@ -5480,7 +5704,7 @@
       "id": "VariableID:103:5760",
       "name": "shadow/popover/layer-1/blur",
       "remote": false,
-      "key": "60bba4c7468f3c13cbc136f995c78ca71cc7669e",
+      "key": "397ac35242e53418a680250529a9c6dddac2f72a",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5497,7 +5721,7 @@
       "id": "VariableID:103:5761",
       "name": "shadow/popover/layer-1/spread",
       "remote": false,
-      "key": "cc5e591bdf15fed7f50bbd894d00b77b4750b706",
+      "key": "5ac1c31d54d5b957f48633e48671509f1969a8e5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5514,7 +5738,7 @@
       "id": "VariableID:103:5759",
       "name": "shadow/popover/layer-1/y",
       "remote": false,
-      "key": "09e80a8834e97cbf0d62ca17a1e121b4e51a6e7b",
+      "key": "c250c976fa256b76f19a30e62714e166a97d6fd1",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5531,7 +5755,7 @@
       "id": "VariableID:104:5764",
       "name": "shadow/popover/layer-2/blur",
       "remote": false,
-      "key": "8850752f02c1f6ff97786b36a03602405c50ce7d",
+      "key": "e82b5770ffe3b2b1cafe024b25f16ad532ca2fad",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5548,7 +5772,7 @@
       "id": "VariableID:104:5765",
       "name": "shadow/popover/layer-2/spread",
       "remote": false,
-      "key": "a8d253107c5ca1e5f2f71dbe366095edabc1d3d5",
+      "key": "b1b8d288fc013a6a833f398e7616184e027e3b4c",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5565,7 +5789,7 @@
       "id": "VariableID:104:5763",
       "name": "shadow/popover/layer-2/y",
       "remote": false,
-      "key": "d3ff6c9eeb1b2cc45824923895a0c0cff0021bef",
+      "key": "10659e2eed6fc96eb44f706a48ee3bdaf5cf2816",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5582,7 +5806,7 @@
       "id": "VariableID:40:58",
       "name": "typography/body/body-lg/font-size",
       "remote": false,
-      "key": "ea430ea6ee1110120032bed84c28aeaf509016af",
+      "key": "091134f05f8d77306c59737b7530be4793c20a9b",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5602,7 +5826,7 @@
       "id": "VariableID:40:59",
       "name": "typography/body/body-lg/lh-normal",
       "remote": false,
-      "key": "6cece8162e6e89a1459076489930a82f45764b6d",
+      "key": "e89ebb70e55766a8e3faac16dbd8a032531b6104",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5619,7 +5843,7 @@
       "id": "VariableID:55:5503",
       "name": "typography/body/body-lg/tracking-tight",
       "remote": false,
-      "key": "06e4dfcb3acaeae75cf7b6c7d93c6cb214c9b9c8",
+      "key": "1287d0265f436f05ff780336ef219fd5cd12b0ca",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5636,7 +5860,7 @@
       "id": "VariableID:40:61",
       "name": "typography/body/body-md/font-size",
       "remote": false,
-      "key": "e5ad561f575f53507f12688125ab1a13ae5e286e",
+      "key": "151c612a3eba16d0712f069e43a1bc396ad398bf",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5656,7 +5880,7 @@
       "id": "VariableID:40:62",
       "name": "typography/body/body-md/lh-normal",
       "remote": false,
-      "key": "4b9ec98164c45bf1098c7552c64fc8a90d69b4ff",
+      "key": "7587e283d5cd7668181a4da14577461147f1c131",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5673,7 +5897,7 @@
       "id": "VariableID:55:5502",
       "name": "typography/body/body-md/tracking-tight",
       "remote": false,
-      "key": "3ae28396005e6121d62c03d1d33f70b421714ce8",
+      "key": "aef8c24e745eaeca1a4e3e89420c9c7a62e6ea59",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5690,7 +5914,7 @@
       "id": "VariableID:40:64",
       "name": "typography/body/body-sm/font-size",
       "remote": false,
-      "key": "f383d7500c1f2fac951a855713b9f1a1bf3d7be1",
+      "key": "f10de2102190a3efdcec88e351dc43644c93e0c9",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5710,7 +5934,7 @@
       "id": "VariableID:40:65",
       "name": "typography/body/body-sm/lh-normal",
       "remote": false,
-      "key": "844271508a382a7ad2e88bc3e26d1559af981586",
+      "key": "88ec08fdd1375dbba74fb8847f9eb319688c65a6",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5727,7 +5951,7 @@
       "id": "VariableID:40:66",
       "name": "typography/body/body-sm/tracking-tight",
       "remote": false,
-      "key": "0087094589f93dc53c80937805aacda07f95b08b",
+      "key": "8bb738829f4b5c204ecb84acae79d1ef900bd0ea",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5744,7 +5968,7 @@
       "id": "VariableID:40:57",
       "name": "typography/body/font-weight",
       "remote": false,
-      "key": "ee892f302b114f22c2be8c4f51a75db1d523896e",
+      "key": "644e02fced4bcb8c031cf62ba582da624970acf7",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5764,7 +5988,7 @@
       "id": "VariableID:40:69",
       "name": "typography/button/button-lg/font-size",
       "remote": false,
-      "key": "7e1ff735f16456b9ddfb95add3c1edc5fb9cf2cc",
+      "key": "e99c944cfc9e55e025a1511a8745442154737dc9",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5784,7 +6008,7 @@
       "id": "VariableID:40:70",
       "name": "typography/button/button-lg/lh-snug",
       "remote": false,
-      "key": "20a4e36b9c61777755d15a6da3cc761b307f47c7",
+      "key": "db68175b44fbdd35569bae593ca5a2da29a9d3d1",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5801,7 +6025,7 @@
       "id": "VariableID:40:72",
       "name": "typography/button/button-md/font-size",
       "remote": false,
-      "key": "c95e21211d1ad30674c28b0510d2e824aff59194",
+      "key": "118b8fd0f283c90ed1010668212c91221ad0419c",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5821,7 +6045,7 @@
       "id": "VariableID:40:73",
       "name": "typography/button/button-md/lh-snug",
       "remote": false,
-      "key": "1d82f3bbade8206c0c47482039248126a60642e5",
+      "key": "bd3d1ed5c5c8f330c84ed0699b5dcf4cc569ee78",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5838,7 +6062,7 @@
       "id": "VariableID:40:75",
       "name": "typography/button/button-sm/font-size",
       "remote": false,
-      "key": "1353146177de5d7bfb5b96cd52ee50f2f83c455e",
+      "key": "013ab411032d50494414231e490d2a99538c0619",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5858,7 +6082,7 @@
       "id": "VariableID:40:76",
       "name": "typography/button/button-sm/lh-snug",
       "remote": false,
-      "key": "6a9380e494d139286424c7aa1c053cded855a839",
+      "key": "aabcd6ac2371e2a553f6430040e4ec7b3ecfc373",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5875,7 +6099,7 @@
       "id": "VariableID:61:549",
       "name": "typography/button/button-xl/font-size",
       "remote": false,
-      "key": "9260f36ba8d8a9b15e62db882c7245a93e9f1d1b",
+      "key": "de1f4fa7ba110c8a093ceb9e9faf5e02229300a3",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5895,7 +6119,7 @@
       "id": "VariableID:61:550",
       "name": "typography/button/button-xl/lh-snug",
       "remote": false,
-      "key": "80082f8cb7805651e8d969fdfa51b44c6b55df0f",
+      "key": "3ce855f8dbe706bd2fccbb57d354b425eced3134",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5912,7 +6136,7 @@
       "id": "VariableID:40:68",
       "name": "typography/button/font-weight",
       "remote": false,
-      "key": "ca29d82f0e72099a920af7405019b9720791bc40",
+      "key": "9109f5c5f2f4687ca41a0a61bb76cdc79304df0e",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5932,7 +6156,7 @@
       "id": "VariableID:40:71",
       "name": "typography/button/tracking-normal",
       "remote": false,
-      "key": "681e46d45f7f9cbe7113cceed1cbded0de3f6545",
+      "key": "934b699420f7926b713044f5a00ef2573bfe6299",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5949,7 +6173,7 @@
       "id": "VariableID:40:86",
       "name": "typography/caption/font-size",
       "remote": false,
-      "key": "5daa3ef63b0481c662a305038463ada207219901",
+      "key": "47861303f6bf107a309313ef7c062700d201c901",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5969,7 +6193,7 @@
       "id": "VariableID:40:79",
       "name": "typography/caption/font-weight",
       "remote": false,
-      "key": "869014fb7ad50147e4b04eb37a8669ee1577f047",
+      "key": "34bd65f83830c561a7a7ca78425f320cb9193e19",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -5989,7 +6213,7 @@
       "id": "VariableID:40:87",
       "name": "typography/caption/lh-snug",
       "remote": false,
-      "key": "4ae36e98bbbf772e1eaa079de62fda2c325be61b",
+      "key": "f8b3b966a0f3d53d435a8a79cccb288552e7a486",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6006,7 +6230,7 @@
       "id": "VariableID:40:88",
       "name": "typography/caption/tracking-normal",
       "remote": false,
-      "key": "667b6027fceb7252e4a1307b817a928c158a1cf3",
+      "key": "fe6e9f8abb59044471c2434d6384fe7e26f162bd",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6023,7 +6247,7 @@
       "id": "VariableID:40:37",
       "name": "typography/display/display-lg/font-size",
       "remote": false,
-      "key": "fd65b841a5fdc8999feb99183011e47fe2551767",
+      "key": "b9ff046b018d32b269a1c169c2e37a22994dc35e",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6043,7 +6267,7 @@
       "id": "VariableID:40:38",
       "name": "typography/display/display-lg/lh-tighter",
       "remote": false,
-      "key": "cbc0bd1c5f4053cc13122cf4962e5f4e72b5d80a",
+      "key": "4a260494df195924e9747b3c1b35b3877fd377c3",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6060,7 +6284,7 @@
       "id": "VariableID:40:39",
       "name": "typography/display/display-lg/tracking-tight",
       "remote": false,
-      "key": "a7d3e8ad8cfa92e8fff61172bebfe233e1bde6eb",
+      "key": "c428d22c19af3e4ccccc7b657d521e858eb941d4",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6077,7 +6301,7 @@
       "id": "VariableID:40:40",
       "name": "typography/display/display-md/font-size",
       "remote": false,
-      "key": "baf9bc70a013a81628f62eb2a9c99c5ae4c17047",
+      "key": "42bb301ef0c453b4a7bedf56d96e36186738922d",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6097,7 +6321,7 @@
       "id": "VariableID:40:41",
       "name": "typography/display/display-md/lh-tighter",
       "remote": false,
-      "key": "a77ba89a17e2bafa254ff49ecbd05b2cd9e972ba",
+      "key": "e4e956f9563c244955f5b29f22dff34bcb60aff8",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6114,7 +6338,7 @@
       "id": "VariableID:40:42",
       "name": "typography/display/display-md/tracking-tight",
       "remote": false,
-      "key": "b1206af49c293666eb8df934ede32603bd70aa20",
+      "key": "e81433af4d980c700dfe3a69ac0f401a6222db5a",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6131,7 +6355,7 @@
       "id": "VariableID:40:43",
       "name": "typography/display/display-sm/font-size",
       "remote": false,
-      "key": "87b4f841ff36a134782fe7d564e9c7e3404a8cf7",
+      "key": "95e89ee190f1b93dd0c56fe1e0333462ddd522d6",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6151,7 +6375,7 @@
       "id": "VariableID:40:44",
       "name": "typography/display/display-sm/lh-tighter",
       "remote": false,
-      "key": "331fd09003c7e406c32b27b97b66faa906af4125",
+      "key": "d57998c1155d925abed18cb5414fe27656624247",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6168,7 +6392,7 @@
       "id": "VariableID:40:45",
       "name": "typography/display/display-sm/tracking-tight",
       "remote": false,
-      "key": "71765c97d96baf4908f4ee254749275feafc89c0",
+      "key": "ca12c70918fb7b148c2e98c5a646cf69785a2d2f",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6185,7 +6409,7 @@
       "id": "VariableID:40:36",
       "name": "typography/display/font-weight",
       "remote": false,
-      "key": "9371872acf4d1ebd8397dffb738efa27e1a07188",
+      "key": "e452544efbe6486e7d78ca43193d575c68b27d6b",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6205,7 +6429,7 @@
       "id": "VariableID:34:1806",
       "name": "typography/font-family",
       "remote": false,
-      "key": "87af4cabd9f8b1fe90b1f634c96678184945957a",
+      "key": "13e16becb7ed999b457364f52a1e6bdd297b9ec3",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "STRING",
       "scopes": [
@@ -6225,7 +6449,7 @@
       "id": "VariableID:34:1813",
       "name": "typography/heading/font-weight",
       "remote": false,
-      "key": "808c9f470635dc44f467b4f93d379c63a10751fc",
+      "key": "937cdaa41a6be64f1c2c1743be17b6aa33d85dc2",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6245,7 +6469,7 @@
       "id": "VariableID:34:1804",
       "name": "typography/heading/heading-lg/font-size",
       "remote": false,
-      "key": "6dce2bc758305374af770cb76d55f16a67f29749",
+      "key": "67fb3ebb37ca90006abff1498d0151dec9b769e5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6265,7 +6489,7 @@
       "id": "VariableID:40:29",
       "name": "typography/heading/heading-lg/lh-tight",
       "remote": false,
-      "key": "a5db38d2af1ed217d178d5da9a797444008f0fd0",
+      "key": "634e484e716504fd6e434250f6b9cfae8cce57de",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6282,7 +6506,7 @@
       "id": "VariableID:39:13",
       "name": "typography/heading/heading-lg/tracking-tight",
       "remote": false,
-      "key": "2390bb0843c86ec57a42745da9746f75c3f4f79c",
+      "key": "de133b76f55f0636834a89505cb892ba9484b446",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6299,7 +6523,7 @@
       "id": "VariableID:34:1808",
       "name": "typography/heading/heading-md/font-size",
       "remote": false,
-      "key": "64e5bbdba932fafcd5ed6fb1c01204a091d39e54",
+      "key": "524c3979d702dff08b47c84112cfd2e86658b9b0",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6319,7 +6543,7 @@
       "id": "VariableID:40:26",
       "name": "typography/heading/heading-md/lh-tight",
       "remote": false,
-      "key": "3c8568fa750f1d7923a4414cfb6f7705caa19e31",
+      "key": "3ffdc602f5a2124519b2295a7c76fc2bb47fbe8d",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6336,7 +6560,7 @@
       "id": "VariableID:39:10",
       "name": "typography/heading/heading-md/tracking-tight",
       "remote": false,
-      "key": "eef22580b0bf9325b95db7f0b2a2c1edb6fe27c8",
+      "key": "7a385905ec80e0d51c9f6fd1c4378500ee215207",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6353,7 +6577,7 @@
       "id": "VariableID:34:1803",
       "name": "typography/heading/heading-sm/font-size",
       "remote": false,
-      "key": "332720e6268369102b4acbd15067a4f2fa1381e2",
+      "key": "ff19eed9015bb5ef9b6a00fe71fe63f568d45d63",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6373,7 +6597,7 @@
       "id": "VariableID:34:1814",
       "name": "typography/heading/heading-sm/lh-tight",
       "remote": false,
-      "key": "8d377e0b53392e7385393e40b304a83cec3ff9be",
+      "key": "819be58172c1032ca7415392b8df3752e631467c",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6390,7 +6614,7 @@
       "id": "VariableID:34:1815",
       "name": "typography/heading/heading-sm/tracking-tight",
       "remote": false,
-      "key": "05942c3e2d8f26c3bb28b7ce4c4a259392493e39",
+      "key": "d0d361b413f48baa2e05f281d4089c147dd5a0e3",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6407,7 +6631,7 @@
       "id": "VariableID:34:1805",
       "name": "typography/heading/heading-xl/font-size",
       "remote": false,
-      "key": "555f293c63d87f9871333c7d4dc53f035a7f623e",
+      "key": "ea9148266c199e1da29400a3248bb0ad98158fd4",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6427,7 +6651,7 @@
       "id": "VariableID:40:32",
       "name": "typography/heading/heading-xl/lh-tight",
       "remote": false,
-      "key": "77de6285219a9755b8afc8af3d2df4aa9640fc3b",
+      "key": "161fec1f76dd0673f20badf50168f23569c5e5cc",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6444,7 +6668,7 @@
       "id": "VariableID:39:19",
       "name": "typography/heading/heading-xl/tracking-tight",
       "remote": false,
-      "key": "6c4a3ff61628bd8bf7606816460c68243d5fb2a2",
+      "key": "72112af1d8c56bbf04f153f56136fce6752dca5d",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6458,10 +6682,64 @@
       }
     },
     {
-      "id": "VariableID:649:3538",
+      "id": "VariableID:2066:7984",
+      "name": "typography/heading/heading-xs/font-size",
+      "remote": false,
+      "key": "345482ef825b054ac48dcefc674ebb7befaa392b",
+      "variableCollectionId": "VariableCollectionId:9:3",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "FONT_SIZE"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:1": {
+          "type": "VARIABLE_ALIAS",
+          "id": "VariableID:9:1649"
+        }
+      }
+    },
+    {
+      "id": "VariableID:2066:7985",
+      "name": "typography/heading/heading-xs/lh-tight",
+      "remote": false,
+      "key": "00f35d03d8f980382ac6cde5654dd7eed623d945",
+      "variableCollectionId": "VariableCollectionId:9:3",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "LINE_HEIGHT"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:1": 17.5
+      }
+    },
+    {
+      "id": "VariableID:2066:7986",
+      "name": "typography/heading/heading-xs/tracking-tight",
+      "remote": false,
+      "key": "01ed7251bddfe3847931f3d461c4a50898a51547",
+      "variableCollectionId": "VariableCollectionId:9:3",
+      "resolvedType": "FLOAT",
+      "scopes": [
+        "LETTER_SPACING"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:1": -0.3499999940395355
+      }
+    },
+    {
+      "id": "VariableID:2029:6863",
       "name": "typography/heading/heading-xxs/font-size",
       "remote": false,
-      "key": "168a3eb1c685af9a4c24b2eecfdb870981fd1139",
+      "key": "26c952469561788a06651990162b85ca165ad225",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6478,10 +6756,10 @@
       }
     },
     {
-      "id": "VariableID:649:3539",
+      "id": "VariableID:2029:6864",
       "name": "typography/heading/heading-xxs/lh-tight",
       "remote": false,
-      "key": "2c2aace0a90f3851e36782eedcb22adf99baf7d7",
+      "key": "70e887282c2934db1ff17eb81dd2f7e28752de0c",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6495,10 +6773,10 @@
       }
     },
     {
-      "id": "VariableID:649:3540",
+      "id": "VariableID:2029:6865",
       "name": "typography/heading/heading-xxs/tracking-tight",
       "remote": false,
-      "key": "7fbe9f6293190be0e4566e9a0a666fb9456931ef",
+      "key": "761b8b50016c7f26de8641d79bf9578229842bc6",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6515,7 +6793,7 @@
       "id": "VariableID:118:8604",
       "name": "typography/label/font-weight",
       "remote": false,
-      "key": "f2f9ad434c235253a78b197039dab469647bbdec",
+      "key": "d8920eee9e0ab4ee4b4c6ab624ca4f908bd9ca02",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6535,7 +6813,7 @@
       "id": "VariableID:118:8607",
       "name": "typography/label/label-lg/font-size",
       "remote": false,
-      "key": "c2c4a4fb91a9b25edb52e2fe89286f00a2a232a6",
+      "key": "520957916e99f1d76b24258a2c46282b2732827b",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6555,7 +6833,7 @@
       "id": "VariableID:118:8609",
       "name": "typography/label/label-lg/lh-snug",
       "remote": false,
-      "key": "913ed6d918061f07d245145ece62cfacb72f5d34",
+      "key": "92ebc4c5f13a223fba20061b499530171d223629",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6572,7 +6850,7 @@
       "id": "VariableID:118:8614",
       "name": "typography/label/label-lg/tracking-[-0,125]",
       "remote": false,
-      "key": "250fef64fb9aff17f2df71582421663d8d785596",
+      "key": "55ba14c8b484e5750f1f2cd20c3d17712bfe270b",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6589,7 +6867,7 @@
       "id": "VariableID:118:8610",
       "name": "typography/label/label-md/font-size",
       "remote": false,
-      "key": "05878010425e13b03f25d5d6759537617770d9a0",
+      "key": "f3bf033f62046fe59159327b985c96c6c82c27cb",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6609,7 +6887,7 @@
       "id": "VariableID:118:8611",
       "name": "typography/label/label-md/lh-snug",
       "remote": false,
-      "key": "d9147830ce2b76053ca9c383379555d63210a953",
+      "key": "44c8656d97e522b7328283e9cde36d09104cca12",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6626,7 +6904,7 @@
       "id": "VariableID:118:8622",
       "name": "typography/label/label-md/tracking-[-0,125]",
       "remote": false,
-      "key": "b5a083bb7511cef9f9b3a8bbc7a8a40e7875d2d0",
+      "key": "9dbd460e36a7232c9d598938068dcd4e1dfc4176",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6643,7 +6921,7 @@
       "id": "VariableID:118:8612",
       "name": "typography/label/label-sm/font-size",
       "remote": false,
-      "key": "c08b2c91d842ecf3538fa1822d205fbaacd7ade3",
+      "key": "a2f8322a717e4f00dc24b4df9b543076726338fa",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6663,7 +6941,7 @@
       "id": "VariableID:118:8613",
       "name": "typography/label/label-sm/lh-snug",
       "remote": false,
-      "key": "8b80572f6b2ed87c7414fb04b346f09832fd8e7f",
+      "key": "37dd4f9a1d3fe626ff215aa1fff1817fbdcc3622",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6680,7 +6958,7 @@
       "id": "VariableID:118:8623",
       "name": "typography/label/label-sm/tracking-[-0,125]",
       "remote": false,
-      "key": "32b552b6a7df7cb848937211da5ce9c23deb2ab0",
+      "key": "882002b1a8b257d30dcd55746096459d63ad4276",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6697,7 +6975,7 @@
       "id": "VariableID:118:8605",
       "name": "typography/label/label-xl/font-size",
       "remote": false,
-      "key": "7bc2ca6a6370672a209952b74218fca5fa18dfb4",
+      "key": "5b42a6b833963b28beb0b7d9e7b281ed47d292c5",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6717,7 +6995,7 @@
       "id": "VariableID:118:8606",
       "name": "typography/label/label-xl/lh-snug",
       "remote": false,
-      "key": "c29db3a7d1e09c5e112dc29ddc64d3b7b5374453",
+      "key": "17f8cb3e677d470afeb8bb4c91397b9fbb45147a",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [
@@ -6734,7 +7012,7 @@
       "id": "VariableID:118:8617",
       "name": "typography/label/label-xl/tracking-[-0,125]",
       "remote": false,
-      "key": "ae28545d36b805a4a12007477ef2252c1da41443",
+      "key": "5553bb1c7322c6fee3f7f9aa0e90e816c5065b99",
       "variableCollectionId": "VariableCollectionId:9:3",
       "resolvedType": "FLOAT",
       "scopes": [

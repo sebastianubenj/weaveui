@@ -258,7 +258,7 @@ export const RecoveryLogoutRetry: Story = {
 
 export const BagAfterLogin: Story = {
   beforeEach: () => {
-    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "tp-7", quantity: 2 }]));
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 2 }]));
   },
   play: async ({ canvasElement }) => {
     await submitLogin(canvasElement);

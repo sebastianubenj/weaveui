@@ -148,9 +148,9 @@ export function FileUpload({
          data-[dragging=true]:[--file-upload-stroke-width:var(--primitives-stroke-width-stroke-2)]
          data-[dragging=true]:[--file-upload-stroke:var(--semantics-colors-border-strong)]
          data-[dragging=true]:[background-color:var(--semantics-colors-interaction-file-upload-drag-over)]
-         intent-keyboard:data-[focused=true]:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+         intent-keyboard:data-[focused=true]:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
          intent-keyboard:data-[focused=true]:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
-         intent-keyboard:focus-within:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+         intent-keyboard:focus-within:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
          intent-keyboard:focus-within:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
          has-disabled:[--file-upload-stroke:var(--semantics-colors-border-default)]
          has-disabled:opacity-(--primitives-opacity-opacity-45)

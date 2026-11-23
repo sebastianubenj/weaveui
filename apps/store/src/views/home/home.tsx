@@ -19,18 +19,21 @@ interface ProductGroup {
 }
 
 const groups = {
-  synthesizers: {
-    heading: "Synthesizers",
-    productIds: ["op-1-field", "op-xy"],
+  synths: {
+    heading: "Synths & Samplers",
+    productIds: ["sp-16", "a01", "gx-24", "sp-40"],
   },
-  samplers: { heading: "Samplers", productIds: ["ep-40", "ko-ii-fx-mic"] },
+  controllers: {
+    heading: "Controllers & Mixers",
+    productIds: ["fx-32", "mx-4"],
+  },
   recording: {
-    heading: "Recording & Mixing",
-    productIds: ["tp-7", "cm-15", "tx-6"],
+    heading: "Mics & Recorders",
+    productIds: ["mk-20", "fx-mic", "ar-4"],
   },
-  accessories: {
-    heading: "Accessories & Audio",
-    productIds: ["ep-2350", "ko-pedal", "life-is-fantastic"],
+  speakers: {
+    heading: "Speakers",
+    productIds: ["sp-12"],
   },
 } satisfies Record<string, ProductGroup>;
 
@@ -41,10 +44,13 @@ type HomeMenu = { label: string } & (
 
 const menus: HomeMenu[] = [
   { label: "Products", groups: Object.values(groups) },
-  { label: "Services", links: ["Repairs", "Maintenance", "Customization"] },
   {
     label: "Discover",
     links: ["Collections", "Collaborations", "Stories", "Artists"],
+  },
+  {
+    label: "Learn",
+    links: ["Getting started", "Product setup", "Care & maintenance"],
   },
   {
     label: "Support",
@@ -86,7 +92,7 @@ function MenuContent({
         {menu.groups ? (
           <ProductLinks groups={menu.groups} onSelect={onSelect} />
         ) : (
-          <NavigationSection heading={`Explore ${menu.label}`}>
+          <NavigationSection heading={menu.label === "Learn" ? "Learn" : `Explore ${menu.label}`}>
             {links}
           </NavigationSection>
         )}
@@ -107,13 +113,9 @@ function ProductLinks({
   return sections.map((group) => (
     <NavigationSection
       key={group.heading}
-      heading={
-        mobile && group.heading === groups.synthesizers.heading
-          ? undefined
-          : group.heading
-      }
-      size={group.heading === groups.synthesizers.heading ? "lg" : "sm"}
-      className={mobile ? "[&>h2]:pl-(--primitives-spacing-8)" : undefined}
+      heading={group.heading}
+      size={mobile || group.heading === groups.synths.heading ? "lg" : "sm"}
+      className={mobile ? "px-0 first:mt-(--primitives-spacing-4) last:mb-(--primitives-spacing-12) [&>h2]:px-(--primitives-spacing-8)" : undefined}
     >
       {group.productIds.flatMap((id) => {
         const product = PRODUCTS.find((candidate) => candidate.id === id);
@@ -133,7 +135,6 @@ function ProductLinks({
                   event.preventDefault();
                   onSelect(id);
                 }}
-                className={mobile ? "pl-(--primitives-spacing-8)" : undefined}
               >
                 {product.name}
               </NavigationMenuLink>,

@@ -21,18 +21,18 @@ test("retains product quantities after a new page loads", async () => {
   vi.resetModules();
   const nextPage = await import("./bag");
   expect(nextPage.readBag()).toEqual([
-    { productId: "tp-7", quantity: 2 }, { productId: "op-1-field", quantity: 1 },
+    { productId: "sp-16", quantity: 2 }, { productId: "fx-32", quantity: 1 },
   ]);
 });
 
 test("ignores unknown products, duplicates and invalid quantities from storage", async () => {
   storage.set("weaveui-bag-v1", JSON.stringify([
-    { productId: "tp-7", quantity: 2 }, { productId: "tp-7", quantity: 50 },
-    { productId: "unknown", quantity: 1 }, { productId: "op-xy", quantity: -1 },
-    { productId: "tx-6", quantity: "2" }, null,
+    { productId: "sp-16", quantity: 2 }, { productId: "sp-16", quantity: 50 },
+    { productId: "unknown", quantity: 1 }, { productId: "a01", quantity: -1 },
+    { productId: "mx-4", quantity: "2" }, null,
   ]));
   const { readBag } = await import("./bag");
-  expect(readBag()).toEqual([{ productId: "tp-7", quantity: 2 }]);
+  expect(readBag()).toEqual([{ productId: "sp-16", quantity: 2 }]);
 });
 
 test("recovers from corrupt data and keeps working when writes are blocked", async () => {
@@ -44,5 +44,5 @@ test("recovers from corrupt data and keeps working when writes are blocked", asy
     setItem: () => { throw new Error("Quota exceeded"); },
   });
   addProductToBag(PRODUCTS[0]!);
-  expect(readBag()).toEqual([{ productId: "tp-7", quantity: 1 }]);
+  expect(readBag()).toEqual([{ productId: "sp-16", quantity: 1 }]);
 });

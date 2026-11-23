@@ -35,7 +35,7 @@ async function playHome(canvasElement: HTMLElement) {
   await waitFor(() =>
     expect(body.getByRole("heading", { name: "Bag" })).toBeVisible(),
   );
-  await expect(body.getAllByText("TP-7 aluminum").length).toBeGreaterThan(1);
+  await expect(body.getAllByText("SP-16 Black").length).toBeGreaterThan(1);
 
   await userEvent.keyboard("{Escape}");
   await waitFor(() =>
@@ -71,7 +71,7 @@ export const Mobile: Story = {
     await waitFor(() =>
       expect(canvas.getByRole("heading", { name: "Bag" })).toBeVisible(),
     );
-    await expect(canvas.getAllByText("TP-7 aluminum").length).toBeGreaterThan(1);
+    await expect(canvas.getAllByText("SP-16 Black").length).toBeGreaterThan(1);
 
     await userEvent.click(canvas.getByRole("button", { name: "Close" }));
     await waitFor(() =>
@@ -86,8 +86,11 @@ export const BrowseProduct: Story = {
     const canvas = within(canvasElement);
     const body = within(document.body);
     await userEvent.hover(canvas.getByRole("link", { name: "Products" }));
-    await userEvent.click(await body.findByRole("link", { name: "OP-XY" }));
-    await waitFor(() => expect(canvas.getByRole("article", { name: "OP-XY" })).toHaveFocus());
+    for (const name of ["Synths & Samplers", "Controllers & Mixers", "Mics & Recorders", "Speakers"]) {
+      await waitFor(() => expect(body.getByRole("heading", { name })).toBeVisible());
+    }
+    await userEvent.click(await body.findByRole("link", { name: "A01 Synth Pad" }));
+    await waitFor(() => expect(canvas.getByRole("article", { name: "A01 Synth Pad" })).toHaveFocus());
     await expect(canvas.queryByRole("button", { name: "Products menu" })).toHaveAttribute("aria-expanded", "false");
   },
 };
@@ -98,8 +101,47 @@ export const BrowseProductMobile: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(canvas.getByRole("button", { name: "Menu" }));
     await userEvent.click(await canvas.findByRole("link", { name: "Products" }));
-    await userEvent.click(await canvas.findByRole("link", { name: "OP-XY" }));
-    await waitFor(() => expect(canvas.getByRole("article", { name: "OP-XY" })).toHaveFocus());
+    await waitFor(() => expect(canvas.getByRole("heading", { name: "Synths & Samplers" })).toBeVisible());
+    await expect(canvas.getByRole("button", { name: "Back" })).toBeVisible();
+    await expect(canvas.getByRole("heading", { name: "Speakers" })).toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Back" }));
+    await userEvent.click(await canvas.findByRole("link", { name: "Products" }));
+    await userEvent.click(await canvas.findByRole("link", { name: "A01 Synth Pad" }));
+    await waitFor(() => expect(canvas.getByRole("article", { name: "A01 Synth Pad" })).toHaveFocus());
     await waitFor(() => expect(canvas.queryByRole("button", { name: "Close" })).not.toBeInTheDocument());
+  },
+};
+
+export const BrowseLearn: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await document.fonts.ready;
+    const mark = canvas.getByRole("link", { name: "Home" }).getBoundingClientRect();
+    const bag = canvas.getByRole("button", { name: "Bag" }).getBoundingClientRect();
+    await expect(bag.right - mark.left).toBeCloseTo(658, 0);
+    await userEvent.hover(canvas.getByRole("link", { name: "Learn" }));
+    await waitFor(() => expect(body.getByRole("heading", { name: "Learn" })).toBeVisible());
+    for (const name of ["Getting started", "Product setup", "Care & maintenance"]) {
+      await waitFor(() => expect(body.getByRole("link", { name })).toBeVisible());
+    }
+  },
+};
+
+export const BrowseLearnMobile: Story = {
+  globals: { viewport: { value: "mobile2", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Menu" }));
+    const names = ["Products", "Discover", "Learn", "Support", "About"];
+    const links = canvas.getAllByRole("link").filter((link) => names.includes(link.textContent ?? ""));
+    await expect(links.map((link) => link.textContent)).toEqual(names);
+    await userEvent.click(canvas.getByRole("link", { name: "Learn" }));
+    for (const name of ["Getting started", "Product setup", "Care & maintenance"]) {
+      await waitFor(() => expect(canvas.getByRole("link", { name })).toBeVisible());
+    }
+    await userEvent.click(canvas.getByRole("button", { name: "Back" }));
+    await waitFor(() => expect(canvas.getByRole("link", { name: "Learn" })).toBeVisible());
   },
 };

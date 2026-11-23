@@ -45,7 +45,7 @@ export function Input({
          has-[[data-slot=input]:focus]:px-(--primitives-spacing-out-of-scale-2-25)
          has-[[data-slot=input]:focus]:[border-color:var(--semantics-colors-border-strong)]
          has-aria-invalid:has-[[data-slot=input]:focus]:[border-color:var(--semantics-colors-border-destructive)]
-         intent-keyboard:has-[[data-slot=input]:focus]:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+         intent-keyboard:has-[[data-slot=input]:focus]:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
          intent-keyboard:has-[[data-slot=input]:focus]:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
          has-disabled:opacity-(--primitives-opacity-opacity-40)
          [&_svg]:pointer-events-none [&_svg]:shrink-0

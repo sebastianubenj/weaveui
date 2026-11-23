@@ -66,7 +66,7 @@
     --weaveui-destructive: var(--semantics-colors-background-destructive-op10);
     --weaveui-destructive-foreground: var(--semantics-colors-foreground-destructive);
     --weaveui-border: var(--semantics-colors-border-default);
-    --weaveui-ring: var(--semantics-colors-border-ring-focus);
+    --weaveui-ring: var(--semantics-colors-border-highlight);
     --weaveui-input: var(--semantics-colors-border-default);
 
     --weaveui-muted: var(--semantics-colors-background-subtle);

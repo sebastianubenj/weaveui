@@ -38,7 +38,7 @@ export function Link({
          rounded-(--primitives-radius-rounded-sm) outline-none
          hover:no-underline
          active:underline
-         focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+         focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
          focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
          aria-disabled:pointer-events-none aria-disabled:cursor-default
          aria-disabled:underline

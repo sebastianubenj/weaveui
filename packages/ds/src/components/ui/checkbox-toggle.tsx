@@ -74,7 +74,7 @@ export function CheckboxToggle({
           border-solid border-(length:--primitives-stroke-width-stroke)
           [border-color:var(--semantics-colors-border-default)]
           outline-none
-          focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+          focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
           focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
           checked:[background-color:var(--semantics-colors-background-primary)]
           checked:border-0

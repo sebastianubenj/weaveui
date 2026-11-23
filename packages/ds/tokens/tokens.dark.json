@@ -62,6 +62,21 @@
             }
           }
         },
+        "info-op10": {
+          "type": "color",
+          "value": "#0074e81a",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "collection": "Semantic Colors",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "variableId": "VariableID:2038:12497",
+              "exportKey": "variables"
+            }
+          }
+        },
         "page": {
           "type": "color",
           "value": "{primitives.colors.black}",
@@ -211,7 +226,7 @@
             }
           }
         },
-        "ring-focus": {
+        "highlight": {
           "type": "color",
           "value": "{primitives.colors.blue.500}",
           "extensions": {
@@ -252,6 +267,20 @@
               "exportKey": "variables"
             }
           }
+        },
+        "transparent": {
+          "type": "color",
+          "value": "#40404000",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "collection": "Semantic Colors",
+              "scopes": [
+                "STROKE_COLOR"
+              ],
+              "variableId": "VariableID:2029:6859",
+              "exportKey": "variables"
+            }
+          }
         }
       },
       "foreground": {
@@ -289,7 +318,7 @@
         },
         "highlight": {
           "type": "color",
-          "value": "{primitives.colors.cyan.500}",
+          "value": "{primitives.colors.blue.500}",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "collection": "Semantic Colors",
@@ -331,6 +360,22 @@
                 "STROKE_COLOR"
               ],
               "variableId": "VariableID:450:1657",
+              "exportKey": "variables"
+            }
+          }
+        },
+        "subtle-on-subtle": {
+          "type": "color",
+          "value": "{primitives.colors.gray.500}",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "collection": "Semantic Colors",
+              "scopes": [
+                "SHAPE_FILL",
+                "TEXT_FILL",
+                "STROKE_COLOR"
+              ],
+              "variableId": "VariableID:2066:11879",
               "exportKey": "variables"
             }
           }

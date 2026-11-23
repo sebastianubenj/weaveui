@@ -43,7 +43,7 @@ export function Textarea({ className, error = false, disabled, ref, ...props }: 
           focus:[padding:var(--primitives-spacing-out-of-scale-1-75)_var(--primitives-spacing-out-of-scale-1-5)_var(--primitives-spacing-out-of-scale-1-5)_var(--primitives-spacing-out-of-scale-2-25)]
           focus:[border-color:var(--semantics-colors-border-strong)]
           aria-invalid:focus:[border-color:var(--semantics-colors-border-destructive)]
-          intent-keyboard:focus:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-ring-focus)]
+          intent-keyboard:focus:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
           intent-keyboard:focus:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]
           disabled:cursor-default
           [&::-webkit-resizer]:opacity-0`}

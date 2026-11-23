@@ -14,9 +14,12 @@ const MEDIA_ASPECT = {
 
 const headingClassName = `m-0 w-full overflow-hidden text-ellipsis whitespace-nowrap font-sans
   [font-weight:var(--semantics-typography-heading-font-weight)]
-  text-(length:--semantics-typography-heading-heading-lg-font-size)
-  leading-(--semantics-typography-heading-heading-lg-lh-tight)
-  tracking-(--semantics-typography-heading-heading-lg-tracking-tight)
+  text-(length:--semantics-typography-heading-heading-md-font-size)
+  leading-(--semantics-typography-heading-heading-md-lh-tight)
+  tracking-(--semantics-typography-heading-heading-md-tracking-tight)
+  md:text-(length:--semantics-typography-heading-heading-lg-font-size)
+  md:leading-(--semantics-typography-heading-heading-lg-lh-tight)
+  md:tracking-(--semantics-typography-heading-heading-lg-tracking-tight)
   [color:var(--semantics-colors-foreground-default)]`;
 
 export type ProductCardLayout = keyof typeof MEDIA_ASPECT;
