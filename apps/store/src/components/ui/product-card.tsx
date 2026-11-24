@@ -66,6 +66,7 @@ export interface ProductCardProps
   actionLabel?: string;
   onAction?: React.MouseEventHandler<HTMLButtonElement>;
   showAction?: boolean;
+  href?: string;
 }
 
 export function ProductCard({
@@ -78,6 +79,7 @@ export function ProductCard({
   actionLabel = "Add",
   onAction,
   showAction = true,
+  href,
   ref,
   ...props
 }: ProductCardProps) {
@@ -95,7 +97,7 @@ export function ProductCard({
         className={productCardMediaClassName}
         style={{ aspectRatio: MEDIA_ASPECT[layout] }}
       >
-        <img src={src} alt={alt} style={IMAGE_BOX[layout]} />
+        {href ? <a href={href} aria-label={`View ${name}`} className="absolute inset-0"><img src={src} alt="" style={IMAGE_BOX[layout]} /></a> : <img src={src} alt={alt} style={IMAGE_BOX[layout]} />}
       </div>
       <div className="flex w-full items-center justify-between gap-(--primitives-spacing-2)">
         <div className="flex min-w-0 flex-1 flex-col items-start gap-(--primitives-spacing-1)">

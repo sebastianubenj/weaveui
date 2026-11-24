@@ -27,7 +27,7 @@ export function HomeProducts({ onAction }: HomeProductsProps) {
     <div
       className="flex min-h-dvh w-full flex-col items-center px-(--semantics-layout-mobile-grid-margin) md:px-(--primitives-spacing-8) [background-color:var(--semantics-colors-background-page)]"
     >
-      <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) flex-col items-start pb-(--primitives-spacing-16)">
+      <div className="flex w-full max-w-(--semantics-layout-desktop-content-max-width) flex-col items-start pb-(--primitives-spacing-32)">
         <div className="flex w-full items-start py-(--primitives-spacing-4)">
           <h1 id="products" className={headingClassName}>All products</h1>
         </div>
@@ -46,6 +46,7 @@ export function HomeProducts({ onAction }: HomeProductsProps) {
               )}
               layout={isDesktop ? product.layout : "square"}
               name={product.name}
+              href={`/products/${product.id}`}
               price={product.price}
               src={product.src}
               alt={product.alt}

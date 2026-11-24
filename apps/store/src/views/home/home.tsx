@@ -11,9 +11,11 @@ import {
 } from "@weaveui/ds";
 import { useAuth } from "@/lib/auth-context";
 import { addProductToBag, useBag, useBagUnitCount } from "@/lib/bag";
-import { PRODUCTS } from "@/lib/catalog";
+import { PRODUCTS, type HomeProduct } from "@/lib/catalog";
+import { ProductDetailContent } from "@/patterns/product-detail-content/product-detail-content";
 import { HomeProducts } from "@/patterns/home-products/home-products";
 import { NavigationBagLoaded } from "@/components/ui/navigation-bag-loaded";
+import { HomeFooter } from "./home-footer";
 
 interface ProductGroup {
   heading: string;
@@ -125,7 +127,7 @@ function ProductLinks({
           ? [
               <NavigationMenuLink
                 key={id}
-                href={`#product-${id}`}
+                href={`/products/${id}`}
                 onClick={(event) => {
                   if (
                     event.metaKey ||
@@ -149,9 +151,11 @@ function ProductLinks({
 
 export interface HomeProps {
   onReview?: () => void;
+  product?: HomeProduct;
+  onSelectProduct?: (id: string) => void;
 }
 
-export function Home({ onReview }: HomeProps) {
+export function Home({ onReview, product, onSelectProduct }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
   const bagUnitCount = useBagUnitCount();
@@ -169,7 +173,8 @@ export function Home({ onReview }: HomeProps) {
   function selectProduct(id: string) {
     setOpen(false);
     setValue(null);
-    setDestination({ id });
+    if (onSelectProduct) onSelectProduct(id);
+    else setDestination({ id });
   }
 
   useEffect(() => {
@@ -195,7 +200,7 @@ export function Home({ onReview }: HomeProps) {
             <ul className="m-0 mt-(--primitives-spacing-4) flex list-none flex-col gap-(--primitives-spacing-4) p-0">
               {results.map((product) => (
                 <li key={product.id}>
-                  <a href={`#product-${product.id}`} onClick={(event) => {
+                  <a href={`/products/${product.id}`} onClick={(event) => {
                     if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
                     event.preventDefault();
                     selectProduct(product.id);
@@ -269,8 +274,9 @@ export function Home({ onReview }: HomeProps) {
             {error}
           </FormAlert>
         ) : null}
-        <HomeProducts onAction={addProductToBag} />
+        {product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
       </main>
+      <HomeFooter />
     </>
   );
 }

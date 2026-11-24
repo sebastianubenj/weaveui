@@ -124,6 +124,17 @@ export const Desktop: Story = {
   },
 };
 
+export const Footer: Story = {
+  play: async ({ canvasElement }) => {
+    const footer = within(canvasElement).getByRole("contentinfo");
+    const link = within(footer).getByRole("link", { name: "Getting started" });
+    const location = window.location.href;
+    await userEvent.click(link);
+    await expect(window.location.href).toBe(location);
+    await expect(within(footer).getByText("© 2026 mood. All rights reserved.")).toBeVisible();
+  },
+};
+
 export const Mobile: Story = {
   globals: {
     viewport: { value: "mobile2", isRotated: false },
@@ -214,7 +225,7 @@ export const BrowseLearnMobile: Story = {
     await expect(links.map((link) => link.textContent)).toEqual(names);
     await userEvent.click(canvas.getByRole("link", { name: "Learn" }));
     for (const name of ["Getting started", "Product setup", "Care & maintenance"]) {
-      await waitFor(() => expect(canvas.getByRole("link", { name })).toBeVisible());
+      await waitFor(() => expect(canvas.getAllByRole("link", { name }).find((link) => !link.closest("footer"))).toBeVisible());
     }
     await userEvent.click(canvas.getByRole("button", { name: "Back" }));
     await waitFor(() => expect(canvas.getByRole("link", { name: "Learn" })).toBeVisible());

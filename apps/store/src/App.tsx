@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
 
 import { Button, confirmEmailErrorMessage } from "@weaveui/ds";
 import {
@@ -12,6 +12,7 @@ import {
 import { useAuth } from "@/lib/auth-context";
 import { checkCompromisedPassword } from "@/lib/password-security";
 import { AuthLayout } from "@/views/auth-layout";
+import { PRODUCTS } from "@/lib/catalog";
 
 const ExpiredLink = lazy(() =>
   import("@/views/expired-link/expired-link").then(({ ExpiredLink }) => ({ default: ExpiredLink })),
@@ -37,6 +38,14 @@ const ResetPassword = lazy(() =>
 
 const EMAIL_NOT_CONFIRMED =
   "Confirm your email before signing in. Check your inbox for the confirmation link.";
+
+function StoreRoute() {
+  const { productId } = useParams();
+  const navigate = useNavigate();
+  const product = productId ? PRODUCTS.find((item) => item.id === productId) : undefined;
+  if (productId && !product) return <Navigate to="/" replace />;
+  return <Home product={product} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
+}
 
 function AuthLinkRedirect() {
   const { ready, linkError, clearLinkError } = useAuth();
@@ -209,7 +218,8 @@ export function App() {
       <AuthLinkRedirect />
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<StoreRoute />} />
+          <Route path="/products/:productId" element={<StoreRoute />} />
           <Route path="/login" element={<LoginRoute />} />
           <Route path="/register" element={<RegisterRoute />} />
           <Route path="/forgot-password" element={<ForgotPasswordRoute />} />
