@@ -9,6 +9,7 @@ import { playwright } from '@vitest/browser-playwright';
 // More info at: https://storybook.js.org/docs/next/writing-tests/integrations/vitest-addon
 export default defineConfig({
   plugins: [react(), tailwindcss()],
+  optimizeDeps: { include: ['@base-ui/react/navigation-menu'] },
   resolve: {
     alias: [
       { find: /^@\//, replacement: `${path.resolve(import.meta.dirname, './src')}/` },
@@ -50,6 +51,20 @@ export default defineConfig({
             browser: 'chromium'
           }],
           commands: {
+              pointerAt: async (context, selector: string, action: "move" | "click", dx = 0, dy = 0) => {
+                for (const frame of context.page.frames()) {
+                  const locator = frame.locator(selector).first();
+                  if (!(await locator.count())) continue;
+                  const box = await locator.boundingBox();
+                  if (!box) throw new Error(`Element is not visible: ${selector}`);
+                  const x = box.x + box.width / 2 + dx;
+                  const y = box.y + box.height / 2 + dy;
+                  if (action === "click") await context.page.mouse.click(x, y);
+                  else await context.page.mouse.move(x, y);
+                  return;
+                }
+                throw new Error(`Element not found: ${selector}`);
+              },
             emulateReducedMotion: async (context, value: 'reduce' | 'no-preference') => {
               await context.page.emulateMedia({ reducedMotion: value });
             }

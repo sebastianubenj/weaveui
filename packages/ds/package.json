@@ -25,7 +25,9 @@
     "LICENSES"
   ],
   "sideEffects": [
-    "**/*.css"
+    "**/*.css",
+    "./dist/index.js",
+    "./src/lib/focus-intent.ts"
   ],
   "scripts": {
     "build:tokens": "node build-tokens.js",

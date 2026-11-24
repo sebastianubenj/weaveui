@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
+import { expect, userEvent, within } from "storybook/test";
 
 import { Login } from "./login";
 
@@ -21,5 +21,13 @@ export const Default: Story = {
 
     await expect(canvas.getByRole("banner")).toBeInTheDocument();
     await expect(canvas.getByRole("link", { name: "Home" })).toBeInTheDocument();
+    const email = canvas.getByRole("textbox", { name: /email/i });
+    await userEvent.tab();
+    await userEvent.tab();
+    await expect(email).toHaveFocus();
+    const wrapper = email.parentElement!;
+    await expect(getComputedStyle(wrapper).outlineStyle).toBe("solid");
+    await expect(getComputedStyle(wrapper).outlineWidth).toBe("2px");
+    await expect(getComputedStyle(wrapper).outlineOffset).toBe("3px");
   },
 };

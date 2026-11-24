@@ -9,12 +9,47 @@ import {
   NavigationLink,
   NavigationMenuLink,
   NavigationSection,
+  NavigationSearchTrigger,
+  NavigationBagTrigger,
 } from "./navigation";
 
 declare module "vitest/browser" {
   interface BrowserCommands {
     emulateReducedMotion: (value: "reduce" | "no-preference") => Promise<void>;
+    pointerAt: (selector: string, action: "move" | "click", dx?: number, dy?: number) => Promise<void>;
   }
+}
+
+test("the open bag follows the bar when the viewport or bar size changes", async () => {
+    await page.viewport(1200, 800);
+    await mount(<Navigation logoHref="#home" logoLabel="Home" searchLabel="Search" clearSearchLabel="Clear search" menuLabel="Menu" closeLabel="Close" backLabel="Back"><NavigationBagTrigger aria-label="Bag" signInHref="#login" /></Navigation>);
+    await userEvent.click(button("Bag")!);
+    await vi.waitFor(() => expect(query('[data-slot="navigation-bag-empty-title"]')).not.toBeNull());
+    await page.viewport(1280, 800);
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    const bar = query<HTMLElement>('[data-slot="navigation"]')!.getBoundingClientRect();
+    const panel = query<HTMLElement>('[data-slot="navigation-panel"]')!.getBoundingClientRect();
+    expect(panel.top).toBeCloseTo(bar.bottom, 0);
+    expect(panel.width).toBeCloseTo(bar.width, 0);
+    const barElement = query<HTMLElement>('[data-slot="navigation"]')!;
+    barElement.style.height = "80px";
+    await vi.waitFor(() => expect(query<HTMLElement>('[data-slot="navigation-panel"]')!.getBoundingClientRect().top).toBeCloseTo(barElement.getBoundingClientRect().bottom, 0));
+});
+
+function SearchSample() {
+  const [search, setSearch] = React.useState("missing");
+  const input = React.useRef<HTMLInputElement>(null);
+  return <>
+    <Navigation logoHref="#home" logoLabel="Home" searchLabel="Search" clearSearchLabel="Clear search"
+      menuLabel="Menu" closeLabel="Close" backLabel="Back" searchValue={search}
+      onSearchValueChange={setSearch} searchInputRef={input}
+      searchResults={search ? <div style={{ height: 280, display: "flex", alignItems: "end" }}>
+        <button data-test-clear onClick={() => { setSearch(""); input.current?.focus(); }}>Clear results</button>
+      </div> : null}>
+      <NavigationSearchTrigger />
+    </Navigation>
+    <div data-test-outside style={{ height: 800 }} />
+  </>;
 }
 
 function Links({ count }: { count: number }) {
@@ -126,6 +161,23 @@ function delayMs(element: Element) {
 function openDesktopPanel(name: string) {
   return userEvent.hover(link(name));
 }
+
+test("search remains open after shrinking until the pointer reenters and leaves", async () => {
+  await page.viewport(1280, 800);
+  await mount(<SearchSample />);
+  await commands.pointerAt('[data-slot="navigation-search-trigger"]', "click");
+  await vi.waitFor(() => expect(query("[data-test-clear]")).not.toBeNull());
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  await commands.pointerAt("[data-test-clear]", "click");
+  await vi.waitFor(() => expect(query<HTMLInputElement>('input[type="search"]')?.value).toBe(""));
+  await new Promise((resolve) => setTimeout(resolve, 600));
+  await commands.pointerAt("[data-test-outside]", "move", 100, 100);
+  await new Promise((resolve) => setTimeout(resolve, 600));
+  expect(query('input[type="search"]')).not.toBeNull();
+  await commands.pointerAt('[data-slot="navigation"]', "move");
+  await commands.pointerAt("[data-test-outside]", "move", 100, 100);
+  await vi.waitFor(() => expect(query('input[type="search"]')).toBeNull());
+});
 
 describe("motion preference", () => {
   test("animates the panel height and its items by default", async () => {

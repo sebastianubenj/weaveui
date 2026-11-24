@@ -17,7 +17,9 @@ Do not use `Link` for these items. `Link` is underlined text. `NavigationLink` i
 
 - **Desktop panel** — `NavigationLink` with `menu` (usually `NavigationSection`) opens a panel under the bar on hover, like the Apple global nav. The panel is one surface over the page with a scrim; it does not push content. Hovering another link swaps content. `Escape`, a press outside, or leaving the bar and panel closes it. A link without `menu` only navigates. On touch, the first tap on a link with `menu` opens the panel; the second follows `href`.
 - **Search** — `NavigationSearchTrigger` opens search on click or `Enter`, never on hover. The field takes focus. Same close rules as the panel. Drive text with `searchValue`, `onSearchValueChange`, and `onSearchSubmit` on `Navigation`. Open from outside with `value="search"`.
-- **Bag** — `NavigationBagTrigger` opens like search (click / `Enter`, not hover). Empty: “Your bag is empty”, Log in hint, My profile. `loggedIn` swaps hint and Log out. With `items`: “Bag”, Review bag, up to five rows, overflow copy, My profile. A count badge overlays the bag icon (1–99, then `99+`) and is part of the button name. Open from outside with `value="bag"`.
+- **Search content** — Pass results or an empty state through `searchResults`; it renders below the field on desktop and mobile. The application owns filtering, result destinations, and empty-state copy. In Home, results update as the user types; selecting one closes the panel and focuses the product. A nonempty query without matches shows the empty state, whose Clear search action clears the value and returns focus to the field using `searchInputRef`.
+- **Clearing search on desktop** — If the panel shrinks away from a stationary mouse, it remains open while the pointer is outside. Once the pointer reenters the bar or panel, leaving again closes it normally. Escape and outside presses still close it.
+- **Bag** — `NavigationBagTrigger` opens like search (click / `Enter`, not hover). Empty: “Your bag is empty”, Log in hint, My profile. `loggedIn` swaps hint and Log out. A nonzero `unitCount` shows storefront-provided content through `renderLoadedBag`. A count badge overlays the bag icon (1–99, then `99+`) and is part of the button name. Open from outside with `value="bag"`.
 - **Keyboard** — Focusing a link with `menu` shows a chevron named by `menuLabel`. `Enter` on the link follows `href`; `Enter` on the chevron opens the panel.
 - **Fixed bar** — The bar is `fixed`. An in-flow spacer keeps page content below it. Panels open under the bar.
 - **Controlled value** — Give each link a `value`. `value` / `defaultValue` / `onValueChange` on `Navigation` set the open desktop panel (`null` closes it).
@@ -25,6 +27,8 @@ Do not use `Link` for these items. `Link` is underlined text. `NavigationLink` i
 - **Mobile search and bag** — Full-screen views with the same field or bag body. Closing returns focus to the trigger.
 
 Motion uses `semantics.motion` (durations, stagger, delay-reveal, standard easing). Reduced motion turns transitions off.
+
+During browser tests, opening the empty bag while the viewport changes can produce a transient `ResizeObserver loop completed with undelivered notifications` warning. No visual impact has been confirmed; the warning remains under investigation and is not suppressed. The browser tests verify that the open panel follows changes to the viewport and bar size.
 
 ## Desktop
 
@@ -95,6 +99,7 @@ Required chrome: `logoHref`, `logoLabel`. Product appearance also requires `sear
 | `appearance` | `"product"` &#124; `"empty"` | `"product"` | `empty` is mark-only. Omit or `product` for the full bar. |
 | `logoHref` | `string` | — | Destination of the mark. The mark is decorative; this link is the name. |
 | `logoLabel` | `string` | — | Accessible name of the mark link. |
+| `logo` | `React.ReactNode` | Weave mark | Decorative mark rendered inside the logo link. |
 | `children` | `React.ReactNode` | — | Bar items. Product only. |
 | `menu` | `React.ReactNode` | — | Mobile panel. Desktop uses each `NavigationLink` `menu`. Product only. |
 | `open` | `boolean` | — | Controlled mobile panel. Uncontrolled when omitted. |
@@ -106,6 +111,8 @@ Required chrome: `logoHref`, `logoLabel`. Product appearance also requires `sear
 | `searchLabel` | `string` | — | Search button name, and the field name and placeholder. |
 | `clearSearchLabel` | `string` | — | Name of the clear button in the search field. |
 | `searchValue` | `string` | — | Search text. Controlled when set. |
+| `searchResults` | `React.ReactNode` | — | Application-provided results or empty state below the search field. |
+| `searchInputRef` | `React.Ref<HTMLInputElement>` | — | Ref to the search field, for example to restore focus after clearing from custom content. |
 | `onSearchValueChange` | `(value: string) => void` | — | Search text changes. |
 | `onSearchSubmit` | `(value: string) => void` | — | Search form submit. |
 | `onSearch` | `() => void` | — | Runs when the search button is pressed, before the panel opens. |
@@ -174,14 +181,10 @@ Must be a child of `Navigation`.
 | `onLogOut` | `() => void` | — | Log out under My profile when `loggedIn`. |
 | `profileTitle` | `string` | `"My profile"` | Heading above the session control. |
 | `logOutLabel` | `string` | `"Log out"` | Log out button label. |
-| `items` | `NavigationBagItem[]` | — | Loaded bag. Omit for empty. Count is the sum of item quantities (default 1 each). |
-| `title` | `string` | `"Bag"` | Loaded-state heading. |
-| `reviewLabel` | `string` | `"Review bag"` | Review bag control. |
-| `onReview` | `() => void` | — | Review bag action. |
+| `unitCount` | `number` | `0` | Number of units in the bag, used for the badge and empty state. Requires `renderLoadedBag` when supplied. |
+| `renderLoadedBag` | `(device, profile) => React.ReactNode` | — | Storefront-owned nonempty bag content. Receives the device and the shared profile control. |
 | `onSignInClick` | mouse handler | — | Extra handler on Log in anchors. |
 | `className` | `string` | — | Classes on the trigger. |
-
-`NavigationBagItem`: `name`, `src`, `alt`, optional `quantity` (for example `"x2"`).
 
 ### NavigationIconButton
 

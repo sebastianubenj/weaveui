@@ -17,6 +17,81 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const EmptyBagOpen: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Bag" }));
+    await waitFor(() => expect(within(document.body).getByRole("heading", { name: "Your bag is empty" })).toBeVisible());
+  },
+};
+
+export const ClearSearchDesktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(canvas.getByRole("button", { name: "Search" }));
+    const search = await body.findByRole("searchbox", { name: "Search" });
+    await userEvent.type(search, "xyz");
+    const heading = await body.findByRole("heading", { name: "No results found" });
+    await waitFor(() => expect(heading).toBeVisible());
+    const clear = body.getAllByRole("button", { name: "Clear search" })[1];
+    const panel = body.getByRole("searchbox", { name: "Search" }).closest('[data-slot="navigation-panel"]')!;
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    const height = panel.getBoundingClientRect().height;
+    await userEvent.hover(clear);
+    await userEvent.click(clear);
+    await expect(search).toHaveFocus();
+    await expect(search).toHaveValue("");
+    await new Promise((resolve) => setTimeout(resolve, 600));
+    await expect(search).toBeVisible();
+    await expect(panel.getBoundingClientRect().height).toBeLessThan(height);
+    await userEvent.hover(canvas.getByRole("link", { name: "Discover" }));
+    await waitFor(() => expect(body.getByRole("heading", { name: "Discover" })).toBeVisible());
+    await waitFor(() => expect(panel.getBoundingClientRect().height).toBeLessThan(height));
+  },
+};
+
+export const ClearSearchFieldDesktop: Story = {
+  globals: { viewport: { value: "desktop", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(canvas.getByRole("button", { name: "Search" }));
+    const search = await body.findByRole("searchbox", { name: "Search" });
+    await userEvent.type(search, "xyz");
+    await waitFor(() => expect(body.getByRole("heading", { name: "No results found" })).toBeVisible());
+    const panel = search.closest('[data-slot="navigation-panel"]')!;
+    await new Promise((resolve) => setTimeout(resolve, 400));
+    const height = panel.getBoundingClientRect().height;
+    await userEvent.click(body.getAllByRole("button", { name: "Clear search" })[0]);
+    await waitFor(() => expect(panel.getBoundingClientRect().height).toBeLessThan(height));
+    await expect(search).toHaveFocus();
+  },
+};
+
+export const SearchProductsMobile: Story = {
+  globals: { viewport: { value: "mobile2", isRotated: false } },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(canvas.getByRole("button", { name: "Search" }));
+    const search = await canvas.findByRole("searchbox", { name: "Search" });
+    await userEvent.type(search, "sp-");
+    const results = canvas.getByRole("region", { name: "Search results" });
+    await expect(within(results).getAllByRole("link")).toHaveLength(3);
+    await userEvent.clear(search);
+    await userEvent.type(search, "xyz");
+    await waitFor(() => expect(canvas.getByRole("heading", { name: "No results found" })).toBeVisible());
+    await userEvent.click(canvas.getAllByRole("button", { name: "Clear search" })[1]);
+    await expect(search).toHaveFocus();
+    await expect(search).toHaveValue("");
+    await userEvent.type(search, "sp-");
+    await userEvent.click(within(canvas.getByRole("region", { name: "Search results" })).getByRole("link", { name: "SP-12 Aluminum" }));
+    await waitFor(() => expect(canvas.getByRole("article", { name: "SP-12 Aluminum" })).toHaveFocus());
+  },
+};
+
 async function playHome(canvasElement: HTMLElement) {
   const canvas = within(canvasElement);
   const body = within(document.body);
@@ -102,7 +177,7 @@ export const BrowseProductMobile: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Menu" }));
     await userEvent.click(await canvas.findByRole("link", { name: "Products" }));
     await waitFor(() => expect(canvas.getByRole("heading", { name: "Synths & Samplers" })).toBeVisible());
-    await expect(canvas.getByRole("button", { name: "Back" })).toBeVisible();
+    await waitFor(() => expect(canvas.getByRole("button", { name: "Back" })).toBeVisible());
     await expect(canvas.getByRole("heading", { name: "Speakers" })).toBeInTheDocument();
     await userEvent.click(canvas.getByRole("button", { name: "Back" }));
     await userEvent.click(await canvas.findByRole("link", { name: "Products" }));

@@ -1,6 +1,6 @@
 import { useSyncExternalStore } from "react";
 import { PRODUCTS, type HomeProduct } from "./catalog";
-import type { NavigationBagItem } from "@/components/ui/navigation";
+import type { NavigationBagItem } from "@/components/ui/navigation-bag-loaded";
 
 export const BAG_STORAGE_KEY = "weaveui-bag-v1";
 interface BagEntry { productId: string; quantity: number }
@@ -79,4 +79,8 @@ export function useBag(): NavigationBagItem[] {
       quantity: entry.quantity > 1 ? `x${entry.quantity}` : undefined,
     }] : [];
   });
+}
+
+export function useBagUnitCount(): number {
+  return useSyncExternalStore(subscribe, readBag, () => empty).reduce((total, entry) => total + entry.quantity, 0);
 }

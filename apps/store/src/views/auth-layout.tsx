@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import { cn, FormAlert } from "@weaveui/ds";
-import { Navigation } from "@/components/ui/navigation";
+import { Navigation } from "@weaveui/ds";
 import { useAuth } from "@/lib/auth-context";
 
 export interface AuthLayoutProps extends React.ComponentProps<"div"> {

@@ -5,13 +5,13 @@ import { expect, fireEvent, userEvent, waitFor, within } from "storybook/test";
 import {
   Navigation,
   NavigationBagTrigger,
-  type NavigationBagItem,
   NavigationLink,
   NavigationMenuLink,
   type NavigationProductProps,
   NavigationSearchTrigger,
   NavigationSection,
-} from "./navigation";
+} from "@weaveui/ds";
+import { NavigationBagLoaded, type NavigationBagItem } from "./navigation-bag-loaded";
 
 const sampleLinks = [
   "Products",
@@ -20,6 +20,15 @@ const sampleLinks = [
   "Support",
   "About",
 ] as const;
+
+export const CustomLogo: Story = {
+  args: { logoHref: "#home", logoLabel: "Home", searchLabel: "Search", clearSearchLabel: "Clear search", menuLabel: "Menu", closeLabel: "Close", backLabel: "Back" },
+  render: () => <SampleNavigation logo={<span aria-hidden="true">W</span>} />,
+  play: async ({ canvasElement }) => {
+    const logo = within(canvasElement).getByRole("link", { name: "Home" });
+    await expect(logo).toHaveTextContent("W");
+  },
+};
 
 type SampleLink = (typeof sampleLinks)[number];
 
@@ -93,6 +102,9 @@ function SampleNavigation(
   },
 ) {
   const { navRef, bagItems, onReview, bagLoggedIn, onLogOut, ...rest } = props;
+  const renderLoadedBag = React.useCallback((device: "desktop" | "mobile", profile: React.ReactNode) => (
+    <NavigationBagLoaded device={device} profile={profile} items={bagItems ?? []} title="Bag" reviewLabel="Review bag" onReview={onReview} />
+  ), [bagItems, onReview]);
 
   return (
     <Navigation
@@ -125,8 +137,8 @@ function SampleNavigation(
         onSignInClick={stopNavigation}
         loggedIn={bagLoggedIn}
         onLogOut={onLogOut}
-        items={bagItems}
-        onReview={onReview}
+        unitCount={(bagItems ?? []).reduce((count, item) => count + (item.quantity ? Number.parseInt(item.quantity.replace(/^x/i, ""), 10) || 1 : 1), 0)}
+        renderLoadedBag={renderLoadedBag}
       />
     </Navigation>
   );

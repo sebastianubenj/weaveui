@@ -49,7 +49,7 @@
         },
         "info": {
           "type": "color",
-          "value": "{primitives.colors.blue.500}",
+          "value": "{primitives.colors.blue.400}",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "collection": "Semantic Colors",
@@ -64,7 +64,7 @@
         },
         "info-op10": {
           "type": "color",
-          "value": "#0074e81a",
+          "value": "#0080ff1a",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "collection": "Semantic Colors",
@@ -228,7 +228,7 @@
         },
         "highlight": {
           "type": "color",
-          "value": "{primitives.colors.blue.500}",
+          "value": "{primitives.colors.blue.400}",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "collection": "Semantic Colors",
@@ -318,7 +318,7 @@
         },
         "highlight": {
           "type": "color",
-          "value": "{primitives.colors.blue.500}",
+          "value": "{primitives.colors.blue.400}",
           "extensions": {
             "org.lukasoppermann.figmaDesignTokens": {
               "collection": "Semantic Colors",
@@ -449,7 +449,7 @@
         "file-upload": {
           "drag-over": {
             "type": "color",
-            "value": "#0074e81a",
+            "value": "#0080ff1a",
             "extensions": {
               "org.lukasoppermann.figmaDesignTokens": {
                 "collection": "Semantic Colors",

@@ -26,6 +26,7 @@
         "VariableID:10:2162",
         "VariableID:10:2166",
         "VariableID:9:2040",
+        "VariableID:2122:12773",
         "VariableID:165:1027",
         "VariableID:454:21972",
         "VariableID:454:21971",
@@ -645,6 +646,26 @@
       }
     },
     {
+      "id": "VariableID:2122:12773",
+      "name": "colors/blue/400",
+      "remote": false,
+      "key": "2504b03f0b69592ad2d0180cebe2ddbe43a3a826",
+      "variableCollectionId": "VariableCollectionId:9:2",
+      "resolvedType": "COLOR",
+      "scopes": [],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "9:0": {
+          "r": 0,
+          "g": 0.501960813999176,
+          "b": 1,
+          "a": 1
+        }
+      }
+    },
+    {
       "id": "VariableID:165:1027",
       "name": "colors/blue/500",
       "remote": false,
@@ -658,8 +679,8 @@
       "valuesByMode": {
         "9:0": {
           "r": 0,
-          "g": 0.45490196347236633,
-          "b": 0.9098039269447327,
+          "g": 0.4313725531101227,
+          "b": 0.8627451062202454,
           "a": 1
         }
       }
@@ -4005,7 +4026,7 @@
         },
         "450:2": {
           "type": "VARIABLE_ALIAS",
-          "id": "VariableID:165:1027"
+          "id": "VariableID:2122:12773"
         }
       }
     },
@@ -4037,7 +4058,7 @@
         "450:2": {
           "color": {
             "type": "VARIABLE_ALIAS",
-            "id": "VariableID:165:1027"
+            "id": "VariableID:2122:12773"
           },
           "opacity": {
             "type": "VARIABLE_ALIAS",
@@ -4337,7 +4358,7 @@
         },
         "450:2": {
           "type": "VARIABLE_ALIAS",
-          "id": "VariableID:165:1027"
+          "id": "VariableID:2122:12773"
         }
       }
     },
@@ -4499,7 +4520,7 @@
         },
         "450:2": {
           "type": "VARIABLE_ALIAS",
-          "id": "VariableID:165:1027"
+          "id": "VariableID:2122:12773"
         }
       }
     },
@@ -4735,7 +4756,7 @@
         "450:2": {
           "color": {
             "type": "VARIABLE_ALIAS",
-            "id": "VariableID:165:1027"
+            "id": "VariableID:2122:12773"
           },
           "opacity": {
             "type": "VARIABLE_ALIAS",

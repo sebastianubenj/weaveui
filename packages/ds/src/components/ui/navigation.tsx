@@ -1,21 +1,12 @@
 import * as React from "react";
 import { NavigationMenu } from "@base-ui/react/navigation-menu";
+import navigationMark from "./navigation-mark.svg";
 
-import {
-  Button,
-  Icon,
-  iconBox16,
-  iconBox20,
-  Link,
-  scrollbarClassName,
-  useIsDesktop,
-  cn,
-  type IconName,
-} from "@weaveui/ds";
-import {
-  BagPreviewProductCard,
-  type BagPreviewProductCardDevice,
-} from "@/components/ui/bag-preview-product-card";
+import { Icon, iconBox16, iconBox20, type IconName } from "#/components/icon";
+import { Link } from "#/components/ui/link";
+import { scrollbarClassName } from "#/lib/scrollbar";
+import { useIsDesktop } from "#/lib/media";
+import { cn } from "#/lib/utils";
 
 const focusRing = `relative outline-none
   after:pointer-events-none after:absolute after:content-[''] after:hidden
@@ -84,26 +75,6 @@ const BAG_EMPTY_HINT = "to see if you have any saved items";
 const BAG_EMPTY_HINT_LOGGED_IN = "Start adding items";
 const BAG_PROFILE_TITLE = "My profile";
 const BAG_LOG_OUT_LABEL = "Log out";
-const BAG_TITLE = "Bag";
-const BAG_REVIEW_LABEL = "Review bag";
-
-export interface NavigationBagItem {
-  name: string;
-  src: string;
-  alt: string;
-  quantity?: string;
-}
-
-function bagItemUnitCount(item: NavigationBagItem): number {
-  if (item.quantity == null) return 1;
-  const parsed = Number.parseInt(item.quantity.replace(/^x/i, ""), 10);
-  return Number.isFinite(parsed) && parsed > 0 ? parsed : 1;
-}
-
-function bagUnitCount(items: NavigationBagItem[] | undefined): number {
-  if (!items?.length) return 0;
-  return items.reduce((sum, item) => sum + bagItemUnitCount(item), 0);
-}
 
 function formatBagBadgeLabel(count: number): string {
   return count > 99 ? "99+" : String(count);
@@ -114,11 +85,6 @@ function bagTriggerAccessibleName(ariaLabel: string, count: number): string {
   if (count > 99) return `${ariaLabel}, 99+ items`;
   if (count === 1) return `${ariaLabel}, 1 item`;
   return `${ariaLabel}, ${count} items`;
-}
-
-function bagOverflowLabel(extra: number): string {
-  if (extra === 1) return "1 more item in your bag";
-  return `${extra} more items in your bag`;
 }
 
 function BagBadge({ count }: { count: number }) {
@@ -181,13 +147,13 @@ interface BagPanelConfig {
   profileTitle: string;
   logOutLabel: string;
   onLogOut?: () => void;
-  items?: NavigationBagItem[];
-  title: string;
-  reviewLabel: string;
-  onReview?: () => void;
+  unitCount: number;
+  renderLoadedBag?: (device: "desktop" | "mobile", profile: React.ReactNode) => React.ReactNode;
 }
 
 interface NavigationContextValue {
+  searchResults?: React.ReactNode;
+  searchInputRef?: React.Ref<HTMLInputElement>;
   openFromHover: (value: string | null) => void;
   cancelPendingOpen: () => void;
   /** Opens the panel of a link on its first touch. Returns false when it is already open. */
@@ -346,7 +312,7 @@ function useAnimatedHeight(
       previous = next;
     });
 
-    observer.observe(viewport, { childList: true });
+    observer.observe(viewport, { childList: true, subtree: true });
     return () => {
       observer.disconnect();
       animation?.cancel();
@@ -544,20 +510,11 @@ function NavigationMenuIcon({ open }: { open: boolean }) {
 
 function NavigationMark() {
   return (
-    <svg
-      viewBox="0 0 12 12"
+    <span
       aria-hidden="true"
-      className="size-(--primitives-spacing-3)"
-      fill="currentColor"
-    >
-      <rect x="4" y="0" width="4" height="4" rx="2" />
-      <rect x="4" y="4" width="4" height="4" rx="2" />
-      <rect x="4" y="8" width="4" height="4" rx="2" />
-      <path d="M0 4A4 4 0 0 1 4 0V6A2 2 0 0 1 2 8A2 2 0 0 1 0 6Z" />
-      <path d="M8 6A2 2 0 0 1 10 4A2 2 0 0 1 12 6V8A4 4 0 0 1 8 12Z" />
-      <path d="M4 8H2A2 2 0 0 0 2 12H4Z" />
-      <path d="M8 0H10A2 2 0 0 1 12 2V2A2 2 0 0 1 10 4H8V0Z" />
-    </svg>
+      className="inline-block size-(--primitives-spacing-4) bg-current mask-center mask-no-repeat"
+      style={{ maskImage: `url("${navigationMark}")` }}
+    />
   );
 }
 
@@ -899,6 +856,8 @@ export function NavigationSearchTrigger({ className }: { className?: string }) {
   }
 
   const {
+    searchResults,
+    searchInputRef,
     searchLabel,
     clearSearchLabel,
     search,
@@ -920,6 +879,7 @@ export function NavigationSearchTrigger({ className }: { className?: string }) {
       onValueChange={changeSearch}
       onSubmit={onSearchSubmit}
       autoFocus
+      ref={searchInputRef}
     />
   );
 
@@ -950,6 +910,7 @@ export function NavigationSearchTrigger({ className }: { className?: string }) {
             )}
           >
             {field}
+            {searchResults}
           </div>
         </NavigationMenu.Content>
       </NavigationMenu.Item>
@@ -971,8 +932,6 @@ export function NavigationSearchTrigger({ className }: { className?: string }) {
     </NavigationMenu.Item>
   );
 }
-
-const BAG_PREVIEW_LIMIT = 5;
 
 const bagHeadingClassName = `m-0 font-sans [font-weight:var(--semantics-typography-heading-font-weight)]
   text-(length:--semantics-typography-heading-heading-xl-font-size)
@@ -1109,140 +1068,19 @@ function NavigationBagEmpty({
   );
 }
 
-function NavigationBagLoaded({
-  title,
-  reviewLabel,
-  onReview,
-  items,
-  device,
-  signInHref,
-  signInLabel,
-  onSignInClick,
-  loggedIn,
-  profileTitle,
-  logOutLabel,
-  onLogOut,
-}: {
-  title: string;
-  reviewLabel: string;
-  onReview?: () => void;
-  items: NavigationBagItem[];
-  device: BagPreviewProductCardDevice;
-} & NavigationBagProfileProps) {
-  const products = items.slice(0, BAG_PREVIEW_LIMIT).map((item, index) => (
-    <BagPreviewProductCard
-      key={`${item.name}-${index}`}
-      device={device}
-      name={item.name}
-      src={item.src}
-      alt={item.alt}
-      showQuantity={item.quantity != null}
-      quantity={item.quantity}
-    />
-  ));
-  const overflow =
-    items.length > BAG_PREVIEW_LIMIT ? (
-      <p
-        data-slot="navigation-bag-overflow"
-        className={`m-0 font-sans
-          [font-weight:var(--semantics-typography-body-font-weight)]
-          text-(length:--semantics-typography-body-body-md-font-size)
-          leading-(--semantics-typography-body-body-md-lh-normal)
-          tracking-(--semantics-typography-body-body-md-tracking-tight)
-          [color:var(--semantics-colors-foreground-subtle-on-subtlest)]`}
-      >
-        {bagOverflowLabel(items.length - BAG_PREVIEW_LIMIT)}
-      </p>
-    ) : null;
-  const profile = (
-    <NavigationBagProfile
-      signInHref={signInHref}
-      signInLabel={signInLabel}
-      onSignInClick={onSignInClick}
-      loggedIn={loggedIn}
-      profileTitle={profileTitle}
-      logOutLabel={logOutLabel}
-      onLogOut={onLogOut}
-    />
-  );
-  const reviewButton = (
-    <Button
-      type="button"
-      variant="primary"
-      size="md"
-      onClick={onReview}
-      className={device === "mobile" ? "w-full" : undefined}
-    >
-      {reviewLabel}
-    </Button>
-  );
-
-  if (device === "mobile") {
-    return (
-      <div className="flex min-h-0 w-full min-w-0 flex-1 flex-col items-start gap-(--primitives-spacing-6)">
-        <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-6)">
-          <h2 data-slot="navigation-bag-title" className={bagHeadingClassName}>
-            {title}
-          </h2>
-          <div
-            className={cn(
-              "flex min-h-0 w-full flex-1 flex-col items-start gap-(--primitives-spacing-2) overflow-y-auto [scrollbar-gutter:stable]",
-              scrollbarClassName,
-            )}
-          >
-            {products}
-          </div>
-          {overflow}
-          {reviewButton}
-        </div>
-        {profile}
-      </div>
-    );
-  }
-
-  return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-6)">
-      <div className="flex w-full min-w-0 flex-col items-start gap-(--primitives-spacing-4)">
-        <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-(--primitives-spacing-4)">
-          <h2 data-slot="navigation-bag-title" className={bagHeadingClassName}>
-            {title}
-          </h2>
-          {reviewButton}
-        </div>
-        <div className="flex w-full flex-col items-start gap-(--primitives-spacing-2)">
-          {products}
-          {overflow}
-        </div>
-      </div>
-      {profile}
-    </div>
-  );
-}
-
 function NavigationBagBody({
   config,
   device,
 }: {
   config: BagPanelConfig;
-  device: BagPreviewProductCardDevice;
+  device: "desktop" | "mobile";
 }) {
-  if (config.items && config.items.length > 0) {
-    return (
-      <NavigationBagLoaded
-        title={config.title}
-        reviewLabel={config.reviewLabel}
-        onReview={config.onReview}
-        items={config.items}
-        device={device}
-        signInHref={config.signInHref}
-        signInLabel={config.signInLabel}
-        onSignInClick={config.onSignInClick}
-        loggedIn={config.loggedIn}
-        profileTitle={config.profileTitle}
-        logOutLabel={config.logOutLabel}
-        onLogOut={config.onLogOut}
-      />
-    );
+  if (config.unitCount > 0) {
+    return config.renderLoadedBag?.(device, <NavigationBagProfile
+      signInHref={config.signInHref} signInLabel={config.signInLabel}
+      onSignInClick={config.onSignInClick} loggedIn={config.loggedIn}
+      profileTitle={config.profileTitle} logOutLabel={config.logOutLabel}
+      onLogOut={config.onLogOut} />) ?? null;
   }
 
   return (
@@ -1260,7 +1098,7 @@ function NavigationBagBody({
   );
 }
 
-export interface NavigationBagTriggerProps {
+export type NavigationBagTriggerProps = {
   className?: string;
   /** Accessible name of the bag button. */
   "aria-label": string;
@@ -1275,11 +1113,12 @@ export interface NavigationBagTriggerProps {
   profileTitle?: string;
   logOutLabel?: string;
   onLogOut?: () => void;
-  items?: NavigationBagItem[];
-  title?: string;
-  reviewLabel?: string;
-  onReview?: () => void;
-}
+} & (
+  | { unitCount?: 0; renderLoadedBag?: never }
+  | { unitCount: number;
+      /** Storefront-owned content for a nonempty bag. */
+      renderLoadedBag: (device: "desktop" | "mobile", profile: React.ReactNode) => React.ReactNode }
+);
 
 export function NavigationBagTrigger({
   className,
@@ -1293,11 +1132,10 @@ export function NavigationBagTrigger({
   profileTitle = BAG_PROFILE_TITLE,
   logOutLabel = BAG_LOG_OUT_LABEL,
   onLogOut,
-  items,
-  title = BAG_TITLE,
-  reviewLabel = BAG_REVIEW_LABEL,
-  onReview,
+  unitCount: requestedUnitCount = 0,
+  renderLoadedBag,
 }: NavigationBagTriggerProps) {
+  const unitCount = Number.isFinite(requestedUnitCount) ? Math.max(0, Math.floor(requestedUnitCount)) : 0;
   const resolvedEmptyHint =
     emptyHint ?? (loggedIn ? BAG_EMPTY_HINT_LOGGED_IN : BAG_EMPTY_HINT);
   const navigation = React.useContext(NavigationContext);
@@ -1325,10 +1163,8 @@ export function NavigationBagTrigger({
       profileTitle,
       logOutLabel,
       onLogOut,
-      items,
-      title,
-      reviewLabel,
-      onReview,
+      unitCount,
+      renderLoadedBag,
     });
   }, [
     registerBag,
@@ -1341,14 +1177,11 @@ export function NavigationBagTrigger({
     profileTitle,
     logOutLabel,
     onLogOut,
-    items,
-    title,
-    reviewLabel,
-    onReview,
+    unitCount,
+    renderLoadedBag,
   ]);
 
-  const bagLoaded = items != null && items.length > 0;
-  const unitCount = bagUnitCount(items);
+  const bagLoaded = unitCount > 0;
   const triggerLabel = bagTriggerAccessibleName(ariaLabel, unitCount);
 
   if (isDesktop) {
@@ -1390,10 +1223,8 @@ export function NavigationBagTrigger({
                 profileTitle,
                 logOutLabel,
                 onLogOut,
-                items,
-                title,
-                reviewLabel,
-                onReview,
+                unitCount,
+                renderLoadedBag,
               }}
               device="desktop"
             />
@@ -1432,6 +1263,8 @@ type NavigationChromeProps = Omit<
   logoHref: string;
   /** Accessible name for the mark link. */
   logoLabel: string;
+  /** Decorative logo; defaults to the Weave mark. */
+  logo?: React.ReactNode;
 };
 
 export type NavigationEmptyProps = NavigationChromeProps & {
@@ -1463,6 +1296,9 @@ export type NavigationProductProps = NavigationChromeProps & {
   clearSearchLabel: string;
   /** Search text. Controlled when set. */
   searchValue?: string;
+  /** Content displayed below the search field. */
+  searchResults?: React.ReactNode;
+  searchInputRef?: React.Ref<HTMLInputElement>;
   onSearchValueChange?: (value: string) => void;
   /** Called with the text when the search form is submitted. */
   onSearchSubmit?: (value: string) => void;
@@ -1488,6 +1324,7 @@ function NavigationEmpty({
   className,
   logoHref,
   logoLabel,
+  logo = <NavigationMark />,
   ref,
   ...props
 }: NavigationChromeProps) {
@@ -1545,7 +1382,7 @@ function NavigationEmpty({
             className={iconButtonClassName}
           >
             <span className="inline-flex size-(--primitives-spacing-4) items-center justify-center">
-              <NavigationMark />
+              {logo}
             </span>
           </a>
         </div>
@@ -1566,9 +1403,12 @@ function NavigationProduct({
   className,
   logoHref,
   logoLabel,
+  logo = <NavigationMark />,
   searchLabel,
   clearSearchLabel,
   searchValue,
+  searchResults,
+  searchInputRef,
   onSearchValueChange,
   onSearchSubmit,
   menuLabel,
@@ -1751,6 +1591,8 @@ function NavigationProduct({
       searchLabel,
       clearSearchLabel,
       search,
+      searchResults,
+      searchInputRef,
       changeSearch,
       onSearchSubmit,
       onSearch,
@@ -1773,6 +1615,8 @@ function NavigationProduct({
       searchLabel,
       clearSearchLabel,
       search,
+      searchResults,
+      searchInputRef,
       changeSearch,
       onSearchSubmit,
       onSearch,
@@ -1793,16 +1637,10 @@ function NavigationProduct({
     );
     const inside = new Set<HTMLElement>();
     let closeTimer: number | undefined;
+    let lastPointer: { x: number; y: number } | undefined;
+    let awaitingReentry = false;
 
-    function onEnter(event: PointerEvent) {
-      if (event.pointerType !== "mouse") return;
-      window.clearTimeout(closeTimer);
-      inside.add(event.currentTarget as HTMLElement);
-    }
-
-    function onLeave(event: PointerEvent) {
-      if (event.pointerType !== "mouse") return;
-      inside.delete(event.currentTarget as HTMLElement);
+    function scheduleClose() {
       window.clearTimeout(closeTimer);
       closeTimer = window.setTimeout(() => {
         if (inside.size > 0) return;
@@ -1811,6 +1649,31 @@ function NavigationProduct({
       }, motionMs("delay-hover-close"));
     }
 
+    function onMove(event: PointerEvent) {
+      if (event.pointerType === "mouse") lastPointer = { x: event.clientX, y: event.clientY };
+    }
+
+    function onEnter(event: PointerEvent) {
+      if (event.pointerType !== "mouse") return;
+      window.clearTimeout(closeTimer);
+      awaitingReentry = false;
+      inside.add(event.currentTarget as HTMLElement);
+    }
+
+    function onLeave(event: PointerEvent) {
+      if (event.pointerType !== "mouse") return;
+      inside.delete(event.currentTarget as HTMLElement);
+      window.clearTimeout(closeTimer);
+      if (awaitingReentry) return;
+      if (activeValueRef.current === SEARCH_VALUE && lastPointer &&
+          lastPointer.x === event.clientX && lastPointer.y === event.clientY) {
+        awaitingReentry = true;
+        return;
+      }
+      scheduleClose();
+    }
+
+    document.addEventListener("pointermove", onMove, true);
     for (const node of regions) {
       node.addEventListener("pointerenter", onEnter);
       node.addEventListener("pointerleave", onLeave);
@@ -1818,6 +1681,7 @@ function NavigationProduct({
 
     return () => {
       window.clearTimeout(closeTimer);
+      document.removeEventListener("pointermove", onMove, true);
       for (const node of regions) {
         node.removeEventListener("pointerenter", onEnter);
         node.removeEventListener("pointerleave", onLeave);
@@ -1956,6 +1820,7 @@ function NavigationProduct({
       onValueChange={changeSearch}
       onSubmit={onSearchSubmit}
       autoFocus={autoFocus}
+      ref={searchInputRef}
     />
   );
 
@@ -1988,7 +1853,7 @@ function NavigationProduct({
           className={cn(iconButtonClassName, expanded && "max-md:hidden")}
         >
           <span className="inline-flex size-(--primitives-spacing-4) items-center justify-center">
-            <NavigationMark />
+            {logo}
           </span>
         </a>
         {/* The back control fades out when going back, but leaves at once when the menu closes, so it never shows next to the mark of the closed bar. */}
@@ -2130,6 +1995,7 @@ function NavigationProduct({
                 )}
               >
                 {searchField(true)}
+                {searchResults}
               </div>
             </div>
           ) : (

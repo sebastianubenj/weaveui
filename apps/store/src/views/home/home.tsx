@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { FormAlert } from "@weaveui/ds";
+import { useCallback, useEffect, useRef, useState } from "react";
+import type { ReactNode } from "react";
+import { Button, FormAlert, PageHeader } from "@weaveui/ds";
 import {
   Navigation,
   NavigationBagTrigger,
@@ -7,11 +8,12 @@ import {
   NavigationMenuLink,
   NavigationSearchTrigger,
   NavigationSection,
-} from "@/components/ui/navigation";
+} from "@weaveui/ds";
 import { useAuth } from "@/lib/auth-context";
-import { addProductToBag, useBag } from "@/lib/bag";
+import { addProductToBag, useBag, useBagUnitCount } from "@/lib/bag";
 import { PRODUCTS } from "@/lib/catalog";
 import { HomeProducts } from "@/patterns/home-products/home-products";
+import { NavigationBagLoaded } from "@/components/ui/navigation-bag-loaded";
 
 interface ProductGroup {
   heading: string;
@@ -46,7 +48,7 @@ const menus: HomeMenu[] = [
   { label: "Products", groups: Object.values(groups) },
   {
     label: "Discover",
-    links: ["Collections", "Collaborations", "Stories", "Artists"],
+    links: ["Creative workflows", "Behind the design"],
   },
   {
     label: "Learn",
@@ -54,11 +56,11 @@ const menus: HomeMenu[] = [
   },
   {
     label: "Support",
-    links: ["Help Center", "Orders & Shipping", "Product Resources"],
+    links: ["FAQs", "Shipping & delivery", "Returns & refunds", "Warranty", "Contact us"],
   },
   {
     label: "About",
-    links: ["Our Story", "Design Philosophy", "Careers", "Contact"],
+    links: ["Our story", "Our philosophy"],
   },
 ];
 
@@ -92,7 +94,7 @@ function MenuContent({
         {menu.groups ? (
           <ProductLinks groups={menu.groups} onSelect={onSelect} />
         ) : (
-          <NavigationSection heading={menu.label === "Learn" ? "Learn" : `Explore ${menu.label}`}>
+          <NavigationSection heading={menu.label}>
             {links}
           </NavigationSection>
         )}
@@ -152,8 +154,16 @@ export interface HomeProps {
 export function Home({ onReview }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
+  const bagUnitCount = useBagUnitCount();
+  const renderLoadedBag = useCallback((device: "desktop" | "mobile", profile: ReactNode) => (
+    <NavigationBagLoaded device={device} profile={profile} items={bagItems} title="Bag" reviewLabel="Review bag" onReview={onReview} />
+  ), [bagItems, onReview]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string | null>(null);
+  const [search, setSearch] = useState("");
+  const searchInputRef = useRef<HTMLInputElement>(null);
+  const query = search.trim().toLocaleLowerCase();
+  const results = query ? PRODUCTS.filter((product) => product.name.toLocaleLowerCase().includes(query)) : [];
   const [destination, setDestination] = useState<{ id: string } | null>(null);
 
   function selectProduct(id: string) {
@@ -176,6 +186,39 @@ export function Home({ onReview }: HomeProps) {
         logoLabel="Home"
         searchLabel="Search"
         clearSearchLabel="Clear search"
+        searchValue={search}
+        searchInputRef={searchInputRef}
+        onSearchValueChange={setSearch}
+        searchResults={results.length > 0 ? (
+          <section aria-label="Search results" className="mt-(--primitives-spacing-4) w-full">
+            <h2 className="m-0 font-sans [font-weight:var(--semantics-typography-body-font-weight)] text-(length:--semantics-typography-label-label-sm-font-size) leading-(--semantics-typography-label-label-sm-lh-snug) tracking-(--semantics-typography-label-label-sm-tracking-0-125) [color:var(--semantics-colors-foreground-subtle-on-subtlest)]">Search results</h2>
+            <ul className="m-0 mt-(--primitives-spacing-4) flex list-none flex-col gap-(--primitives-spacing-4) p-0">
+              {results.map((product) => (
+                <li key={product.id}>
+                  <a href={`#product-${product.id}`} onClick={(event) => {
+                    if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+                    event.preventDefault();
+                    selectProduct(product.id);
+                  }} className="relative flex w-full items-center gap-(--primitives-spacing-2) no-underline [color:var(--semantics-colors-foreground-default)] hover:[background-color:var(--semantics-colors-interaction-secondary-hover)] outline-none after:pointer-events-none after:absolute after:hidden after:content-[''] after:[inset:calc(-1*(var(--primitives-spacing-out-of-scale-0-75)+var(--primitives-ring-focus-width-ring-2)))] after:[border:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)] after:[border-radius:var(--primitives-radius-rounded-sm)] focus-visible:after:block">
+                    <img src={product.src} alt="" className="size-(--primitives-spacing-12) shrink-0 object-contain [background-color:var(--semantics-colors-background-subtle)]" />
+                    <span className="font-sans [font-weight:var(--semantics-typography-label-font-weight)] text-(length:--semantics-typography-label-label-lg-font-size) leading-(--semantics-typography-button-button-lg-lh-snug) tracking-(--semantics-typography-label-label-lg-tracking-0-125)">{product.name}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ) : query ? (
+          <section aria-live="polite" className="mt-(--primitives-spacing-4) flex w-full flex-col items-center gap-(--primitives-spacing-8) text-center">
+            <div className="flex w-full flex-col items-center">
+              <div className="relative size-(--primitives-spacing-out-of-scale-30) overflow-hidden">
+                <img src="/search-empty.png" alt="" className="absolute top-[-9.49%] left-[-9.49%] size-[118.98%] max-w-none" />
+              </div>
+              <PageHeader title="No results found" titleAs="h2" description={`We couldn't find any products matching "${search.trim()}".`} className="pt-(--primitives-spacing-8) md:pt-(--primitives-spacing-8) [&_[data-slot=description]]:text-(length:--semantics-typography-body-body-md-font-size) [&_[data-slot=description]]:leading-(--semantics-typography-body-body-md-lh-normal) [&_[data-slot=description]]:tracking-(--semantics-typography-body-body-md-tracking-tight) [&_[data-slot=description]]:[color:var(--semantics-colors-foreground-subtle-on-subtlest)] md:[&_[data-slot=description]]:text-(length:--semantics-typography-body-body-lg-font-size) md:[&_[data-slot=description]]:leading-(--semantics-typography-body-body-lg-lh-normal) md:[&_[data-slot=description]]:tracking-(--semantics-typography-body-body-lg-tracking-tight)" />
+              <p className="m-0 mt-(--primitives-spacing-4) font-sans [font-weight:var(--semantics-typography-body-font-weight)] text-(length:--semantics-typography-body-body-md-font-size) leading-(--semantics-typography-body-body-md-lh-normal) tracking-(--semantics-typography-body-body-md-tracking-tight) md:text-(length:--semantics-typography-body-body-lg-font-size) md:leading-(--semantics-typography-body-body-lg-lh-normal) md:tracking-(--semantics-typography-body-body-lg-tracking-tight)">Try a different search term.</p>
+            </div>
+            <Button variant="outline" size="md" onClick={() => { setSearch(""); searchInputRef.current?.focus(); }}>Clear search</Button>
+          </section>
+        ) : null}
         menuLabel="Menu"
         closeLabel="Close"
         backLabel="Back"
@@ -216,8 +259,8 @@ export function Home({ onReview }: HomeProps) {
           onLogOut={() => {
             void logOut();
           }}
-          items={bagItems}
-          onReview={onReview}
+          unitCount={bagUnitCount}
+          renderLoadedBag={renderLoadedBag}
         />
       </Navigation>
       <main>
