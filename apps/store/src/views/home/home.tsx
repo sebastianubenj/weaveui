@@ -16,6 +16,7 @@ import { ProductDetailContent } from "@/patterns/product-detail-content/product-
 import { HomeProducts } from "@/patterns/home-products/home-products";
 import { NavigationBagLoaded } from "@/components/ui/navigation-bag-loaded";
 import { HomeFooter } from "./home-footer";
+import { Bag } from "@/views/bag/bag";
 
 interface ProductGroup {
   heading: string;
@@ -151,19 +152,20 @@ function ProductLinks({
 
 export interface HomeProps {
   onReview?: () => void;
+  showBag?: boolean;
   product?: HomeProduct;
   onSelectProduct?: (id: string) => void;
 }
 
-export function Home({ onReview, product, onSelectProduct }: HomeProps) {
+export function Home({ onReview, product, onSelectProduct, showBag = false }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
   const bagUnitCount = useBagUnitCount();
-  const renderLoadedBag = useCallback((device: "desktop" | "mobile", profile: ReactNode) => (
-    <NavigationBagLoaded device={device} profile={profile} items={bagItems} title="Bag" reviewLabel="Review bag" onReview={onReview} />
-  ), [bagItems, onReview]);
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState<string | null>(null);
+  const renderLoadedBag = useCallback((device: "desktop" | "mobile", profile: ReactNode) => (
+    <NavigationBagLoaded device={device} profile={profile} items={bagItems} title="Bag" reviewLabel="Review bag" onReview={() => { setOpen(false); setValue(null); onReview?.(); }} />
+  ), [bagItems, onReview]);
   const [search, setSearch] = useState("");
   const searchInputRef = useRef<HTMLInputElement>(null);
   const query = search.trim().toLocaleLowerCase();
@@ -274,7 +276,7 @@ export function Home({ onReview, product, onSelectProduct }: HomeProps) {
             {error}
           </FormAlert>
         ) : null}
-        {product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
+        {showBag ? <Bag /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
       </main>
       <HomeFooter />
     </>

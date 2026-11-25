@@ -53,21 +53,40 @@ function subscribe(notify: () => void) {
   };
 }
 
-export function addProductToBag(product: HomeProduct) {
-  const entries = readBag();
-  const existing = entries.find((entry) => entry.productId === product.id);
-  if (existing && !Number.isSafeInteger(existing.quantity + 1)) return;
-  snapshot = existing
-    ? entries.map((entry) => entry === existing ? { ...entry, quantity: entry.quantity + 1 } : entry)
-    : [...entries, { productId: product.id, quantity: 1 }];
+function writeBag(entries: BagEntry[]) {
+  snapshot = entries;
   try {
     const stored = JSON.stringify(snapshot);
     localStorage.setItem(BAG_STORAGE_KEY, stored);
     lastStored = stored;
   } catch {
-    // A failed write must not prevent adding a product for the current page.
+    // Keep the in-memory bag usable when browser storage is unavailable.
   }
   listeners.forEach((notify) => notify());
+}
+
+export function changeBagQuantity(productId: string, change: number) {
+  const entries = readBag();
+  const entry = entries.find((item) => item.productId === productId);
+  if (!entry || !Number.isSafeInteger(entry.quantity + change) || entry.quantity + change < 1) return;
+  writeBag(entries.map((item) => item === entry ? { ...item, quantity: item.quantity + change } : item));
+}
+
+export function removeFromBag(productId: string) {
+  writeBag(readBag().filter((item) => item.productId !== productId));
+}
+
+export function useBagEntries() {
+  return useSyncExternalStore(subscribe, readBag, () => empty);
+}
+
+export function addProductToBag(product: HomeProduct) {
+  const entries = readBag();
+  const existing = entries.find((entry) => entry.productId === product.id);
+  if (existing && !Number.isSafeInteger(existing.quantity + 1)) return;
+  writeBag(existing
+    ? entries.map((entry) => entry === existing ? { ...entry, quantity: entry.quantity + 1 } : entry)
+    : [...entries, { productId: product.id, quantity: 1 }]);
 }
 
 export function useBag(): NavigationBagItem[] {

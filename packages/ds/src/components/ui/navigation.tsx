@@ -71,7 +71,7 @@ const SEARCH_VALUE = "search";
 const BAG_VALUE = "bag";
 const BAG_EMPTY_TITLE = "Your bag is empty";
 const BAG_SIGN_IN_LABEL = "Log in";
-const BAG_EMPTY_HINT = "to see if you have any saved items";
+const BAG_EMPTY_HINT = "or start adding items.";
 const BAG_EMPTY_HINT_LOGGED_IN = "Start adding items";
 const BAG_PROFILE_TITLE = "My profile";
 const BAG_LOG_OUT_LABEL = "Log out";
@@ -953,6 +953,7 @@ const navPanelButtonClassName = `inline-flex items-center justify-center gap-(--
   leading-(--semantics-typography-button-button-md-lh-snug)
   tracking-(--semantics-typography-button-tracking-normal)
   [color:var(--semantics-colors-foreground-default)]
+  [@media(hover:hover)]:hover:[color:var(--semantics-colors-interaction-navigation-link-hover)]
   no-underline cursor-pointer
   rounded-(--primitives-radius-rounded-10) outline-none
   focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]

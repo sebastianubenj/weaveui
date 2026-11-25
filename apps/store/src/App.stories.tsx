@@ -304,3 +304,52 @@ export const PasswordRejectedByServer: Story = {
     await expect(mockAuth.signOut).not.toHaveBeenCalled();
   },
 };
+
+export const BagFlow: Story = {
+  parameters: { route: "/products/sp-16" },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole("button", { name: "Add to bag" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    const review = await within(document.body).findByRole("button", { name: "Review bag" });
+    await userEvent.click(review);
+    await expect(await canvas.findByRole("heading", { name: "Bag", level: 1 })).toBeVisible();
+    const increase = canvas.getByRole("button", { name: /Increase quantity of/ });
+    const name = increase.getAttribute("aria-label")!.replace("Increase quantity of ", "");
+    await userEvent.click(increase);
+    await expect(canvas.getByLabelText("Quantity: 2")).toBeVisible();
+    await expect(canvas.getAllByText("$4,598")).toHaveLength(3);
+    await expect(canvas.getByText("Free")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Bag, 2 items" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: `Decrease quantity of ${name}` }));
+    await expect(canvas.getByRole("button", { name: `Decrease quantity of ${name}` })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: `Remove ${name}` }));
+    await expect(canvas.getByRole("heading", { name: "Your bag is empty", level: 1 })).toBeVisible();
+    await expect(canvas.getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login");
+    await expect(localStorage.getItem(BAG_STORAGE_KEY)).toBe("[]");
+  },
+};
+
+export const BagWithItems: Story = {
+  parameters: { route: "/bag" },
+  beforeEach: () => {
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([
+      { productId: "sp-12", quantity: 1 },
+      { productId: "sp-16", quantity: 1 },
+      { productId: "ar-4", quantity: 3 },
+      { productId: "sp-40", quantity: 1 },
+      { productId: "fx-32", quantity: 1 },
+    ]));
+  },
+};
+
+export const EmptyBagSignedIn: Story = {
+  parameters: { route: "/bag" },
+  beforeEach: () => { resetSupabaseMock(exampleSession); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(await canvas.findByRole("heading", { name: "Your bag is empty" })).toBeVisible();
+    await waitFor(() => expect(canvas.getByText("Start adding items.")).toBeVisible());
+    await expect(canvas.queryByRole("link", { name: "Log in" })).toBeNull();
+  },
+};

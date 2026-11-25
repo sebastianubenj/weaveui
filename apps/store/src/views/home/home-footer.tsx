@@ -29,7 +29,9 @@ export function HomeFooter() {
               </section>
             ))}
           </nav>
-          <div className="mt-(--primitives-spacing-8) border-t-(length:--primitives-stroke-width-stroke-0-75) [border-color:var(--semantics-colors-border-default)] py-(--primitives-spacing-4)">
+        </div>
+        <div className="mt-(--primitives-spacing-8) border-t-(length:--primitives-stroke-width-stroke-0-75) [border-color:var(--semantics-colors-border-default)] py-(--primitives-spacing-4)">
+          <div className="mx-auto w-full max-w-(--semantics-layout-desktop-content-max-width-1062)">
             <p className="m-0 font-sans [font-weight:var(--semantics-typography-body-font-weight)] text-(length:--semantics-typography-body-body-sm-font-size) leading-(--semantics-typography-body-body-sm-lh-normal) tracking-(--semantics-typography-body-body-sm-tracking-tight) [color:var(--semantics-colors-foreground-subtle)]">© 2026 mood. All rights reserved.</p>
           </div>
         </div>
