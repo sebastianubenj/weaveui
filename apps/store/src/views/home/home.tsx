@@ -17,6 +17,7 @@ import { HomeProducts } from "@/patterns/home-products/home-products";
 import { NavigationBagLoaded } from "@/components/ui/navigation-bag-loaded";
 import { HomeFooter } from "./home-footer";
 import { Bag } from "@/views/bag/bag";
+import { Checkout } from "@/views/checkout/checkout";
 
 interface ProductGroup {
   heading: string;
@@ -153,11 +154,13 @@ function ProductLinks({
 export interface HomeProps {
   onReview?: () => void;
   showBag?: boolean;
+  showCheckout?: boolean;
+  onCheckout?: () => void;
   product?: HomeProduct;
   onSelectProduct?: (id: string) => void;
 }
 
-export function Home({ onReview, product, onSelectProduct, showBag = false }: HomeProps) {
+export function Home({ onReview, product, onSelectProduct, showBag = false, showCheckout = false, onCheckout }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
   const bagUnitCount = useBagUnitCount();
@@ -276,7 +279,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false }: Ho
             {error}
           </FormAlert>
         ) : null}
-        {showBag ? <Bag /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
+        {showCheckout ? <Checkout /> : showBag ? <Bag onCheckout={onCheckout} /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
       </main>
       <HomeFooter />
     </>

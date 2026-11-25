@@ -39,12 +39,12 @@ const ResetPassword = lazy(() =>
 const EMAIL_NOT_CONFIRMED =
   "Confirm your email before signing in. Check your inbox for the confirmation link.";
 
-function StoreRoute({ showBag = false }: { showBag?: boolean }) {
+function StoreRoute({ showBag = false, showCheckout = false }: { showBag?: boolean; showCheckout?: boolean }) {
   const { productId } = useParams();
   const navigate = useNavigate();
   const product = productId ? PRODUCTS.find((item) => item.id === productId) : undefined;
   if (productId && !product) return <Navigate to="/" replace />;
-  return <Home product={product} showBag={showBag} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
+  return <Home product={product} showBag={showBag} showCheckout={showCheckout} onCheckout={() => navigate("/checkout")} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
 }
 
 function AuthLinkRedirect() {
@@ -220,6 +220,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<StoreRoute />} />
           <Route path="/bag" element={<StoreRoute showBag />} />
+          <Route path="/checkout" element={<StoreRoute showCheckout />} />
           <Route path="/products/:productId" element={<StoreRoute />} />
           <Route path="/login" element={<LoginRoute />} />
           <Route path="/register" element={<RegisterRoute />} />

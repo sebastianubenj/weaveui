@@ -24,6 +24,7 @@
     "@base-ui/react": "^1.7.0",
     "@supabase/supabase-js": "^2.118.0",
     "@weaveui/ds": "*",
+    "credit-card-type": "^10.3.1",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "react-router-dom": "^7.12.0"
