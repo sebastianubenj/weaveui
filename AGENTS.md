@@ -594,6 +594,10 @@ Do not wrap MDX content in Markdown code fences unless the content is intentiona
 
 ## 16. Accessibility
 
+Badge text may use a contrast ratio as low as 3.5:1 against its effective background, including badges that convey critical information. This is a project-specific exception and does not meet WCAG AA for normal text below 4.5:1. Other text retains the WCAG contrast requirements. Check badge contrast in each applicable theme and background; do not treat the exception as permission to skip contrast verification.
+
+Mark badge elements with `data-badge` so Storybook applies the project-specific contrast rule. The regular axe contrast rule remains active for other text.
+
 Components must follow accessible interaction patterns.
 
 Use appropriate:

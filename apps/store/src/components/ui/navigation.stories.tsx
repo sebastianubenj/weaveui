@@ -99,9 +99,11 @@ function SampleNavigation(
     onReview?: () => void;
     bagLoggedIn?: boolean;
     onLogOut?: () => void;
+    onSavedAddresses?: () => void;
+    onPaymentMethods?: () => void;
   },
 ) {
-  const { navRef, bagItems, onReview, bagLoggedIn, onLogOut, ...rest } = props;
+  const { navRef, bagItems, onReview, bagLoggedIn, onLogOut, onSavedAddresses, onPaymentMethods, ...rest } = props;
   const renderLoadedBag = React.useCallback((device: "desktop" | "mobile", profile: React.ReactNode) => (
     <NavigationBagLoaded device={device} profile={profile} items={bagItems ?? []} title="Bag" reviewLabel="Review bag" onReview={onReview} />
   ), [bagItems, onReview]);
@@ -137,6 +139,8 @@ function SampleNavigation(
         onSignInClick={stopNavigation}
         loggedIn={bagLoggedIn}
         onLogOut={onLogOut}
+        onSavedAddresses={onSavedAddresses}
+        onPaymentMethods={onPaymentMethods}
         unitCount={(bagItems ?? []).reduce((count, item) => count + (item.quantity ? Number.parseInt(item.quantity.replace(/^x/i, ""), 10) || 1 : 1), 0)}
         renderLoadedBag={renderLoadedBag}
       />
@@ -611,7 +615,10 @@ export const DesktopBagOneOverflow: Story = {
 
 export const DesktopBagLoggedIn: Story = {
   args: requiredArgs,
-  render: () => <SampleNavigation bagItems={sampleBagItems} bagLoggedIn />,
+  render: function DesktopBagLoggedInRender() {
+    const [status, setStatus] = React.useState("");
+    return <><SampleNavigation bagItems={sampleBagItems} bagLoggedIn onSavedAddresses={() => setStatus("addresses opened")} onPaymentMethods={() => setStatus("payments opened")} />{status && <p>{status}</p>}</>;
+  },
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     const body = within(document.body);
@@ -623,6 +630,10 @@ export const DesktopBagLoggedIn: Story = {
     await expect(body.queryByRole("link", { name: "Log in" })).toBeNull();
     await expect(body.getByRole("button", { name: "Log out" })).toBeVisible();
     await expect(body.getByText("My profile")).toBeVisible();
+    await userEvent.click(body.getByRole("button", { name: "Saved addresses" }));
+    await expect(canvas.getByText("addresses opened")).toBeVisible();
+    await userEvent.click(body.getByRole("button", { name: "Payment methods" }));
+    await expect(canvas.getByText("payments opened")).toBeVisible();
 
     await userEvent.keyboard("{Escape}");
     await waitFor(() =>
@@ -720,6 +731,9 @@ export const MobileBagEmpty: Story = {
     await expect(canvas.queryByRole("button", { name: "Log in" })).toBeNull();
     await expect(canvas.getByText("My profile")).toBeVisible();
 
+    await expect(canvas.queryByRole("button", { name: "Saved addresses" })).toBeNull();
+    await expect(canvas.queryByRole("button", { name: "Payment methods" })).toBeNull();
+
     await userEvent.click(canvas.getByRole("button", { name: "Close" }));
     await waitFor(() =>
       expect(
@@ -810,6 +824,8 @@ export const MobileBagLoggedIn: Story = {
     await expect(canvas.queryByRole("link", { name: "Log in" })).toBeNull();
     await expect(canvas.getByRole("button", { name: "Log out" })).toBeVisible();
     await expect(canvas.getByText("My profile")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Saved addresses" })).toBeDisabled();
+    await expect(canvas.getByRole("button", { name: "Payment methods" })).toBeDisabled();
 
     await userEvent.click(canvas.getByRole("button", { name: "Close" }));
     await waitFor(() =>

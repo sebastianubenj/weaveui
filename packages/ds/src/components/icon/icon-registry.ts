@@ -32,6 +32,7 @@ import {
   ShoppingBag,
   TriangleAlert,
   Upload,
+  Wallet,
   X,
   createLucideIcon,
 } from "lucide-react";
@@ -94,6 +95,7 @@ export const iconRegistry = {
   "shopping-bag": ShoppingBag,
   "triangle-alert": TriangleAlert,
   upload: Upload,
+  wallet: Wallet,
   x: X,
 } as const satisfies Record<string, LucideIcon>;
 

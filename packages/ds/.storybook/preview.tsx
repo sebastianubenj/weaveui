@@ -1,5 +1,6 @@
 import "../src/index.css";
 import "./preview.css";
+import { badgeContrastConfig } from "./badge-contrast";
 import type { Decorator, Preview } from '@storybook/react-vite'
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 
@@ -58,6 +59,7 @@ const preview: Preview = {
     },
 
     a11y: {
+      config: badgeContrastConfig,
       // 'todo' - show a11y violations in the test UI only
       // 'error' - fail CI on a11y violations
       // 'off' - skip a11y checks entirely

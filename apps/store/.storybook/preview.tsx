@@ -3,6 +3,7 @@ import "./preview.css";
 import type { Decorator, Preview } from "@storybook/react-vite";
 import { MINIMAL_VIEWPORTS } from "storybook/viewport";
 import { sb } from "storybook/test";
+import { badgeContrastConfig } from "../../../packages/ds/.storybook/badge-contrast";
 
 sb.mock(import("../src/lib/supabase.ts"));
 sb.mock(import("../src/lib/password-security.ts"));
@@ -46,6 +47,7 @@ const preview: Preview = {
       },
     },
     a11y: {
+      config: badgeContrastConfig,
       test: "error",
     },
   },

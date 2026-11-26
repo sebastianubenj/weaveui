@@ -94,6 +94,7 @@ function BagBadge({ count }: { count: number }) {
     <span
       aria-hidden="true"
       data-slot="navigation-bag-badge"
+      data-badge
       className={`pointer-events-none absolute flex
         top-(--primitives-spacing-2) left-(--primitives-spacing-out-of-scale-2-25)
         min-h-(--primitives-spacing-out-of-scale-3-25) min-w-(--primitives-spacing-out-of-scale-3-25)
@@ -147,6 +148,8 @@ interface BagPanelConfig {
   profileTitle: string;
   logOutLabel: string;
   onLogOut?: () => void;
+  onSavedAddresses?: () => void;
+  onPaymentMethods?: () => void;
   unitCount: number;
   renderLoadedBag?: (device: "desktop" | "mobile", profile: React.ReactNode) => React.ReactNode;
 }
@@ -955,6 +958,7 @@ const navPanelButtonClassName = `inline-flex items-center justify-center gap-(--
   [color:var(--semantics-colors-foreground-default)]
   [@media(hover:hover)]:hover:[color:var(--semantics-colors-interaction-navigation-link-hover)]
   no-underline cursor-pointer
+  disabled:cursor-default
   rounded-(--primitives-radius-rounded-10) outline-none
   focus-visible:[outline:var(--primitives-ring-focus-width-ring-2)_solid_var(--semantics-colors-border-highlight)]
   focus-visible:[outline-offset:var(--primitives-spacing-out-of-scale-0-75)]`;
@@ -968,6 +972,8 @@ type NavigationBagProfileProps = Pick<
   | "profileTitle"
   | "logOutLabel"
   | "onLogOut"
+  | "onSavedAddresses"
+  | "onPaymentMethods"
 >;
 
 function NavigationBagProfileSessionControl({
@@ -977,7 +983,7 @@ function NavigationBagProfileSessionControl({
   loggedIn,
   logOutLabel,
   onLogOut,
-}: Omit<NavigationBagProfileProps, "profileTitle">) {
+}: Omit<NavigationBagProfileProps, "profileTitle" | "onSavedAddresses" | "onPaymentMethods">) {
   if (loggedIn) {
     return (
       <button
@@ -1007,6 +1013,14 @@ function NavigationBagProfile(props: NavigationBagProfileProps) {
   return (
     <div className="flex w-full flex-col items-start gap-(--primitives-spacing-4)">
       <p className={bagHeadingClassName}>{props.profileTitle}</p>
+      {props.loggedIn && <>
+        <button type="button" className={navPanelButtonClassName} disabled={!props.onSavedAddresses} onClick={props.onSavedAddresses}>
+          <Icon name="map-pin" size={iconBox16} aria-hidden="true" />Saved addresses
+        </button>
+        <button type="button" className={navPanelButtonClassName} disabled={!props.onPaymentMethods} onClick={props.onPaymentMethods}>
+          <Icon name="wallet" size={iconBox16} aria-hidden="true" />Payment methods
+        </button>
+      </>}
       <NavigationBagProfileSessionControl {...props} />
     </div>
   );
@@ -1022,6 +1036,8 @@ function NavigationBagEmpty({
   profileTitle,
   logOutLabel,
   onLogOut,
+  onSavedAddresses,
+  onPaymentMethods,
 }: Pick<
   BagPanelConfig,
   | "signInHref"
@@ -1033,6 +1049,8 @@ function NavigationBagEmpty({
   | "profileTitle"
   | "logOutLabel"
   | "onLogOut"
+  | "onSavedAddresses"
+  | "onPaymentMethods"
 >) {
   return (
     <div className="flex w-full flex-col items-start gap-(--primitives-spacing-6)">
@@ -1064,6 +1082,8 @@ function NavigationBagEmpty({
         profileTitle={profileTitle}
         logOutLabel={logOutLabel}
         onLogOut={onLogOut}
+        onSavedAddresses={onSavedAddresses}
+        onPaymentMethods={onPaymentMethods}
       />
     </div>
   );
@@ -1081,7 +1101,8 @@ function NavigationBagBody({
       signInHref={config.signInHref} signInLabel={config.signInLabel}
       onSignInClick={config.onSignInClick} loggedIn={config.loggedIn}
       profileTitle={config.profileTitle} logOutLabel={config.logOutLabel}
-      onLogOut={config.onLogOut} />) ?? null;
+      onLogOut={config.onLogOut} onSavedAddresses={config.onSavedAddresses}
+      onPaymentMethods={config.onPaymentMethods} />) ?? null;
   }
 
   return (
@@ -1095,6 +1116,8 @@ function NavigationBagBody({
       profileTitle={config.profileTitle}
       logOutLabel={config.logOutLabel}
       onLogOut={config.onLogOut}
+      onSavedAddresses={config.onSavedAddresses}
+      onPaymentMethods={config.onPaymentMethods}
     />
   );
 }
@@ -1114,6 +1137,10 @@ export type NavigationBagTriggerProps = {
   profileTitle?: string;
   logOutLabel?: string;
   onLogOut?: () => void;
+  /** Opens the saved addresses view. Without a handler, the option is disabled. */
+  onSavedAddresses?: () => void;
+  /** Opens the payment methods view. Without a handler, the option is disabled. */
+  onPaymentMethods?: () => void;
 } & (
   | { unitCount?: 0; renderLoadedBag?: never }
   | { unitCount: number;
@@ -1133,6 +1160,8 @@ export function NavigationBagTrigger({
   profileTitle = BAG_PROFILE_TITLE,
   logOutLabel = BAG_LOG_OUT_LABEL,
   onLogOut,
+  onSavedAddresses,
+  onPaymentMethods,
   unitCount: requestedUnitCount = 0,
   renderLoadedBag,
 }: NavigationBagTriggerProps) {
@@ -1164,6 +1193,8 @@ export function NavigationBagTrigger({
       profileTitle,
       logOutLabel,
       onLogOut,
+      onSavedAddresses,
+      onPaymentMethods,
       unitCount,
       renderLoadedBag,
     });
@@ -1178,6 +1209,8 @@ export function NavigationBagTrigger({
     profileTitle,
     logOutLabel,
     onLogOut,
+    onSavedAddresses,
+    onPaymentMethods,
     unitCount,
     renderLoadedBag,
   ]);
@@ -1224,6 +1257,8 @@ export function NavigationBagTrigger({
                 profileTitle,
                 logOutLabel,
                 onLogOut,
+                onSavedAddresses,
+                onPaymentMethods,
                 unitCount,
                 renderLoadedBag,
               }}

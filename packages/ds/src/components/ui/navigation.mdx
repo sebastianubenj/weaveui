@@ -179,6 +179,8 @@ Must be a child of `Navigation`.
 | `emptyHint` | `string` | copy by `loggedIn` | Hint under the heading. Defaults: “or start adding items.”, or “Start adding items” when `loggedIn`. |
 | `loggedIn` | `boolean` | `false` | Hides the empty-state Log in link; My profile shows Log out. |
 | `onLogOut` | `() => void` | — | Log out under My profile when `loggedIn`. |
+| `onSavedAddresses` | `() => void` | — | Opens saved addresses when signed in; the option is disabled without a handler. |
+| `onPaymentMethods` | `() => void` | — | Opens payment methods when signed in; the option is disabled without a handler. |
 | `profileTitle` | `string` | `"My profile"` | Heading above the session control. |
 | `logOutLabel` | `string` | `"Log out"` | Log out button label. |
 | `unitCount` | `number` | `0` | Number of units in the bag, used for the badge and empty state. Requires `renderLoadedBag` when supplied. |
