@@ -76,6 +76,10 @@ export function removeFromBag(productId: string) {
   writeBag(readBag().filter((item) => item.productId !== productId));
 }
 
+export function clearBag() {
+  writeBag([]);
+}
+
 export function useBagEntries() {
   return useSyncExternalStore(subscribe, readBag, () => empty);
 }

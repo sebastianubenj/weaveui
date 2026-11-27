@@ -8,7 +8,7 @@ import { playwright } from "@vitest/browser-playwright";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
-  optimizeDeps: { include: ["react-router-dom"] },
+  optimizeDeps: { include: ["react-router-dom", "@base-ui/react/menu"] },
   resolve: {
     alias: [
       { find: /^@\//, replacement: `${path.resolve(import.meta.dirname, "./src")}/` },

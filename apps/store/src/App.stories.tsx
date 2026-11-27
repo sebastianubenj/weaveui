@@ -310,10 +310,13 @@ export const BagFlow: Story = {
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
     await userEvent.click(await canvas.findByRole("button", { name: "Add to bag" }));
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
+    await expect(window.scrollY).toBeGreaterThan(0);
     await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
     const review = await within(document.body).findByRole("button", { name: "Review bag" });
     await userEvent.click(review);
     await expect(await canvas.findByRole("heading", { name: "Bag", level: 1 })).toBeVisible();
+    await waitFor(() => expect(window.scrollY).toBe(0));
     const increase = canvas.getByRole("button", { name: /Increase quantity of/ });
     const name = increase.getAttribute("aria-label")!.replace("Increase quantity of ", "");
     await userEvent.click(increase);
@@ -327,6 +330,21 @@ export const BagFlow: Story = {
     await expect(canvas.getByRole("heading", { name: "Your bag is empty", level: 1 })).toBeVisible();
     await expect(canvas.getByRole("link", { name: "Log in" })).toHaveAttribute("href", "/login");
     await expect(localStorage.getItem(BAG_STORAGE_KEY)).toBe("[]");
+  },
+};
+
+export const HomeBagScroll: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => { localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }])); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await canvas.findByRole("heading", { name: "All products" });
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: "instant" });
+    await expect(window.scrollY).toBeGreaterThan(0);
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await within(document.body).findByRole("button", { name: "Review bag" }));
+    await expect(await canvas.findByRole("heading", { name: "Bag", level: 1 })).toBeVisible();
+    await waitFor(() => expect(window.scrollY).toBe(0));
   },
 };
 
@@ -365,6 +383,8 @@ export const CheckoutFlow: Story = {
     await expect(await canvas.findByRole("heading", { name: "Checkout" })).toBeVisible();
     await expect(canvas.getAllByText("$2,299")).toHaveLength(2);
     await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).toBeChecked();
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).toBeDisabled();
     await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
     await expect(canvas.getByRole("heading", { name: "Shipping address" })).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
@@ -389,7 +409,90 @@ export const CheckoutFlow: Story = {
     await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
     await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
     await userEvent.click(canvas.getByRole("button", { name: "Confirm and pay" }));
-    await expect(canvas.getByRole("status")).toHaveTextContent("No payment was made");
+    await expect(await canvas.findByRole("heading", { name: "Order confirmed!" })).toBeVisible();
+    await expect(canvas.getByText(/456 Main Street, Apt 8C/)).toBeVisible();
+    await expect(canvas.getByText("Mastercard ····3737")).toBeVisible();
+    await expect(canvas.getByText("SP-16 Black")).toBeVisible();
+    await expect(canvas.getByText(/No payment was made or confirmation email sent/)).toBeVisible();
+    await expect(JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) ?? "null")).toEqual([]);
+    await userEvent.click(canvas.getByRole("button", { name: "Continue shopping" }));
+    await expect(canvas.queryByRole("heading", { name: "Order confirmed!" })).toBeNull();
+  },
+};
+
+export const SavedAddressesFlow: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    await expect(await canvas.findByRole("heading", { name: "Saved addresses" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await userEvent.type(canvas.getByLabelText("First name"), "Alex");
+    await userEvent.type(canvas.getByLabelText("Last name"), "Doe");
+    await userEvent.type(canvas.getByLabelText("Street address"), "789 Market Street");
+    await userEvent.type(canvas.getByLabelText("City"), "New York");
+    await userEvent.click(canvas.getByRole("combobox", { name: "State" }));
+    await userEvent.click(await body.findByRole("option", { name: "NY" }));
+    await userEvent.type(canvas.getByLabelText("ZIP code"), "10001");
+    await userEvent.type(canvas.getByLabelText("Address name"), "Studio");
+    await userEvent.click(canvas.getByRole("button", { name: "Save address" }));
+    await expect(canvas.getByRole("heading", { name: "Studio" })).toBeVisible();
+    await expect(within(canvas.getByRole("heading", { name: "Studio" }).closest("article")!).getByText("Default")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    await expect(await canvas.findByRole("heading", { name: "Checkout" })).toBeVisible();
+    await expect(canvas.getByText("789 Market Street")).toBeVisible();
+    await expect(canvas.getByText("Studio")).toBeVisible();
+  },
+};
+
+export const CheckoutDefaultAddressInProfile: Story = {
+  parameters: { route: "/checkout" },
+  beforeEach: () => { resetSupabaseMock(exampleSession); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Change shipping address" }));
+    await userEvent.click(canvas.getByRole("radio", { name: /Work/ }));
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default shipping address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    const work = await canvas.findByRole("heading", { name: "Work" });
+    await expect(within(work.closest("article")!).getByText("Default")).toBeVisible();
+  },
+};
+
+export const ProfileDefaultAddressInCheckout: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Options for Work" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Set as default" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Work" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Edit" }));
+    await userEvent.clear(canvas.getByLabelText("Street address"));
+    await userEvent.type(canvas.getByLabelText("Street address"), "789 Updated Street");
+    await userEvent.click(canvas.getByRole("button", { name: "Save changes" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    await expect(await canvas.findByText("789 Updated Street, Apt 8C")).toBeVisible();
+    await expect(within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!).getByText("Default")).toBeVisible();
   },
 };
 

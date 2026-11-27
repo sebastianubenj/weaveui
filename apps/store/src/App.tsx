@@ -1,5 +1,5 @@
-import { lazy, Suspense, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useNavigate, useParams } from "react-router-dom";
+import { lazy, Suspense, useEffect, useLayoutEffect, useState } from "react";
+import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from "react-router-dom";
 
 import { Button, confirmEmailErrorMessage } from "@weaveui/ds";
 import {
@@ -13,6 +13,9 @@ import { useAuth } from "@/lib/auth-context";
 import { checkCompromisedPassword } from "@/lib/password-security";
 import { AuthLayout } from "@/views/auth-layout";
 import { PRODUCTS } from "@/lib/catalog";
+import { clearBag } from "@/lib/bag";
+import { AddressesProvider } from "@/lib/addresses-provider";
+import type { ConfirmedOrder } from "@/views/order-confirmed/order-confirmed";
 
 const ExpiredLink = lazy(() =>
   import("@/views/expired-link/expired-link").then(({ ExpiredLink }) => ({ default: ExpiredLink })),
@@ -39,12 +42,23 @@ const ResetPassword = lazy(() =>
 const EMAIL_NOT_CONFIRMED =
   "Confirm your email before signing in. Check your inbox for the confirmation link.";
 
-function StoreRoute({ showBag = false, showCheckout = false }: { showBag?: boolean; showCheckout?: boolean }) {
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useLayoutEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "instant" });
+  }, [pathname]);
+  return null;
+}
+
+function StoreRoute({ showBag = false, showCheckout = false, showConfirmation = false, showSavedAddresses = false }: { showBag?: boolean; showCheckout?: boolean; showConfirmation?: boolean; showSavedAddresses?: boolean }) {
   const { productId } = useParams();
   const navigate = useNavigate();
+  const location = useLocation();
+  const confirmedOrder = showConfirmation ? location.state as ConfirmedOrder | null : null;
+  if (showConfirmation && !confirmedOrder) return <Navigate to="/" replace />;
   const product = productId ? PRODUCTS.find((item) => item.id === productId) : undefined;
   if (productId && !product) return <Navigate to="/" replace />;
-  return <Home product={product} showBag={showBag} showCheckout={showCheckout} onCheckout={() => navigate("/checkout")} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
+  return <Home product={product} showBag={showBag} showCheckout={showCheckout} showSavedAddresses={showSavedAddresses} onSavedAddresses={() => navigate("/saved-addresses")} confirmedOrder={confirmedOrder ?? undefined} onConfirm={(order) => { clearBag(); navigate("/order-confirmed", { state: order, replace: true }); }} onContinueShopping={() => navigate("/")} onCheckout={() => navigate("/checkout")} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
 }
 
 function AuthLinkRedirect() {
@@ -215,12 +229,15 @@ function PasswordUpdatedRoute() {
 export function App() {
   return (
     <>
+      <ScrollToTop />
       <AuthLinkRedirect />
-      <Suspense fallback={null}>
+      <AddressesProvider><Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<StoreRoute />} />
           <Route path="/bag" element={<StoreRoute showBag />} />
           <Route path="/checkout" element={<StoreRoute showCheckout />} />
+          <Route path="/saved-addresses" element={<StoreRoute showSavedAddresses />} />
+          <Route path="/order-confirmed" element={<StoreRoute showConfirmation />} />
           <Route path="/products/:productId" element={<StoreRoute />} />
           <Route path="/login" element={<LoginRoute />} />
           <Route path="/register" element={<RegisterRoute />} />
@@ -236,7 +253,7 @@ export function App() {
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Suspense>
+      </Suspense></AddressesProvider>
     </>
   );
 }

@@ -18,6 +18,8 @@ import { NavigationBagLoaded } from "@/components/ui/navigation-bag-loaded";
 import { HomeFooter } from "./home-footer";
 import { Bag } from "@/views/bag/bag";
 import { Checkout } from "@/views/checkout/checkout";
+import { OrderConfirmed, type ConfirmedOrder } from "@/views/order-confirmed/order-confirmed";
+import { SavedAddresses } from "@/views/saved-addresses/saved-addresses";
 
 interface ProductGroup {
   heading: string;
@@ -156,11 +158,16 @@ export interface HomeProps {
   showBag?: boolean;
   showCheckout?: boolean;
   onCheckout?: () => void;
+  showSavedAddresses?: boolean;
+  onSavedAddresses?: () => void;
+  onConfirm?: (order: ConfirmedOrder) => void;
+  confirmedOrder?: ConfirmedOrder;
+  onContinueShopping?: () => void;
   product?: HomeProduct;
   onSelectProduct?: (id: string) => void;
 }
 
-export function Home({ onReview, product, onSelectProduct, showBag = false, showCheckout = false, onCheckout }: HomeProps) {
+export function Home({ onReview, product, onSelectProduct, showBag = false, showCheckout = false, showSavedAddresses = false, onSavedAddresses, onCheckout, onConfirm, confirmedOrder, onContinueShopping }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
   const bagUnitCount = useBagUnitCount();
@@ -223,7 +230,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false, show
               <div className="relative size-(--primitives-spacing-out-of-scale-30) overflow-hidden">
                 <img src="/search-empty.png" alt="" className="absolute top-[-9.49%] left-[-9.49%] size-[118.98%] max-w-none" />
               </div>
-              <PageHeader title="No results found" titleAs="h2" description={`We couldn't find any products matching "${search.trim()}".`} className="pt-(--primitives-spacing-8) md:pt-(--primitives-spacing-8) [&_[data-slot=description]]:text-(length:--semantics-typography-body-body-md-font-size) [&_[data-slot=description]]:leading-(--semantics-typography-body-body-md-lh-normal) [&_[data-slot=description]]:tracking-(--semantics-typography-body-body-md-tracking-tight) [&_[data-slot=description]]:[color:var(--semantics-colors-foreground-subtle-on-subtlest)] md:[&_[data-slot=description]]:text-(length:--semantics-typography-body-body-lg-font-size) md:[&_[data-slot=description]]:leading-(--semantics-typography-body-body-lg-lh-normal) md:[&_[data-slot=description]]:tracking-(--semantics-typography-body-body-lg-tracking-tight)" />
+              <PageHeader title="No results found" titleAs="h2" description={`We couldn't find any products matching "${search.trim()}".`} className="pt-(--primitives-spacing-8) md:pt-(--primitives-spacing-8) md:[&_[data-slot=title]]:[font-weight:var(--semantics-typography-heading-font-weight)] md:[&_[data-slot=title]]:text-(length:--semantics-typography-heading-heading-xl-font-size) md:[&_[data-slot=title]]:leading-(--semantics-typography-heading-heading-xl-lh-tight) md:[&_[data-slot=title]]:tracking-(--semantics-typography-heading-heading-xl-tracking-tight) [&_[data-slot=description]]:text-(length:--semantics-typography-body-body-md-font-size) [&_[data-slot=description]]:leading-(--semantics-typography-body-body-md-lh-normal) [&_[data-slot=description]]:tracking-(--semantics-typography-body-body-md-tracking-tight) [&_[data-slot=description]]:[color:var(--semantics-colors-foreground-subtle-on-subtlest)] md:[&_[data-slot=description]]:text-(length:--semantics-typography-body-body-lg-font-size) md:[&_[data-slot=description]]:leading-(--semantics-typography-body-body-lg-lh-normal) md:[&_[data-slot=description]]:tracking-(--semantics-typography-body-body-lg-tracking-tight)" />
               <p className="m-0 mt-(--primitives-spacing-4) font-sans [font-weight:var(--semantics-typography-body-font-weight)] text-(length:--semantics-typography-body-body-md-font-size) leading-(--semantics-typography-body-body-md-lh-normal) tracking-(--semantics-typography-body-body-md-tracking-tight) md:text-(length:--semantics-typography-body-body-lg-font-size) md:leading-(--semantics-typography-body-body-lg-lh-normal) md:tracking-(--semantics-typography-body-body-lg-tracking-tight)">Try a different search term.</p>
             </div>
             <Button variant="outline" size="md" onClick={() => { setSearch(""); searchInputRef.current?.focus(); }}>Clear search</Button>
@@ -266,6 +273,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false, show
           aria-label="Bag"
           signInHref="/login"
           loggedIn={loggedIn}
+          onSavedAddresses={onSavedAddresses ? () => { setOpen(false); setValue(null); onSavedAddresses(); } : undefined}
           onLogOut={() => {
             void logOut();
           }}
@@ -279,7 +287,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false, show
             {error}
           </FormAlert>
         ) : null}
-        {showCheckout ? <Checkout /> : showBag ? <Bag onCheckout={onCheckout} /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
+        {confirmedOrder ? <OrderConfirmed order={confirmedOrder} onContinue={() => onContinueShopping?.()} /> : showSavedAddresses ? <SavedAddresses /> : showCheckout ? <Checkout onConfirm={order => onConfirm?.(order)} /> : showBag ? <Bag onCheckout={onCheckout} /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
       </main>
       <HomeFooter />
     </>
