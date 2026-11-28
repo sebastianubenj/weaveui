@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { MemoryRouter } from "react-router-dom";
 import { expect, userEvent, within } from "storybook/test";
 import { AddressesProvider } from "@/lib/addresses-provider";
 import { SavedAddresses } from "./saved-addresses";
@@ -6,7 +7,7 @@ import { SavedAddresses } from "./saved-addresses";
 const meta = {
   title: "Views/Saved addresses",
   component: SavedAddresses,
-  decorators: [Story => <AddressesProvider><Story /></AddressesProvider>],
+  decorators: [Story => <MemoryRouter initialEntries={["/saved-addresses"]}><AddressesProvider><Story /></AddressesProvider></MemoryRouter>],
   parameters: { layout: "fullscreen" },
 } satisfies Meta<typeof SavedAddresses>;
 export default meta;

@@ -1,5 +1,5 @@
 import { StrictMode } from "react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation, useNavigate } from "react-router-dom";
 import type { AuthChangeEvent, Session, AuthError } from "@supabase/supabase-js";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, mocked, userEvent, waitFor, within } from "storybook/test";
@@ -12,6 +12,12 @@ import { exampleSession, supabase as mockSupabase } from "./lib/__mocks__/supaba
 import { getSupabase } from "./lib/supabase";
 
 const mockAuth = mocked(mockSupabase.auth, true);
+
+function HistoryControls() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  return <div><button type="button" onClick={() => navigate(-1)}>Browser back</button><button type="button" onClick={() => navigate(1)}>Browser forward</button><output aria-label="Current path">{location.pathname}</output></div>;
+}
 
 function resetSupabaseMock(initialSession: Session | null = null) {
   let session = initialSession;
@@ -53,16 +59,17 @@ const meta = {
   decorators: [(Story, context) => (
     <StrictMode>
       <MemoryRouter key={context.id} initialEntries={[context.parameters.route]}>
-        <AuthProvider><Story /></AuthProvider>
+        <AuthProvider><Story />{context.parameters.historyControls && <HistoryControls />}</AuthProvider>
       </MemoryRouter>
     </StrictMode>
   )],
   beforeEach: () => {
     const originalUrl = window.location.href;
+    const originalTitle = document.title;
     localStorage.removeItem(BAG_STORAGE_KEY);
     resetSupabaseMock();
     mocked(checkCompromisedPassword).mockResolvedValue("clear");
-    return () => { window.history.replaceState({}, "", originalUrl); };
+    return () => { window.history.replaceState({}, "", originalUrl); document.title = originalTitle; };
   },
 } satisfies Meta<typeof App>;
 
@@ -372,6 +379,54 @@ export const EmptyBagSignedIn: Story = {
   },
 };
 
+export const CheckoutBrowserHistory: Story = {
+  parameters: { route: "/checkout", historyControls: true },
+  beforeEach: () => { localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }])); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const back = canvas.getByRole("button", { name: "Browser back" });
+    await userEvent.click(await canvas.findByRole("button", { name: "Change shipping address" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/checkout/shipping");
+    await waitFor(() => expect(document.title).toBe("Change shipping address | mood."));
+    await userEvent.click(canvas.getByRole("radio", { name: /Work/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/checkout/shipping/new");
+    await waitFor(() => expect(document.title).toBe("Add new address | mood."));
+    await userEvent.type(canvas.getByLabelText("First name"), "Draft");
+    await userEvent.click(back);
+    await expect(canvas.getByRole("heading", { name: "Change shipping address" })).toBeVisible();
+    await waitFor(() => expect(document.title).toBe("Change shipping address | mood."));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await expect(canvas.getByLabelText("First name")).toHaveValue("");
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(back);
+    await expect(within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!).getByText("456 Main Street, Apt 8C")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/checkout/payment");
+    await waitFor(() => expect(document.title).toBe("Change payment method | mood."));
+    await userEvent.click(canvas.getByRole("radio", { name: /Mastercard/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Use this card" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/checkout/payment/new");
+    await waitFor(() => expect(document.title).toBe("Add new card | mood."));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Draft");
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Use shipping address as billing address" }));
+    await userEvent.click(back);
+    await userEvent.click(canvas.getByRole("button", { name: "Browser forward" }));
+    await expect(canvas.getByLabelText("Cardholder name")).toHaveValue("");
+    await expect(canvas.getByRole("checkbox", { name: "Use shipping address as billing address" })).toBeChecked();
+    await userEvent.click(back);
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.getByLabelText("Cardholder name")).toHaveValue("");
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(back);
+    await expect(canvas.getByText("Mastercard ····3737")).toBeVisible();
+  },
+};
+
 export const CheckoutFlow: Story = {
   parameters: { route: "/bag" },
   beforeEach: () => {
@@ -432,6 +487,65 @@ export const CheckoutFlow: Story = {
     await expect(JSON.parse(localStorage.getItem(BAG_STORAGE_KEY) ?? "null")).toEqual([]);
     await userEvent.click(canvas.getByRole("button", { name: "Continue shopping" }));
     await expect(canvas.queryByRole("heading", { name: "Order confirmed!" })).toBeNull();
+  },
+};
+
+export const SavedAddressesBrowserHistory: Story = {
+  parameters: { route: "/saved-addresses", historyControls: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    const back = canvas.getByRole("button", { name: "Browser back" });
+    await userEvent.click(await canvas.findByRole("button", { name: "Add new address" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/saved-addresses/new");
+    await waitFor(() => expect(document.title).toBe("Add new address | mood."));
+    await userEvent.type(canvas.getByLabelText("First name"), "Draft");
+    await userEvent.click(back);
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await expect(canvas.getByLabelText("First name")).toHaveValue("");
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Home" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Edit address" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/saved-addresses/home/edit");
+    await waitFor(() => expect(document.title).toBe("Edit address | mood."));
+    await userEvent.clear(canvas.getByLabelText("First name"));
+    await userEvent.type(canvas.getByLabelText("First name"), "Draft");
+    await userEvent.click(back);
+    await expect(canvas.getAllByText("John Doe", { selector: "div" })).toHaveLength(2);
+  },
+};
+
+export const PaymentMethodsBrowserHistory: Story = {
+  parameters: { route: "/payment-methods", historyControls: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    const back = canvas.getByRole("button", { name: "Browser back" });
+    await userEvent.click(await canvas.findByRole("button", { name: "Add new card" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/payment-methods/new");
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Draft");
+    await userEvent.click(back);
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.getByLabelText("Cardholder name")).toHaveValue("");
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Visa ending in 4242" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Edit billing address" }));
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/payment-methods/visa/billing-address");
+    await waitFor(() => expect(document.title).toBe("Edit billing address | mood."));
+    await userEvent.clear(canvas.getByLabelText("Street address"));
+    await userEvent.type(canvas.getByLabelText("Street address"), "Draft");
+    await userEvent.click(back);
+    await expect(canvas.getByText("456 Main Street, Apt 8C")).toBeVisible();
+  },
+};
+
+export const DirectAddressEdit: Story = {
+  parameters: { route: "/saved-addresses/home/edit", historyControls: true },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await expect(await canvas.findByRole("heading", { name: "Edit address" })).toBeVisible();
+    await expect(canvas.getByLabelText("First name")).toHaveValue("John");
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await expect(canvas.getByRole("heading", { name: "Your addresses" })).toBeVisible();
+    await expect(canvas.getByLabelText("Current path")).toHaveTextContent("/saved-addresses");
   },
 };
 
@@ -577,6 +691,51 @@ export const CheckoutNewDetails: Story = {
   },
 };
 
+
+export const CheckoutFormValidation: Story = {
+  parameters: { route: "/checkout" },
+  beforeEach: () => { localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }])); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole("button", { name: "Change shipping address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    const first = canvas.getByLabelText("First name");
+    await userEvent.type(first, " ");
+    await userEvent.tab();
+    await expect(canvas.getByText("Enter your first name.")).toBeVisible();
+    await userEvent.type(first, "Alex");
+    await expect(canvas.queryByText("Enter your first name.")).not.toBeInTheDocument();
+    await userEvent.clear(first);
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use address" }));
+    await expect(first).toHaveFocus();
+    await expect(first).toHaveAccessibleDescription("Enter your first name.");
+    await expect(canvas.getByText("Select a state.")).toBeVisible();
+    await userEvent.type(first, "Alex");
+    await expect(canvas.queryByText("Enter your first name.")).not.toBeInTheDocument();
+    const zip = canvas.getByLabelText("ZIP code");
+    await userEvent.type(zip, "1234");
+    await expect(canvas.getByText("Enter a valid ZIP code, such as 10001 or 10001-1234.")).toBeVisible();
+    await userEvent.type(zip, "5");
+    await expect(canvas.queryByText("Enter a valid ZIP code, such as 10001 or 10001-1234.")).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use card" }));
+    await expect(canvas.getByLabelText("Cardholder name")).toHaveFocus();
+    await expect(canvas.getByText("Enter your card number.")).toBeVisible();
+    await expect(canvas.queryByText("Enter your street address.")).not.toBeInTheDocument();
+    await userEvent.type(canvas.getByLabelText("Card number"), "4242424242424241");
+    await expect(canvas.getByText("Enter a valid card number.")).toBeVisible();
+    await userEvent.clear(canvas.getByLabelText("Card number"));
+    await userEvent.type(canvas.getByLabelText("Card number"), "4242424242424242");
+    await expect(canvas.queryByText("Enter a valid card number.")).not.toBeInTheDocument();
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "0120");
+    await expect(canvas.getByText("This card has expired.")).toBeVisible();
+    await userEvent.type(canvas.getByLabelText("Security code"), "12");
+    await expect(canvas.getByText("Enter the 3-digit security code.")).toBeVisible();
+  },
+};
 
 export const CheckoutCardBrands: Story = {
   parameters: { route: "/checkout" },
@@ -770,6 +929,46 @@ export const PaymentMethodsInCheckout: Story = {
     await expect(within(defaultCard).queryByText("Default")).not.toBeInTheDocument();
   },
 };
+
+export const CheckoutAfterDeletingAllCards: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Payment methods" }));
+    for (const name of ["Mastercard ending in 3737", "Visa ending in 4242"]) {
+      await userEvent.click(await canvas.findByRole("button", { name: `Options for ${name}` }));
+      await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+      await userEvent.click(within(await body.findByRole("dialog")).getByRole("button", { name: "Delete card" }));
+    }
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    await expect(canvas.getByRole("heading", { name: "No saved payment methods yet" })).toBeVisible();
+    await expect(canvas.getByText("Add a payment method to continue with your order.")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Confirm and pay" })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default payment method" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await expect(canvas.getByRole("heading", { name: "No saved payment methods yet" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "5555555555554444");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use card" }));
+    const payment = within(canvas.getByRole("heading", { name: "Payment method" }).closest("section")!);
+    await expect(payment.getByText("Mastercard ····4444")).toBeVisible();
+    await expect(payment.getByText("Default")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Confirm and pay" })).toBeEnabled();
+  },
+};
+
+export const CheckoutAfterDeletingAllCardsMobile: Story = { ...CheckoutAfterDeletingAllCards, globals: { viewport: { value: "mobile1", isRotated: false } } };
 
 export const AddPaymentWithoutShippingAddress: Story = {
   parameters: { route: "/" },

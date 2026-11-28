@@ -51,6 +51,25 @@ function ScrollToTop() {
   return null;
 }
 
+function PageTitle() {
+  const { pathname } = useLocation();
+  let title: string | undefined;
+  if (pathname === "/bag") title = "Bag";
+  else if (pathname.startsWith("/checkout")) {
+    title = ({ "/checkout": "Checkout", "/checkout/shipping": "Change shipping address", "/checkout/shipping/new": "Add new address", "/checkout/payment": "Change payment method", "/checkout/payment/new": "Add new card" } as Record<string, string>)[pathname] ?? "Checkout";
+  } else if (pathname.startsWith("/saved-addresses")) {
+    title = pathname === "/saved-addresses/new" ? "Add new address" : /^\/saved-addresses\/[^/]+\/edit$/.test(pathname) ? "Edit address" : "Saved addresses";
+  } else if (pathname.startsWith("/payment-methods")) {
+    title = pathname === "/payment-methods/new" ? "Add new card" : /^\/payment-methods\/[^/]+\/billing-address$/.test(pathname) ? "Edit billing address" : "Payment methods";
+  } else if (pathname.startsWith("/products/")) {
+    title = PRODUCTS.find(product => `/products/${product.id}` === pathname)?.name;
+  } else {
+    title = ({ "/order-confirmed": "Order confirmed", "/login": "Log in", "/register": "Create account", "/forgot-password": "Forgot password", "/reset-password": "Reset password", "/password-updated": "Password updated", "/expired-link": "Expired link" } as Record<string, string>)[pathname];
+  }
+  useEffect(() => { document.title = title ? `${title} | mood.` : "mood."; }, [title]);
+  return null;
+}
+
 function StoreRoute({ showBag = false, showCheckout = false, showConfirmation = false, showSavedAddresses = false, showPaymentMethods = false }: { showBag?: boolean; showCheckout?: boolean; showConfirmation?: boolean; showSavedAddresses?: boolean; showPaymentMethods?: boolean }) {
   const { productId } = useParams();
   const navigate = useNavigate();
@@ -231,14 +250,15 @@ export function App() {
   return (
     <>
       <ScrollToTop />
+      <PageTitle />
       <AuthLinkRedirect />
       <AddressesProvider><PaymentMethodsProvider><Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<StoreRoute />} />
           <Route path="/bag" element={<StoreRoute showBag />} />
-          <Route path="/checkout" element={<StoreRoute showCheckout />} />
-          <Route path="/saved-addresses" element={<StoreRoute showSavedAddresses />} />
-          <Route path="/payment-methods" element={<StoreRoute showPaymentMethods />} />
+          <Route path="/checkout/*" element={<StoreRoute showCheckout />} />
+          <Route path="/saved-addresses/*" element={<StoreRoute showSavedAddresses />} />
+          <Route path="/payment-methods/*" element={<StoreRoute showPaymentMethods />} />
           <Route path="/order-confirmed" element={<StoreRoute showConfirmation />} />
           <Route path="/products/:productId" element={<StoreRoute />} />
           <Route path="/login" element={<LoginRoute />} />

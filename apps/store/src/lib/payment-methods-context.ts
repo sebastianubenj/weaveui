@@ -7,6 +7,7 @@ export interface PaymentMethodsState {
   cards: PaymentCard[];
   defaultCardId: string | null;
   addCard: (card: PaymentCard, makeDefault: boolean) => void;
+  deleteCard: (id: string, replacementId?: string) => void;
   setDefaultCardId: (id: string) => void;
   updateBillingAddress: (id: string, address: BillingAddress) => void;
 }

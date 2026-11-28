@@ -11,8 +11,16 @@ export function PaymentMethodsProvider({ children }: { children: ReactNode }) {
     setState(current => ({ cards: [...current.cards, card], defaultCardId: makeDefault || !current.defaultCardId ? card.id : current.defaultCardId }));
   }
   function setDefaultCardId(id: string) { setState(current => current.cards.some(card => card.id === id) ? { ...current, defaultCardId: id } : current); }
+  function deleteCard(id: string, replacementId?: string) {
+    setState(current => {
+      if (!current.cards.some(card => card.id === id)) return current;
+      const remaining = current.cards.filter(card => card.id !== id);
+      if (current.defaultCardId === id && remaining.length > 1 && !remaining.some(card => card.id === replacementId)) return current;
+      return { cards: remaining, defaultCardId: current.defaultCardId === id ? (remaining.find(card => card.id === replacementId)?.id ?? remaining[0]?.id ?? null) : current.defaultCardId };
+    });
+  }
   function updateBillingAddress(id: string, billingAddress: PaymentCard["billingAddress"]) {
     setState(current => ({ ...current, cards: current.cards.map(card => card.id === id ? { ...card, billingAddress } : card) }));
   }
-  return <PaymentMethodsContext.Provider value={{ ...state, addCard, setDefaultCardId, updateBillingAddress }}>{children}</PaymentMethodsContext.Provider>;
+  return <PaymentMethodsContext.Provider value={{ ...state, addCard, deleteCard, setDefaultCardId, updateBillingAddress }}>{children}</PaymentMethodsContext.Provider>;
 }

@@ -2,6 +2,7 @@ import type { ChangeEvent } from "react";
 import { identifyCard } from "@/lib/identify-card";
 import type { CreditCardType } from "credit-card-type/dist/types";
 import { Field, Input } from "@weaveui/ds";
+import { useFormValidation } from "@/components/form-validation-context";
 import visa from "@/views/checkout/assets/visa.svg";
 import mastercard from "@/views/checkout/assets/mastercard.svg";
 import amex from "@/views/checkout/assets/amex.svg";
@@ -30,6 +31,8 @@ function cardLengths(brand: CreditCardType) {
 }
 
 export function CardNumberField({ brand, onBrandChange }: { brand: CreditCardType | null; onBrandChange: (brand: CreditCardType | null) => void }) {
+  const { errors, change, blur } = useFormValidation();
+  const error = errors["card-number"];
   const lengths = brand ? cardLengths(brand) : undefined;
   const pattern = lengths ? lengths.map(length => `([0-9] ?){${length - 1}}[0-9]`).join("|") : "([0-9] ?){11,18}[0-9]";
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -49,8 +52,9 @@ export function CardNumberField({ brand, onBrandChange }: { brand: CreditCardTyp
     }
     input.setSelectionRange(position, position);
     onBrandChange(detected);
+    change("card-number", input.value, "card");
   }
-  return <Field label="Card number" htmlFor="card-number"><Input id="card-number" name="card-number" placeholder="1234 5678 9012 1234" autoComplete="cc-number" inputMode="numeric" pattern={pattern} title={brand && lengths ? `Enter a ${brand.niceType} card number with ${lengths.join(", ")} digits.` : "Enter a card number with 12 to 19 digits."} required onChange={handleChange} trailing={brand ? <CardBrand brand={brand} /> : undefined} /></Field>;
+  return <Field label="Card number" htmlFor="card-number" error={Boolean(error)} description={error}><Input id="card-number" name="card-number" placeholder="1234 5678 9012 1234" autoComplete="cc-number" inputMode="numeric" pattern={pattern} data-validation-rule="card" error={Boolean(error)} aria-describedby={error ? "card-number-description" : undefined} required onChange={handleChange} onBlur={event => blur("card-number", event.currentTarget.value, "card")} trailing={brand ? <CardBrand brand={brand} /> : undefined} /></Field>;
 }
 
 function formatNumericInput(event: ChangeEvent<HTMLInputElement>, format: NumericFormat) {
@@ -71,9 +75,11 @@ function formatNumericInput(event: ChangeEvent<HTMLInputElement>, format: Numeri
 }
 
 export function TextField({ id, label: text, placeholder, optional = false, autoComplete, numericFormat, securityLength }: { id: string; label: string; placeholder: string; optional?: boolean; autoComplete?: string; numericFormat?: NumericFormat; securityLength?: number }) {
+  const { errors, change, blur } = useFormValidation(); const error = errors[id];
+  const rule = numericFormat ?? (id === "cardholder" ? "cardholder" : undefined);
   const rules = {
     expiration: { pattern: "(0[1-9]|1[0-2])/[0-9]{2}", title: "Enter a valid month and year in MM/YY format." },
     security: { pattern: "[0-9]{3,4}", title: "Enter a 3- or 4-digit security code." },
   };
-  return <Field label={text} htmlFor={id} optional={optional}><Input id={id} name={id} placeholder={placeholder} required={!optional} autoComplete={autoComplete} inputMode={numericFormat ? "numeric" : undefined} pattern={numericFormat === "security" && securityLength ? `[0-9]{${securityLength}}` : numericFormat ? rules[numericFormat].pattern : undefined} title={numericFormat === "security" && securityLength ? `Enter a ${securityLength}-digit security code.` : numericFormat ? rules[numericFormat].title : undefined} onChange={numericFormat ? e => formatNumericInput(e, numericFormat) : undefined} /></Field>;
+  return <Field label={text} htmlFor={id} optional={optional} error={Boolean(error)} description={error}><Input id={id} name={id} placeholder={placeholder} required={!optional} autoComplete={autoComplete} inputMode={numericFormat ? "numeric" : undefined} pattern={numericFormat === "security" && securityLength ? `[0-9]{${securityLength}}` : numericFormat ? rules[numericFormat].pattern : undefined} data-validation-rule={rule} data-validation-length={numericFormat === "security" ? securityLength : undefined} error={Boolean(error)} aria-describedby={error ? `${id}-description` : undefined} onChange={event => { if (numericFormat) formatNumericInput(event, numericFormat); if (rule) change(id, event.currentTarget.value, rule, securityLength); }} onBlur={event => { if (rule) blur(id, event.currentTarget.value, rule, securityLength); }} /></Field>;
 }

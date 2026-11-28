@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
+import { MemoryRouter } from "react-router-dom";
 import { expect, userEvent, waitFor, within } from "storybook/test";
 import { AddressesProvider } from "@/lib/addresses-provider";
 import { PaymentMethodsProvider } from "@/lib/payment-methods-provider";
@@ -8,7 +9,7 @@ const meta = {
   title: "Views/Payment methods",
   component: PaymentMethods,
   parameters: { layout: "fullscreen" },
-  decorators: [Story => <AddressesProvider><PaymentMethodsProvider><Story /></PaymentMethodsProvider></AddressesProvider>],
+  decorators: [Story => <MemoryRouter initialEntries={["/payment-methods"]}><AddressesProvider><PaymentMethodsProvider><Story /></PaymentMethodsProvider></AddressesProvider></MemoryRouter>],
 } satisfies Meta<typeof PaymentMethods>;
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -88,3 +89,82 @@ export const ContextMenus: Story = {
   },
 };
 export const ContextMenusMobile: Story = { ...ContextMenus, globals: { viewport: { value: "mobile1", isRotated: false } } };
+
+export const DeleteCards: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    async function openDelete(name: string) {
+      await userEvent.click(canvas.getByRole("button", { name: `Options for ${name}` }));
+      await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+      return within(await body.findByRole("dialog"));
+    }
+    let dialog = await openDelete("Mastercard ending in 3737");
+    await expect(dialog.getByRole("heading", { name: "Delete card?" })).toBeVisible();
+    await userEvent.click(dialog.getByRole("button", { name: "Cancel" }));
+    await expect(canvas.getByText("Mastercard ····3737")).toBeVisible();
+    dialog = await openDelete("Visa ending in 4242");
+    await expect(body.getByRole("dialog")).toHaveAccessibleDescription("Mastercard ····3737 will become your new default payment method.");
+    await userEvent.click(dialog.getByRole("button", { name: "Delete card" }));
+    const remaining = canvas.getByText("Mastercard ····3737").closest("article")!;
+    await expect(within(remaining).getByText("Default")).toBeVisible();
+    dialog = await openDelete("Mastercard ending in 3737");
+    await expect(dialog.getByRole("heading", { name: "Delete card?" })).toBeVisible();
+    await userEvent.click(dialog.getByRole("button", { name: "Delete card" }));
+    await expect(canvas.queryByText("Mastercard ····3737")).not.toBeInTheDocument();
+    await expect(canvas.getByRole("heading", { name: "No saved payment methods yet" })).toBeVisible();
+    await expect(canvas.getByText("Add a payment method to make your next checkout faster.")).toBeVisible();
+    await expect(canvas.queryByText("Manage your saved payment methods.")).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default payment method" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await expect(canvas.getByRole("heading", { name: "No saved payment methods yet" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "5555555555554444");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await userEvent.click(canvas.getByRole("button", { name: "Save card" }));
+    await expect(within(canvas.getByText("Mastercard ····4444").closest("article")!).getByText("Default")).toBeVisible();
+  },
+};
+export const DeleteCardsMobile: Story = { ...DeleteCards, globals: { viewport: { value: "mobile1", isRotated: false } } };
+
+export const DeleteNonDefault: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Mastercard ending in 3737" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+    await userEvent.click(within(await body.findByRole("dialog")).getByRole("button", { name: "Delete card" }));
+    await expect(canvas.queryByText("Mastercard ····3737")).not.toBeInTheDocument();
+    await expect(within(canvas.getByText("Visa ····4242").closest("article")!).getByText("Default")).toBeVisible();
+  },
+};
+
+export const DeleteDefaultWithChoice: Story = {
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "5555555555554444");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await userEvent.click(canvas.getByRole("button", { name: "Save card" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Visa ending in 4242" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+    const dialog = within(await body.findByRole("dialog"));
+    const submit = dialog.getByRole("button", { name: "Delete card" });
+    await expect(submit).toBeDisabled();
+    const select = dialog.getByRole("combobox", { name: "New default card" });
+    await userEvent.click(select);
+    await expect(await body.findByRole("option", { name: "Mastercard – ····3737" })).toBeVisible();
+    const popup = body.getByRole("listbox").closest('[data-slot="select-content"]')!;
+    await expect(Math.abs(popup.getBoundingClientRect().width - select.getBoundingClientRect().width)).toBeLessThan(1);
+    await userEvent.click(await body.findByRole("option", { name: "Mastercard – ····4444" }));
+    await expect(select).toHaveTextContent("Mastercard – ····4444");
+    await expect(submit).toBeEnabled();
+    await userEvent.click(submit);
+    await expect(canvas.queryByText("Visa ····4242")).not.toBeInTheDocument();
+    await expect(within(canvas.getByText("Mastercard ····4444").closest("article")!).getByText("Default")).toBeVisible();
+  },
+};
+export const DeleteDefaultWithChoiceMobile: Story = { ...DeleteDefaultWithChoice, globals: { viewport: { value: "mobile1", isRotated: false } } };
