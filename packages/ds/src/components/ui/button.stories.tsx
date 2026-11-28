@@ -20,9 +20,9 @@ const meta = {
     },
     surface: {
       control: "select",
-      options: ["default", "on-primary"],
+      options: ["default", "on-primary", "on-subtle"],
       description:
-        "Surface the button sits on. on-primary is for a primary action on background/primary.",
+        "Surface the button sits on. on-primary is for a primary action on background/primary; on-subtle adjusts ghost hover on background/subtle.",
     },
     size: {
       control: "select",
@@ -131,6 +131,11 @@ export const OnPrimary: Story = {
       </div>
     ),
   ],
+};
+
+export const GhostOnSubtle: Story = {
+  args: { variant: "ghost", surface: "on-subtle", size: "icon-xs", icon: "ellipsis-vertical", "aria-label": "More options" },
+  decorators: [Story => <div className="rounded-(--primitives-radius-rounded-14) p-(--primitives-spacing-4) [background-color:var(--semantics-colors-background-subtle)]"><Story /></div>],
 };
 
 /* -------------------------------------------------------------------------- */

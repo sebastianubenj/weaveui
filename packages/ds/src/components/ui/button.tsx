@@ -59,6 +59,7 @@ const buttonVariants = cva(
 
         ghost: `bg-transparent [color:var(--semantics-colors-foreground-default)]
           hover:[background-color:var(--semantics-colors-interaction-secondary-hover)]
+          data-[surface=on-subtle]:hover:[background-color:var(--semantics-colors-interaction-secondary-hover-on-subtle)]
           active:bg-transparent
           disabled:[color:var(--semantics-colors-foreground-subtle)]
           aria-disabled:[color:var(--semantics-colors-foreground-subtle)]
@@ -105,6 +106,7 @@ const buttonVariants = cva(
       surface: {
         default: "",
         "on-primary": "",
+        "on-subtle": "",
       },
     },
 
@@ -147,7 +149,8 @@ export interface ButtonProps
   /**
    * Surface the button sits on. `on-primary` is the primary action on
    * `background/primary` (navigation, cart panel). Only `variant="primary"`
-   * has an `on-primary` treatment.
+   * has an `on-primary` treatment. `on-subtle` adjusts the ghost hover on
+   * `background/subtle`.
    */
   surface?: ButtonSurface;
 

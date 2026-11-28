@@ -65,6 +65,7 @@ const selectItemVariants = cva(
 );
 
 type SelectItemRecord = { value: string; label: React.ReactNode };
+const SelectTriggerIdContext = React.createContext<string | undefined>(undefined);
 
 function collectSelectItems(children: React.ReactNode): SelectItemRecord[] {
   const items: SelectItemRecord[] = [];
@@ -130,51 +131,55 @@ export function Select({
   ref,
   ...rootProps
 }: SelectProps) {
+  const generatedId = React.useId();
+  const triggerId = id ?? generatedId;
   const collectedItems = collectSelectItems(children);
   const resolvedItems =
     items ?? (collectedItems.length > 0 ? collectedItems : undefined);
 
   return (
-    <SelectPrimitive.Root
-      disabled={disabled}
-      id={id}
-      items={resolvedItems}
-      {...rootProps}
-    >
-      <SelectPrimitive.Trigger
-        data-slot="select"
+    <SelectTriggerIdContext.Provider value={triggerId}>
+      <SelectPrimitive.Root
         disabled={disabled}
-        aria-invalid={error}
-        aria-label={ariaLabel}
-        aria-labelledby={ariaLabelledBy}
-        aria-describedby={ariaDescribedBy}
-        className={cn(triggerClassName, className)}
-        ref={ref}
+        id={triggerId}
+        items={resolvedItems}
+        {...rootProps}
       >
-        {leadingIcon ? (
-          <Icon name={leadingIcon} size={iconBox20} aria-hidden="true" />
-        ) : null}
-        <SelectPrimitive.Value
-          placeholder={placeholder}
-          className="min-w-0 flex-1 truncate"
-        />
-        <SelectPrimitive.Icon className="relative flex size-(--primitives-spacing-out-of-scale-5) shrink-0">
-          <Icon
-            name="chevron-down"
-            size={iconBox20}
-            aria-hidden="true"
-            className="group-data-popup-open:invisible"
+        <SelectPrimitive.Trigger
+          data-slot="select"
+          disabled={disabled}
+          aria-invalid={error}
+          aria-label={ariaLabel}
+          aria-labelledby={ariaLabelledBy}
+          aria-describedby={ariaDescribedBy}
+          className={cn(triggerClassName, className)}
+          ref={ref}
+        >
+          {leadingIcon ? (
+            <Icon name={leadingIcon} size={iconBox20} aria-hidden="true" />
+          ) : null}
+          <SelectPrimitive.Value
+            placeholder={placeholder}
+            className="min-w-0 flex-1 truncate"
           />
-          <Icon
-            name="chevron-up"
-            size={iconBox20}
-            aria-hidden="true"
-            className="absolute inset-0 invisible group-data-popup-open:visible"
-          />
-        </SelectPrimitive.Icon>
-      </SelectPrimitive.Trigger>
-      {children}
-    </SelectPrimitive.Root>
+          <SelectPrimitive.Icon className="relative flex size-(--primitives-spacing-out-of-scale-5) shrink-0">
+            <Icon
+              name="chevron-down"
+              size={iconBox20}
+              aria-hidden="true"
+              className="group-data-popup-open:invisible"
+            />
+            <Icon
+              name="chevron-up"
+              size={iconBox20}
+              aria-hidden="true"
+              className="absolute inset-0 invisible group-data-popup-open:visible"
+            />
+          </SelectPrimitive.Icon>
+        </SelectPrimitive.Trigger>
+        {children}
+      </SelectPrimitive.Root>
+    </SelectTriggerIdContext.Provider>
   );
 }
 
@@ -184,6 +189,7 @@ export interface SelectContentProps {
 }
 
 export function SelectContent({ className, children }: SelectContentProps) {
+  const triggerId = React.useContext(SelectTriggerIdContext);
   return (
     <SelectPrimitive.Portal>
       <SelectPrimitive.Positioner
@@ -205,6 +211,7 @@ export function SelectContent({ className, children }: SelectContentProps) {
           )}
         >
           <SelectPrimitive.List
+            aria-labelledby={triggerId}
             className={cn(
               `min-h-0 flex-1 overflow-y-auto overscroll-contain [scrollbar-gutter:stable]
               pl-(--primitives-spacing-1) pr-(--primitives-spacing-out-of-scale-1-5) py-(--primitives-spacing-out-of-scale-0-5)`,

@@ -7,15 +7,21 @@ const initialAddresses: Address[] = [
 ];
 
 export function AddressesProvider({ children }: { children: ReactNode }) {
-  const [addresses, setAddresses] = useState(initialAddresses);
-  const [defaultAddressId, setDefaultAddressId] = useState("home");
+  const [state, setState] = useState<{ addresses: Address[]; defaultAddressId: string | null }>({ addresses: initialAddresses, defaultAddressId: "home" });
+  const { addresses, defaultAddressId } = state;
+  function setDefaultAddressId(id: string) { setState(current => ({ ...current, defaultAddressId: id })); }
   function addAddress(address: Address, makeDefault: boolean) {
-    setAddresses(current => [...current, address]);
-    if (makeDefault) setDefaultAddressId(address.id);
+    setState(current => ({ addresses: [...current.addresses, address], defaultAddressId: makeDefault || !current.defaultAddressId ? address.id : current.defaultAddressId }));
   }
   function updateAddress(address: Address, makeDefault: boolean) {
-    setAddresses(current => current.map(item => item.id === address.id ? address : item));
-    if (makeDefault) setDefaultAddressId(address.id);
+    setState(current => ({ addresses: current.addresses.map(item => item.id === address.id ? address : item), defaultAddressId: makeDefault ? address.id : current.defaultAddressId }));
   }
-  return <AddressesContext.Provider value={{ addresses, defaultAddressId, addAddress, updateAddress, setDefaultAddressId }}>{children}</AddressesContext.Provider>;
+  function deleteAddress(id: string, replacementId?: string) {
+    setState(current => {
+      const remaining = current.addresses.filter(item => item.id !== id);
+      if (current.defaultAddressId === id && remaining.length > 1 && !remaining.some(item => item.id === replacementId)) return current;
+      return { addresses: remaining, defaultAddressId: current.defaultAddressId === id ? (remaining.find(item => item.id === replacementId)?.id ?? remaining[0]?.id ?? null) : current.defaultAddressId };
+    });
+  }
+  return <AddressesContext.Provider value={{ addresses, defaultAddressId, addAddress, updateAddress, deleteAddress, setDefaultAddressId }}>{children}</AddressesContext.Provider>;
 }

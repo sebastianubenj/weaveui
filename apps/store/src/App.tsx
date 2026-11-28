@@ -14,6 +14,7 @@ import { checkCompromisedPassword } from "@/lib/password-security";
 import { AuthLayout } from "@/views/auth-layout";
 import { PRODUCTS } from "@/lib/catalog";
 import { clearBag } from "@/lib/bag";
+import { PaymentMethodsProvider } from "@/lib/payment-methods-provider";
 import { AddressesProvider } from "@/lib/addresses-provider";
 import type { ConfirmedOrder } from "@/views/order-confirmed/order-confirmed";
 
@@ -50,7 +51,7 @@ function ScrollToTop() {
   return null;
 }
 
-function StoreRoute({ showBag = false, showCheckout = false, showConfirmation = false, showSavedAddresses = false }: { showBag?: boolean; showCheckout?: boolean; showConfirmation?: boolean; showSavedAddresses?: boolean }) {
+function StoreRoute({ showBag = false, showCheckout = false, showConfirmation = false, showSavedAddresses = false, showPaymentMethods = false }: { showBag?: boolean; showCheckout?: boolean; showConfirmation?: boolean; showSavedAddresses?: boolean; showPaymentMethods?: boolean }) {
   const { productId } = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -58,7 +59,7 @@ function StoreRoute({ showBag = false, showCheckout = false, showConfirmation = 
   if (showConfirmation && !confirmedOrder) return <Navigate to="/" replace />;
   const product = productId ? PRODUCTS.find((item) => item.id === productId) : undefined;
   if (productId && !product) return <Navigate to="/" replace />;
-  return <Home product={product} showBag={showBag} showCheckout={showCheckout} showSavedAddresses={showSavedAddresses} onSavedAddresses={() => navigate("/saved-addresses")} confirmedOrder={confirmedOrder ?? undefined} onConfirm={(order) => { clearBag(); navigate("/order-confirmed", { state: order, replace: true }); }} onContinueShopping={() => navigate("/")} onCheckout={() => navigate("/checkout")} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
+  return <Home product={product} showBag={showBag} showCheckout={showCheckout} showSavedAddresses={showSavedAddresses} showPaymentMethods={showPaymentMethods} onPaymentMethods={() => navigate("/payment-methods")} onSavedAddresses={() => navigate("/saved-addresses")} confirmedOrder={confirmedOrder ?? undefined} onConfirm={(order) => { clearBag(); navigate("/order-confirmed", { state: order, replace: true }); }} onContinueShopping={() => navigate("/")} onCheckout={() => navigate("/checkout")} onReview={() => navigate("/bag")} onSelectProduct={(id) => navigate(`/products/${id}`)} />;
 }
 
 function AuthLinkRedirect() {
@@ -231,12 +232,13 @@ export function App() {
     <>
       <ScrollToTop />
       <AuthLinkRedirect />
-      <AddressesProvider><Suspense fallback={null}>
+      <AddressesProvider><PaymentMethodsProvider><Suspense fallback={null}>
         <Routes>
           <Route path="/" element={<StoreRoute />} />
           <Route path="/bag" element={<StoreRoute showBag />} />
           <Route path="/checkout" element={<StoreRoute showCheckout />} />
           <Route path="/saved-addresses" element={<StoreRoute showSavedAddresses />} />
+          <Route path="/payment-methods" element={<StoreRoute showPaymentMethods />} />
           <Route path="/order-confirmed" element={<StoreRoute showConfirmation />} />
           <Route path="/products/:productId" element={<StoreRoute />} />
           <Route path="/login" element={<LoginRoute />} />
@@ -253,7 +255,7 @@ export function App() {
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Suspense></AddressesProvider>
+      </Suspense></PaymentMethodsProvider></AddressesProvider>
     </>
   );
 }

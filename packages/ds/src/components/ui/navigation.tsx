@@ -1946,7 +1946,7 @@ function NavigationProduct({
                 data-slot="navigation-scrim"
                 className="fixed inset-0 z-(--semantics-layer-scrim) max-md:hidden
               [background-color:var(--semantics-colors-background-primary-op60)]
-              [backdrop-filter:blur(var(--semantics-background-blur-navigation))]
+              [backdrop-filter:blur(var(--semantics-background-blur-bg-blur-16-css))]
               transition-opacity duration-(--semantics-motion-duration-320) delay-(--semantics-motion-delay-scrim) ease-(--semantics-motion-easing-standard)
               motion-reduce:transition-none
               data-starting-style:opacity-0 data-ending-style:opacity-0"

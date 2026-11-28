@@ -341,9 +341,12 @@ export const ControlledValue: Story = {
 
     await userEvent.click(trigger);
     const listbox = await getListbox();
+    await expect(listbox).toHaveAccessibleName("Fruit");
     await userEvent.click(within(listbox).getByRole("option", { name: "Mango" }));
 
     await expect(trigger).toHaveTextContent("Mango");
+    await waitFor(() => expect(within(document.body).queryByRole("listbox")).toBeNull());
+    await expect(trigger).toHaveFocus();
   },
 };
 
@@ -421,6 +424,14 @@ export const WithFormLabel: Story = {
       </Select>
     </div>
   ),
+  play: async ({ canvasElement }) => {
+    const trigger = await getTrigger(canvasElement);
+    await userEvent.click(trigger);
+    const listbox = await getListbox();
+    await expect(listbox).toHaveAccessibleName("Fruit");
+    await userEvent.keyboard("{Escape}");
+    await waitFor(() => expect(within(document.body).queryByRole("listbox")).toBeNull());
+  },
 };
 
 /* -------------------------------------------------------------------------- */

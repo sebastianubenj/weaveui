@@ -14,8 +14,9 @@ export interface Address {
 
 export interface AddressesState {
   addresses: Address[];
-  defaultAddressId: string;
+  defaultAddressId: string | null;
   addAddress: (address: Address, makeDefault: boolean) => void;
+  deleteAddress: (id: string, replacementId?: string) => void;
   updateAddress: (address: Address, makeDefault: boolean) => void;
   setDefaultAddressId: (id: string) => void;
 }

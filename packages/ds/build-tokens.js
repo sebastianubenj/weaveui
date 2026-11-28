@@ -194,6 +194,21 @@ StyleDictionary.registerPreprocessor({
   preprocessor: addGlassFrostCss,
 });
 
+// Figma background blur radius maps to half that radius in CSS filters.
+function addBackgroundBlurCss(dictionary) {
+  const blur = dictionary.semantics?.['background-blur'];
+  const backgroundBlur = blur?.['bg-blur-16'];
+  if (blur && !blur['bg-blur-16-css'] && typeof backgroundBlur?.value === 'number') {
+    blur['bg-blur-16-css'] = { type: 'dimension', value: roundTo5(backgroundBlur.value / 2) };
+  }
+  return dictionary;
+}
+
+StyleDictionary.registerPreprocessor({
+  name: 'background-blur/css',
+  preprocessor: addBackgroundBlurCss,
+});
+
 // ---------------------------------------------------------------------------
 // Centralized numeric-dimension classifier
 // ---------------------------------------------------------------------------
@@ -423,7 +438,7 @@ const cssTransforms = [
 // 3. Configurar la compilación de Style Dictionary
 const sd = new StyleDictionary({
   source: ['tokens/tokens.json'],
-  preprocessors: ['figma/exporter-overrides', 'typography/relative-units', 'glass/frost-css'],
+  preprocessors: ['figma/exporter-overrides', 'typography/relative-units', 'glass/frost-css', 'background-blur/css'],
   hooks: {
     filters: {
       'ds/cssTokens': cssTokensFilter,
@@ -462,7 +477,7 @@ if (Object.keys(darkTokens).length > 0) {
     // The dark file overrides tokens.json on purpose, and references to light-only
     // tokens are filtered out of this file. Both warnings are expected.
     log: { warnings: 'disabled' },
-    preprocessors: ['figma/exporter-overrides', 'typography/relative-units', 'glass/frost-css'],
+    preprocessors: ['figma/exporter-overrides', 'typography/relative-units', 'glass/frost-css', 'background-blur/css'],
     hooks: {
       filters: {
         'ds/darkTokens': (token) => cssTokensFilter(token) && token.filePath?.endsWith('tokens.dark.json'),

@@ -151,6 +151,21 @@
             }
           }
         },
+        "subtle-op60": {
+          "type": "color",
+          "value": "#17171799",
+          "extensions": {
+            "org.lukasoppermann.figmaDesignTokens": {
+              "collection": "Semantic Colors",
+              "scopes": [
+                "FRAME_FILL",
+                "SHAPE_FILL"
+              ],
+              "variableId": "VariableID:2143:11306",
+              "exportKey": "variables"
+            }
+          }
+        },
         "subtlest": {
           "type": "color",
           "value": "{primitives.colors.neutral.950}",
@@ -414,6 +429,38 @@
         }
       },
       "interaction": {
+        "secondary": {
+          "hover-on-subtle": {
+            "type": "color",
+            "value": "#262626ff",
+            "extensions": {
+              "org.lukasoppermann.figmaDesignTokens": {
+                "collection": "Semantic Colors",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "variableId": "VariableID:2143:10950",
+                "exportKey": "variables"
+              }
+            }
+          },
+          "hover": {
+            "type": "color",
+            "value": "#171717ff",
+            "extensions": {
+              "org.lukasoppermann.figmaDesignTokens": {
+                "collection": "Semantic Colors",
+                "scopes": [
+                  "FRAME_FILL",
+                  "SHAPE_FILL"
+                ],
+                "variableId": "VariableID:450:1683",
+                "exportKey": "variables"
+              }
+            }
+          }
+        },
         "destructive": {
           "hover": {
             "type": "color",
@@ -527,23 +574,6 @@
                   "SHAPE_FILL"
                 ],
                 "variableId": "VariableID:450:1700",
-                "exportKey": "variables"
-              }
-            }
-          }
-        },
-        "secondary": {
-          "hover": {
-            "type": "color",
-            "value": "#171717ff",
-            "extensions": {
-              "org.lukasoppermann.figmaDesignTokens": {
-                "collection": "Semantic Colors",
-                "scopes": [
-                  "FRAME_FILL",
-                  "SHAPE_FILL"
-                ],
-                "variableId": "VariableID:450:1683",
                 "exportKey": "variables"
               }
             }

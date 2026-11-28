@@ -383,25 +383,40 @@ export const CheckoutFlow: Story = {
     await expect(await canvas.findByRole("heading", { name: "Checkout" })).toBeVisible();
     await expect(canvas.getAllByText("$2,299")).toHaveLength(2);
     await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
-    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).toBeChecked();
-    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).toBeDisabled();
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default shipping address" })).toBeNull();
+    await expect(within(canvas.getByRole("heading", { name: "Change shipping address" }).closest("section")!).getByText("Default")).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
     await expect(canvas.getByRole("heading", { name: "Shipping address" })).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
     await userEvent.click(canvas.getByRole("radio", { name: /Work/ }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).not.toBeChecked();
     await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
-    await expect(canvas.getByText("456 Main Street, Apt 8C")).toBeVisible();
+    await expect(within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!).getByText("456 Main Street, Apt 8C")).toBeVisible();
+    await expect(within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!).queryByText("Default")).toBeNull();
+    await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await expect(within(canvas.getByRole("heading", { name: "Change shipping address" }).closest("section")!).getByText("Default")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
     await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default payment method" })).not.toBeInTheDocument();
     await userEvent.click(canvas.getByRole("button", { name: "Use this card" }));
     await expect(canvas.getByRole("heading", { name: "Payment method" })).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
     await userEvent.click(canvas.getByRole("radio", { name: /Mastercard/ }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default payment method" })).not.toBeChecked();
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default payment method" }));
+    await userEvent.click(canvas.getByRole("radio", { name: /Visa/ }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default payment method" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("radio", { name: /Mastercard/ }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default payment method" })).not.toBeChecked();
     await userEvent.click(canvas.getByRole("button", { name: "Use this card" }));
     await expect(canvas.getByText("Mastercard ····3737")).toBeVisible();
     await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
     await userEvent.click(canvas.getByRole("button", { name: /Add new card/ }));
     await expect(canvas.getByLabelText("Cardholder name")).toBeVisible();
-    await userEvent.click(canvas.getByRole("checkbox", { name: "Billing address same as shipping address" }));
+    const paymentForm = within(canvas.getByRole("heading", { name: "Add new card" }).closest("section")!);
+    await expect(paymentForm.getByText("456 Main Street, Apt 8C")).toBeVisible();
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Use shipping address as billing address" }));
+    await expect(paymentForm.queryByText("456 Main Street, Apt 8C")).toBeNull();
     await expect(canvas.getByLabelText("Street address")).toBeVisible();
     const billingZip = canvas.getByLabelText("ZIP code");
     await userEvent.type(billingZip, "12a3456789");
@@ -441,6 +456,8 @@ export const SavedAddressesFlow: Story = {
     await userEvent.click(await body.findByRole("option", { name: "NY" }));
     await userEvent.type(canvas.getByLabelText("ZIP code"), "10001");
     await userEvent.type(canvas.getByLabelText("Address name"), "Studio");
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).not.toBeChecked();
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default shipping address" }));
     await userEvent.click(canvas.getByRole("button", { name: "Save address" }));
     await expect(canvas.getByRole("heading", { name: "Studio" })).toBeVisible();
     await expect(within(canvas.getByRole("heading", { name: "Studio" }).closest("article")!).getByText("Default")).toBeVisible();
@@ -484,7 +501,7 @@ export const ProfileDefaultAddressInCheckout: Story = {
     await userEvent.click(await canvas.findByRole("button", { name: "Options for Work" }));
     await userEvent.click(await body.findByRole("menuitem", { name: "Set as default" }));
     await userEvent.click(canvas.getByRole("button", { name: "Options for Work" }));
-    await userEvent.click(await body.findByRole("menuitem", { name: "Edit" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Edit address" }));
     await userEvent.clear(canvas.getByLabelText("Street address"));
     await userEvent.type(canvas.getByLabelText("Street address"), "789 Updated Street");
     await userEvent.click(canvas.getByRole("button", { name: "Save changes" }));
@@ -509,6 +526,7 @@ export const CheckoutNewDetails: Story = {
     const canvas = within(canvasElement);
     await userEvent.click(await canvas.findByRole("button", { name: "Change shipping address" }));
     await userEvent.click(canvas.getByRole("button", { name: /Add new address/ }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).not.toBeChecked();
     await userEvent.type(canvas.getByLabelText("First name"), "Alex");
     await userEvent.type(canvas.getByLabelText("Last name"), "Doe");
     await userEvent.type(canvas.getByLabelText("Street address"), "789 Market Street");
@@ -524,8 +542,13 @@ export const CheckoutNewDetails: Story = {
     await userEvent.type(canvas.getByLabelText("Address name"), "Studio");
     await userEvent.click(canvas.getByRole("button", { name: "Save and use address" }));
     await expect(canvas.getByText("789 Market Street")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default shipping address" })).not.toBeChecked();
+    await expect(within(canvas.getByRole("radio", { name: /Home/ }).closest("label")!).getByText("Default")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
     await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
     await userEvent.click(canvas.getByRole("button", { name: /Add new card/ }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default payment method" })).not.toBeChecked();
     await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
     const cardNumber = canvas.getByLabelText("Card number");
     await userEvent.type(cardNumber, "4242a424242424242");
@@ -541,7 +564,16 @@ export const CheckoutNewDetails: Story = {
     await userEvent.type(security, "1a23");
     await expect(security).toHaveValue("123");
     await userEvent.click(canvas.getByRole("button", { name: "Save and use card" }));
-    await expect(canvas.getByText("Visa ····4242")).toBeVisible();
+    const payment = within(canvas.getByRole("heading", { name: "Payment method" }).closest("section")!);
+    await expect(payment.getByText("Visa ····4242")).toBeVisible();
+    await expect(payment.getByText("789 Market Street")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await expect(canvas.getByRole("checkbox", { name: "Set as default payment method" })).not.toBeChecked();
+    await userEvent.click(canvas.getByRole("button", { name: "Use this card" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await userEvent.click(canvas.getByRole("radio", { name: /Work/ }));
+    await userEvent.click(canvas.getByRole("button", { name: "Use this address" }));
+    await expect(payment.getByText("789 Market Street")).toBeVisible();
   },
 };
 
@@ -581,5 +613,215 @@ export const CheckoutCardBrands: Story = {
     await expect(number).toBeInvalid();
     await userEvent.clear(number);
     await expect(canvas.queryByRole("img", { name: "Visa" })).not.toBeInTheDocument();
+  },
+};
+
+export const CheckoutAfterDeletingAllAddresses: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    for (const name of ["Work", "Home"]) {
+      await userEvent.click(await canvas.findByRole("button", { name: `Options for ${name}` }));
+      await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+      await userEvent.click(within(await body.findByRole("dialog")).getByRole("button", { name: "Delete address" }));
+    }
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    await expect(canvas.getByRole("heading", { name: "No saved addresses yet" })).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Confirm and pay" })).toBeDisabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Use shipping address as billing address" })).toBeNull();
+    await expect(canvas.getByLabelText("Street address")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default shipping address" })).toBeNull();
+    await userEvent.click(canvas.getByRole("button", { name: "Cancel" }));
+    await expect(canvas.getByRole("heading", { name: "No saved addresses yet" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await userEvent.type(canvas.getByLabelText("First name"), "Alex");
+    await userEvent.type(canvas.getByLabelText("Last name"), "Doe");
+    await userEvent.type(canvas.getByLabelText("Street address"), "789 Market Street");
+    await userEvent.type(canvas.getByLabelText("City"), "New York");
+    await userEvent.click(canvas.getByRole("combobox", { name: "State" }));
+    await userEvent.click(await body.findByRole("option", { name: "NY" }));
+    await userEvent.type(canvas.getByLabelText("ZIP code"), "10001");
+    await userEvent.type(canvas.getByLabelText("Address name"), "Studio");
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use address" }));
+    const shipping = within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!);
+    await expect(shipping.getByText("Studio")).toBeVisible();
+    await expect(shipping.getByText("Default")).toBeVisible();
+    await expect(canvas.getByRole("button", { name: "Confirm and pay" })).toBeEnabled();
+    await userEvent.click(canvas.getByRole("button", { name: "Change shipping address" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Set as default shipping address" })).not.toBeInTheDocument();
+    await userEvent.click(canvas.getByRole("button", { name: "Add new address" }));
+    await userEvent.type(canvas.getByLabelText("First name"), "Alex");
+    await userEvent.type(canvas.getByLabelText("Last name"), "Doe");
+    await userEvent.type(canvas.getByLabelText("Street address"), "10 Second Street");
+    await userEvent.type(canvas.getByLabelText("City"), "New York");
+    await userEvent.click(canvas.getByRole("combobox", { name: "State" }));
+    await userEvent.click(await body.findByRole("option", { name: "NY" }));
+    await userEvent.type(canvas.getByLabelText("ZIP code"), "10001");
+    await userEvent.type(canvas.getByLabelText("Address name"), "Second");
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default shipping address" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use address" }));
+    await expect(shipping.getByText("Second")).toBeVisible();
+    await expect(shipping.getByText("Default")).toBeVisible();
+  },
+};
+
+export const CheckoutAfterDeletingAllAddressesMobile: Story = { ...CheckoutAfterDeletingAllAddresses, globals: { viewport: { value: "mobile1", isRotated: false } } };
+
+export const CheckoutEmptyShippingAddress: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    for (const name of ["Work", "Home"]) {
+      await userEvent.click(await canvas.findByRole("button", { name: `Options for ${name}` }));
+      await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+      await userEvent.click(within(await body.findByRole("dialog")).getByRole("button", { name: "Delete address" }));
+    }
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    await expect(canvas.getByRole("heading", { name: "No saved addresses yet" })).toBeVisible();
+  },
+};
+export const CheckoutEmptyShippingAddressMobile: Story = { ...CheckoutEmptyShippingAddress, globals: { viewport: { value: "mobile1", isRotated: false } } };
+
+export const CheckoutCustomBillingAddress: Story = {
+  parameters: { route: "/checkout" },
+  beforeEach: () => { localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }])); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    await userEvent.click(await canvas.findByRole("button", { name: "Change payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "4242424242424242");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Use shipping address as billing address" }));
+    await userEvent.type(canvas.getByLabelText("Street address"), "100 Billing Road");
+    await userEvent.type(canvas.getByLabelText("City"), "New York");
+    await userEvent.click(canvas.getByRole("combobox", { name: "State" }));
+    await userEvent.click(await within(document.body).findByRole("option", { name: "NY" }));
+    await userEvent.type(canvas.getByLabelText("ZIP code"), "10001");
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use card" }));
+    const payment = within(canvas.getByRole("heading", { name: "Payment method" }).closest("section")!);
+    await expect(payment.getByText("100 Billing Road")).toBeVisible();
+  },
+};
+
+export const PaymentMethodsInCheckout: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Payment methods" }));
+    await expect(await canvas.findByRole("heading", { name: "Payment methods" })).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Mastercard ending in 3737" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Edit billing address" }));
+    await userEvent.clear(canvas.getByLabelText("Street address"));
+    await userEvent.type(canvas.getByLabelText("Street address"), "999 Billing Road");
+    await userEvent.click(canvas.getByRole("button", { name: "Save changes" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Options for Mastercard ending in 3737" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Set as default" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    const payment = within(canvas.getByRole("heading", { name: "Payment method" }).closest("section")!);
+    await expect(payment.getByText("Mastercard ····3737")).toBeVisible();
+    await expect(payment.getByText("999 Billing Road, Apt 4B")).toBeVisible();
+    await expect(payment.getByText("Default")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Change payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "5555555555554444");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Save and use card" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Payment methods" }));
+    const card = (await canvas.findByText("Mastercard ····4444")).closest("article")!;
+    await expect(within(card).getByText("123 Main Street, Apt 4B")).toBeVisible();
+    await expect(within(card).getByText("Default")).toBeVisible();
+    const defaultCard = canvas.getByText("Mastercard ····3737").closest("article")!;
+    await expect(within(defaultCard).queryByText("Default")).not.toBeInTheDocument();
+  },
+};
+
+export const AddPaymentWithoutShippingAddress: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => { resetSupabaseMock(exampleSession); },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    for (const name of ["Work", "Home"]) {
+      await userEvent.click(await canvas.findByRole("button", { name: `Options for ${name}` }));
+      await userEvent.click(await body.findByRole("menuitem", { name: "Delete" }));
+      await userEvent.click(within(await body.findByRole("dialog")).getByRole("button", { name: "Delete address" }));
+    }
+    await userEvent.click(canvas.getByRole("button", { name: "Bag" }));
+    await userEvent.click(await body.findByRole("button", { name: "Payment methods" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Add new card" }));
+    await expect(canvas.queryByRole("checkbox", { name: "Use default shipping address as billing address" })).toBeNull();
+    await expect(canvas.getByLabelText("Street address")).toBeVisible();
+  },
+};
+
+export const AddedPaymentUsesSavedBillingAddress: Story = {
+  parameters: { route: "/" },
+  beforeEach: () => {
+    resetSupabaseMock(exampleSession);
+    localStorage.setItem(BAG_STORAGE_KEY, JSON.stringify([{ productId: "sp-16", quantity: 1 }]));
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement); const body = within(document.body);
+    await userEvent.click(await canvas.findByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Payment methods" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Add new card" }));
+    await userEvent.type(canvas.getByLabelText("Cardholder name"), "Alex Doe");
+    await userEvent.type(canvas.getByLabelText("Card number"), "5555555555554444");
+    await userEvent.type(canvas.getByLabelText("Expiration date"), "1230");
+    await userEvent.type(canvas.getByLabelText("Security code"), "123");
+    await expect(canvas.getByRole("checkbox", { name: "Use default shipping address as billing address" })).toBeChecked();
+    await userEvent.click(canvas.getByRole("checkbox", { name: "Set as default payment method" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Save card" }));
+    const card = canvas.getByText("Mastercard ····4444").closest("article")!;
+    await expect(within(card).getByText("123 Main Street, Apt 4B")).toBeVisible();
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Saved addresses" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Options for Work" }));
+    await userEvent.click(await body.findByRole("menuitem", { name: "Set as default" }));
+    await userEvent.click(canvas.getByRole("button", { name: "Bag, 1 item" }));
+    await userEvent.click(await body.findByRole("button", { name: "Review bag" }));
+    await userEvent.click(await canvas.findByRole("button", { name: "Go to checkout" }));
+    const payment = within(canvas.getByRole("heading", { name: "Payment method" }).closest("section")!);
+    await expect(payment.getByText("Mastercard ····4444")).toBeVisible();
+    await expect(payment.getByText("123 Main Street, Apt 4B")).toBeVisible();
+    const shipping = within(canvas.getByRole("heading", { name: "Shipping address" }).closest("section")!);
+    await expect(shipping.getByText("456 Main Street, Apt 8C")).toBeVisible();
   },
 };

@@ -209,14 +209,16 @@
   --semantics-colors-background-destructive-op5: #d600000d;
   --semantics-colors-background-info-op10: #006edc1a;
   --semantics-colors-background-primary-op60: #ffffff99;
+  --semantics-colors-background-subtle-op60: #f5f5f599;
   --semantics-colors-background-success-op5: #0085000d;
   --semantics-colors-border-transparent: #e5e5e500;
+  --semantics-colors-interaction-secondary-hover-on-subtle: #e5e5e5ff;
+  --semantics-colors-interaction-secondary-hover: #f5f5f5ff;
   --semantics-colors-interaction-destructive-hover: #d6000033;
   --semantics-colors-interaction-destructive-subtle-hover: #d600001a;
   --semantics-colors-interaction-file-upload-drag-over: #006edc1a;
   --semantics-colors-interaction-primary-hover: #171717e6;
   --semantics-colors-interaction-primary-on-primary-hover: #f5f5f5e6;
-  --semantics-colors-interaction-secondary-hover: #f5f5f5ff;
   --semantics-shadow-popover-layer-1-color: #0000001a;
   --semantics-shadow-popover-layer-1-blur: 0.375rem;
   --semantics-shadow-popover-layer-1-spread: -0.0625rem;
@@ -225,7 +227,8 @@
   --semantics-shadow-popover-layer-2-blur: 0.25rem;
   --semantics-shadow-popover-layer-2-spread: -0.125rem;
   --semantics-shadow-popover-layer-2-y: 0.125rem;
-  --semantics-background-blur-navigation: 1.5rem;
+  --semantics-background-blur-bg-blur-16: 1rem;
+  --semantics-background-blur-bg-blur-16-css: 0.5rem;
   --semantics-glass-navigation-depth: 0.0625rem;
   --semantics-glass-navigation-dispersion: 6.25rem;
   --semantics-glass-navigation-frost: 0.9375rem;

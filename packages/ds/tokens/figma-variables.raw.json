@@ -244,6 +244,7 @@
         "VariableID:450:1641",
         "VariableID:450:1638",
         "VariableID:450:1636",
+        "VariableID:2143:11306",
         "VariableID:500:5846",
         "VariableID:450:1634",
         "VariableID:450:1635",
@@ -261,6 +262,7 @@
         "VariableID:2066:11879",
         "VariableID:500:5856",
         "VariableID:486:1328",
+        "VariableID:2143:10950",
         "VariableID:450:1691",
         "VariableID:450:1690",
         "VariableID:450:1695",
@@ -4204,6 +4206,43 @@
       }
     },
     {
+      "id": "VariableID:2143:11306",
+      "name": "colors/background/subtle-op60",
+      "remote": false,
+      "key": "def1a34035eeaf0000e4345c06437902c7e090eb",
+      "variableCollectionId": "VariableCollectionId:450:1530",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "450:1": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2063"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2026"
+          }
+        },
+        "450:2": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2064"
+          },
+          "opacity": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2026"
+          }
+        }
+      }
+    },
+    {
       "id": "VariableID:500:5846",
       "name": "colors/background/subtlest",
       "remote": false,
@@ -4655,6 +4694,37 @@
       }
     },
     {
+      "id": "VariableID:2143:10950",
+      "name": "colors/interaction/secondary/hover-on-subtle",
+      "remote": false,
+      "key": "f1ae7f889cafe35d4a8823725d43438361c0d1be",
+      "variableCollectionId": "VariableCollectionId:450:1530",
+      "resolvedType": "COLOR",
+      "scopes": [
+        "FRAME_FILL",
+        "SHAPE_FILL"
+      ],
+      "codeSyntax": {},
+      "hiddenFromPublishing": false,
+      "description": "",
+      "valuesByMode": {
+        "450:1": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2059"
+          },
+          "opacity": 100
+        },
+        "450:2": {
+          "color": {
+            "type": "VARIABLE_ALIAS",
+            "id": "VariableID:9:2065"
+          },
+          "opacity": 100
+        }
+      }
+    },
+    {
       "id": "VariableID:450:1691",
       "name": "colors/interaction/destructive/hover",
       "remote": false,
@@ -4997,7 +5067,7 @@
     },
     {
       "id": "VariableID:388:544",
-      "name": "background-blur/navigation",
+      "name": "background-blur/bg-blur-16",
       "remote": false,
       "key": "26e34131c5facdd9f0f0ce1ab35cd43e766c283e",
       "variableCollectionId": "VariableCollectionId:9:3",
@@ -5009,7 +5079,7 @@
       "hiddenFromPublishing": false,
       "description": "",
       "valuesByMode": {
-        "9:1": 24
+        "9:1": 16
       }
     },
     {

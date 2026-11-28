@@ -19,6 +19,7 @@ import { HomeFooter } from "./home-footer";
 import { Bag } from "@/views/bag/bag";
 import { Checkout } from "@/views/checkout/checkout";
 import { OrderConfirmed, type ConfirmedOrder } from "@/views/order-confirmed/order-confirmed";
+import { PaymentMethods } from "@/views/payment-methods/payment-methods";
 import { SavedAddresses } from "@/views/saved-addresses/saved-addresses";
 
 interface ProductGroup {
@@ -159,6 +160,8 @@ export interface HomeProps {
   showCheckout?: boolean;
   onCheckout?: () => void;
   showSavedAddresses?: boolean;
+  showPaymentMethods?: boolean;
+  onPaymentMethods?: () => void;
   onSavedAddresses?: () => void;
   onConfirm?: (order: ConfirmedOrder) => void;
   confirmedOrder?: ConfirmedOrder;
@@ -167,7 +170,7 @@ export interface HomeProps {
   onSelectProduct?: (id: string) => void;
 }
 
-export function Home({ onReview, product, onSelectProduct, showBag = false, showCheckout = false, showSavedAddresses = false, onSavedAddresses, onCheckout, onConfirm, confirmedOrder, onContinueShopping }: HomeProps) {
+export function Home({ onReview, product, onSelectProduct, showBag = false, showCheckout = false, showSavedAddresses = false, showPaymentMethods = false, onPaymentMethods, onSavedAddresses, onCheckout, onConfirm, confirmedOrder, onContinueShopping }: HomeProps) {
   const { loggedIn, logOut, error } = useAuth();
   const bagItems = useBag();
   const bagUnitCount = useBagUnitCount();
@@ -273,6 +276,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false, show
           aria-label="Bag"
           signInHref="/login"
           loggedIn={loggedIn}
+          onPaymentMethods={onPaymentMethods ? () => { setOpen(false); setValue(null); onPaymentMethods(); } : undefined}
           onSavedAddresses={onSavedAddresses ? () => { setOpen(false); setValue(null); onSavedAddresses(); } : undefined}
           onLogOut={() => {
             void logOut();
@@ -287,7 +291,7 @@ export function Home({ onReview, product, onSelectProduct, showBag = false, show
             {error}
           </FormAlert>
         ) : null}
-        {confirmedOrder ? <OrderConfirmed order={confirmedOrder} onContinue={() => onContinueShopping?.()} /> : showSavedAddresses ? <SavedAddresses /> : showCheckout ? <Checkout onConfirm={order => onConfirm?.(order)} /> : showBag ? <Bag onCheckout={onCheckout} /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
+        {confirmedOrder ? <OrderConfirmed order={confirmedOrder} onContinue={() => onContinueShopping?.()} /> : showSavedAddresses ? <SavedAddresses /> : showPaymentMethods ? <PaymentMethods /> : showCheckout ? <Checkout onConfirm={order => onConfirm?.(order)} /> : showBag ? <Bag onCheckout={onCheckout} /> : product ? <ProductDetailContent key={product.id} product={product} onAdd={() => addProductToBag(product)} /> : <HomeProducts onAction={addProductToBag} />}
       </main>
       <HomeFooter />
     </>

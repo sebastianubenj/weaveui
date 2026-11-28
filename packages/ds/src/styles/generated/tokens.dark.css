@@ -7,14 +7,16 @@
   --semantics-colors-background-destructive-op5: #ff00310d;
   --semantics-colors-background-info-op10: #0080ff1a;
   --semantics-colors-background-primary-op60: #17171799;
+  --semantics-colors-background-subtle-op60: #17171799;
   --semantics-colors-background-success-op5: #00ff000d;
   --semantics-colors-border-transparent: #40404000;
+  --semantics-colors-interaction-secondary-hover-on-subtle: #262626ff;
+  --semantics-colors-interaction-secondary-hover: #171717ff;
   --semantics-colors-interaction-destructive-hover: #ff003133;
   --semantics-colors-interaction-destructive-subtle-hover: #ff00311a;
   --semantics-colors-interaction-file-upload-drag-over: #0080ff1a;
   --semantics-colors-interaction-primary-hover: #f5f5f5e6;
   --semantics-colors-interaction-primary-on-primary-hover: #171717e6;
-  --semantics-colors-interaction-secondary-hover: #171717ff;
   --semantics-shadow-popover-layer-1-color: #0000001a;
   --semantics-shadow-popover-layer-2-color: #0000001a;
   --semantics-colors-background-default: var(--primitives-colors-neutral-950);

@@ -43,7 +43,7 @@ Use `ghost` for low-emphasis actions where minimal visual weight is appropriate.
 
 ### On primary
 
-Use `surface="on-primary"` with `variant="primary"` when the button sits on a solid `background/primary` surface. Do not force the Dark theme on that surface. Other variants do not have an `on-primary` treatment yet.
+Use `surface="on-primary"` with `variant="primary"` when the button sits on a solid `background/primary` surface. Do not force the Dark theme on that surface. Other variants do not have an `on-primary` treatment yet. Use `surface="on-subtle"` with `variant="ghost"` on `background/subtle` to keep the hover visible.
 
 <Canvas of={ButtonStories.OnPrimary} />
 
@@ -162,7 +162,7 @@ The Button component provides properties to control its appearance, content, beh
 | Prop | Type | Default | Description |
 | --- | --- | --- | --- |
 | `variant` | `"primary"` &#124; `"secondary"` &#124; `"destructive"` &#124; `"outline"` &#124; `"ghost"` | `"primary"` | Controls the visual style and intent of the button. |
-| `surface` | `"default"` &#124; `"on-primary"` | `"default"` | Surface the button sits on. `on-primary` is the primary action on `background/primary`. |
+| `surface` | `"default"` &#124; `"on-primary"` | `"default"` | Surface the button sits on. `on-primary` is the primary action on `background/primary`; `on-subtle` adjusts the ghost hover on `background/subtle`. |
 | `size` | `"lg"` &#124; `"md"` &#124; `"sm"` &#124; `"xs"` &#124; `"icon-lg"` &#124; `"icon-md"` &#124; `"icon-sm"` &#124; `"icon-xs"` | `"md"` | Controls the size of the button. |
 | `leadingIcon` | `IconName` | — | Displays an icon before the button label. Ignored for icon-only sizes. |
 | `trailingIcon` | `IconName` | — | Displays an icon after the button label. Ignored for icon-only sizes. |
